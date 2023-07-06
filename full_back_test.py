@@ -11,7 +11,7 @@ tickers = ["BTCUSDT", "ETHUSDT", "BNBUSDT", "XRPUSDT", "ADAUSDT", "MATICUSDT", "
 
 
 def showNextIndicatorData(ticker, frame, ema):
-    df = pandas.read_csv(f"E:\Crypto System\\back_tests\\volume_back_test\\data\\{ticker}-{frame}-indicator-ema.csv")
+    df = pandas.read_csv(f"{const_app.saveDataFolder}{ticker}-{frame}-2022.csv")
 
     dataLong = longBackTest(df, ticker, frame, ema)
     dateSell = sellBackTest(df, ticker, frame, ema)

@@ -3,7 +3,7 @@ tickers = ["BTCUSDT", "ETHUSDT", "BNBUSDT", "XRPUSDT", "ADAUSDT", "MATICUSDT", "
 
 intervals = ["15m", "30m", "1h"]
 
-saveDataFolder = "D:\\Python project\\nadaraya_watson_envelope\\data"
+saveDataFolder = "D:\\Python project\\nadaraya_watson_envelope\\data\\"
 get_data = False
 
 allWin = 0

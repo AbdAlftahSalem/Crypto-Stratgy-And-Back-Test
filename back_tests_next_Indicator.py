@@ -1,3 +1,4 @@
+import const_app
 from util import getChange, getNumByChange
 
 
@@ -34,7 +35,7 @@ def longBackTest(combined_df, ticker: str, frame: str, ema: str):
             enterCandle = combined_df.iloc[i]
             profitPCT = getProfit(frame)
             profit = getNumByChange(enterCandle["close"], profitPCT)
-            stop = getNumByChange(enterCandle["close"], ((profitPCT / 2) * -1))
+            stop = getNumByChange(enterCandle["close"], ((profitPCT / const_app.stopLosePCTFromTPPCT) * -1))
             searchProfit = True
 
         if searchProfit:
@@ -127,13 +128,13 @@ def getProfit(frame: str):
 
     """
     if frame == "15m":
-        return 1.5
+        return const_app.interval15mTpPCT
 
     elif frame == "30m":
-        return 3
+        return const_app.interval30mTpPCT
 
     elif frame == "1h":
-        return 5
+        return const_app.interval1hTpPCT
 
 
 def getTradeData(enterCandle, exitCandle, profit, stop, status, frame):

@@ -39,3 +39,10 @@ messageToTele = ""
 Variable to store the message to be sent to Telegram.
 """
 
+interval15mTpPCT = 1.5
+interval30mTpPCT = 3
+interval1hTpPCT = 5
+
+# This variable will divide it from TP PCT
+# if TP : 3 -> SL will be 3 / 2 = 1.5 . etc
+stopLosePCTFromTPPCT = 2

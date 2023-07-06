@@ -6,9 +6,6 @@ import pandas
 import const_app
 from back_tests_next_Indicator import longBackTest, sellBackTest
 
-tickers = ["BTCUSDT", "ETHUSDT", "BNBUSDT", "XRPUSDT", "ADAUSDT", "MATICUSDT", "SOLUSDT", "DOTUSDT", "AVAXUSDT",
-           "LINKUSDT"]
-
 
 def showNextIndicatorData(ticker, frame, ema):
     df = pandas.read_csv(f"{const_app.saveDataFolder}{ticker}-{frame}-2022.csv")
@@ -57,11 +54,11 @@ def boost(callback, inputTickers, interval, ema):
 
 
 def nextIndicatorBackText():
-    for ema in ["None", "EMA10", "EMA20", "EMA50", "EMA100", "EMA200"]:
-        for frame in ["15m", "30m", "1h"]:
+    for ema in const_app.ema:
+        for frame in const_app.intervals:
             const_app.allWin = 0
             const_app.allLose = 0
-            boost(showNextIndicatorData, tickers, frame, ema)
+            boost(showNextIndicatorData, const_app.tickers, frame, ema)
             print("************************************************************************************\n")
             print(f"ALL WIN {frame}: {const_app.allWin}")
             print(f"ALL LOSE {frame}: {const_app.allLose}")

@@ -21,18 +21,12 @@ def getData(ticker, interval):
     del df["ignore"]
     # Calculate EMA10
 
-    df['ema10'] = df['close'].ewm(span=10, adjust=False).mean()
+    for ema_period in const_app.ema:
+        if ema_period == "None":
+            continue
+        span = int(ema_period[3:])
+        df[f'{ema_period.lower()}'] = df['close'].ewm(span=span, adjust=False).mean()
 
-    # Calculate EMA20
-    df['ema20'] = df['close'].ewm(span=20, adjust=False).mean()
-
-    # Calculate EMA50
-    df['ema50'] = df['close'].ewm(span=50, adjust=False).mean()
-    # Calculate EMA100
-    df['ema100'] = df['close'].ewm(span=100, adjust=False).mean()
-    # Calculate EMA200
-    df['ema200'] = df['close'].ewm(span=200, adjust=False).mean()
-    df.to_csv(f'{ticker}-{interval}-2022.csv')
     df.to_csv(f'{ticker}-{interval}-2022.csv')
 
     return df

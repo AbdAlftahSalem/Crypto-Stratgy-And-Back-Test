@@ -2,6 +2,7 @@ import pandas as pd
 from binance.client import Client
 
 import const_app
+from next_indecator_backtest import applyIndicator
 
 client = Client()
 
@@ -27,7 +28,7 @@ def getData(ticker, interval):
         span = int(ema_period[3:])
         df[f'{ema_period.lower()}'] = df['close'].ewm(span=span, adjust=False).mean()
 
-    df.to_csv(f'{ticker}-{interval}-2022.csv')
+    applyIndicator(df)
 
     return df
 

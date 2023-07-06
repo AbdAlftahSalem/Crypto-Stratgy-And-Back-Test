@@ -1,13 +1,13 @@
-import ccxt as ccxt
 import pandas as pd
 from binance.client import Client
+
+import const_app
 
 client = Client()
 
 
 def getData(ticker, interval):
     kLine = client.get_historical_klines(ticker, interval, "1 Jan, 2022")
-    # kLine = client.get_historical_klines(ticker, interval=interval, limit=200)
     df = pd.DataFrame(
         kLine,
         columns=['date', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'qav', 'num_trades', 'taker_base_vol',
@@ -38,17 +38,9 @@ def getData(ticker, interval):
     return df
 
 
-def getFromBinance(ticker, interval, limit):
-    try:
-
-        exchange = ccxt.binance()
-        exchange.enableRateLimit = True
-        bars = exchange.fetch_ohlcv(ticker, timeframe=interval, limit=limit)
-        df = pd.DataFrame(
-            bars, columns=['date', 'open', 'high', 'low', 'close', 'volume'])
-        df['date'] = pd.to_datetime(df["date"], unit='ms')
-
-        return df
-
-    except:
-        pass
+def getDataForAllTickers():
+    print(f'Start get data for\nTickers : {const_app.tickers}\nIntervals : {const_app.intervals}')
+    for ticker in const_app.tickers:
+        for interval in const_app.intervals:
+            getData(ticker, interval)
+            print(f'Finish get data for {ticker} in {interval} and save in : {const_app.saveDataFolder} folder')

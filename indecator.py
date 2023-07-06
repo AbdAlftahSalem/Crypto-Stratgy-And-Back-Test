@@ -1,29 +1,43 @@
 import math
-
 import pandas as pd
 
+def nadaraya_watson_envelope(length, bandwidth, error_multiplier, source_data):
+    """
+    Calculate the Nadaraya-Watson envelope.
 
-def nadaraya_watson_envelope(length, h, mult, src):
-    y = []
+    Args:
+        length: The length of the envelope.
+        bandwidth: The bandwidth parameter.
+        error_multiplier: The multiplier for the mean absolute error.
+        source_data: The source data.
+
+    Returns:
+        A tuple containing the upper band, lower band, cross-up, and cross-down values.
+
+    """
+    envelope_values = []
 
     for i in range(length):
-        sum = 0.
-        sumw = 0.
+        weighted_sum = 0.0
+        sum_of_weights = 0.0
 
         for j in range(length):
-            w = math.exp(-(math.pow(i - j, 2) / (h * h * 2)))
-            sum += src[j] * w
-            sumw += w
+            weight = math.exp(-(math.pow(i - j, 2) / (bandwidth * bandwidth * 2)))
+            weighted_sum += source_data[j] * weight
+            sum_of_weights += weight
 
-        y2 = sum / sumw
-        y.append(y2)
+        y = weighted_sum / sum_of_weights
+        envelope_values.append(y)
 
-    mae = (src - pd.Series(y)).abs().mean() * mult
+    # Calculate mean absolute error
+    mean_absolute_error = (source_data - pd.Series(envelope_values)).abs().mean() * error_multiplier
 
-    upper = pd.Series(y) + mae
-    lower = pd.Series(y) - mae
+    # Calculate upper and lower bands
+    upper_band = pd.Series(envelope_values) + mean_absolute_error
+    lower_band = pd.Series(envelope_values) - mean_absolute_error
 
-    cross_up = y[0] + mae
-    cross_dn = y[0] - mae
+    # Calculate cross-up and cross-down values
+    cross_up = envelope_values[0] + mean_absolute_error
+    cross_down = envelope_values[0] - mean_absolute_error
 
-    return upper, lower, cross_up, cross_dn
+    return upper_band, lower_band, cross_up, cross_down

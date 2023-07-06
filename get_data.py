@@ -8,6 +8,17 @@ client = Client()
 
 
 def getData(ticker, interval):
+    """
+    Retrieve historical data for a specific ticker and interval from Binance API.
+
+    Args:
+        ticker: The ticker symbol.
+        interval: The time interval for the data.
+
+    Returns:
+        A DataFrame containing the retrieved data.
+
+    """
     kLine = client.get_historical_klines(ticker, interval, "1 Jan, 2022")
     df = pd.DataFrame(
         kLine,
@@ -20,22 +31,27 @@ def getData(ticker, interval):
     del df["num_trades"]
     del df["taker_base_vol"]
     del df["ignore"]
-    # Calculate EMA10
 
+    # Calculate EMA for each specified period
     for ema_period in const_app.ema:
         if ema_period == "None":
             continue
         span = int(ema_period[3:])
         df[f'{ema_period.lower()}'] = df['close'].ewm(span=span, adjust=False).mean()
 
+    # Apply indicators to the DataFrame
     applyIndicator(df)
 
     return df
 
 
 def getDataForAllTickers():
-    print(f'Start get data for\nTickers : {const_app.tickers}\nIntervals : {const_app.intervals}')
+    """
+    Retrieve historical data for all tickers and intervals specified in const_app.
+
+    """
+    print(f'Start get data for\nTickers: {const_app.tickers}\nIntervals: {const_app.intervals}')
     for ticker in const_app.tickers:
         for interval in const_app.intervals:
             getData(ticker, interval)
-            print(f'Finish get data for {ticker} in {interval} and save in : {const_app.saveDataFolder} folder')
+            print(f'Finish getting data for {ticker} in {interval} and save in the {const_app.saveDataFolder} folder')

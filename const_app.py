@@ -1,3 +1,8 @@
+get_data = True
+"""
+Flag to control whether to retrieve historical data or not.
+"""
+
 tickers = ["BTCUSDT", "ETHUSDT", "BNBUSDT", "XRPUSDT", "ADAUSDT", "MATICUSDT", "SOLUSDT", "DOTUSDT", "AVAXUSDT",
            "LINKUSDT"]
 """
@@ -17,11 +22,6 @@ The folder path where the retrieved data will be saved.
 ema = ["None", "EMA10", "EMA20", "EMA50", "EMA100", "EMA200"]
 """
 List of Exponential Moving Average (EMA) periods to be calculated.
-"""
-
-get_data = False
-"""
-Flag to control whether to retrieve historical data or not.
 """
 
 allWin = 0

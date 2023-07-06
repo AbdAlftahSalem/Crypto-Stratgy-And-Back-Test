@@ -1,6 +1,7 @@
 import math
 import pandas as pd
 
+
 def nadaraya_watson_envelope(length, bandwidth, error_multiplier, source_data):
     """
     Calculate the Nadaraya-Watson envelope.
@@ -13,7 +14,6 @@ def nadaraya_watson_envelope(length, bandwidth, error_multiplier, source_data):
 
     Returns:
         A tuple containing the upper band, lower band, cross-up, and cross-down values.
-
     """
     envelope_values = []
 
@@ -23,13 +23,14 @@ def nadaraya_watson_envelope(length, bandwidth, error_multiplier, source_data):
 
         for j in range(length):
             weight = math.exp(-(math.pow(i - j, 2) / (bandwidth * bandwidth * 2)))
-            weighted_sum += source_data[j] * weight
+            weighted_sum += float(source_data[j]) * float(weight)
             sum_of_weights += weight
 
         y = weighted_sum / sum_of_weights
         envelope_values.append(y)
 
     # Calculate mean absolute error
+    source_data = pd.to_numeric(source_data, errors='coerce')
     mean_absolute_error = (source_data - pd.Series(envelope_values)).abs().mean() * error_multiplier
 
     # Calculate upper and lower bands

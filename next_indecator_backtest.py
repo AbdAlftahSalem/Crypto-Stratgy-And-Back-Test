@@ -34,8 +34,9 @@ def applyIndicator(df: pd.DataFrame):
                     i["upper"] = upper
                     i["lower"] = lower
                     i['signal'] = ''
-                    i.loc[i['close'] > i['upper'], 'signal'] = 'sell'
-                    i.loc[i['close'] < i['lower'], 'signal'] = 'buy'
+                    i.loc[i['close'].astype(float) > i['upper'].astype(float), 'signal'] = 'sell'
+                    i.loc[i['close'].astype(float) < i['lower'].astype(float), 'signal'] = 'buy'
+
                     fullDF.append(i)
                 else:
                     print(f"PASS {i.iloc[0]['date']} , to {i.iloc[-1]['date']}")

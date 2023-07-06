@@ -41,8 +41,7 @@ def getData(ticker, interval):
 
     # Apply indicators to the DataFrame
     applyIndicator(df)
-
-    return df
+    print(f'* Finish getting data for {ticker} in {interval} and save in the {const_app.saveDataFolder} folder')
 
 
 def getDataForAllTickers():
@@ -50,8 +49,7 @@ def getDataForAllTickers():
     Retrieve historical data for all tickers and intervals specified in const_app.
 
     """
-    print(f'Start get data for\nTickers: {const_app.tickers}\nIntervals: {const_app.intervals}')
+    print(f'Start get data for\nTickers: {const_app.tickers}\nIntervals: {const_app.intervals}\n\n')
     for ticker in const_app.tickers:
         for interval in const_app.intervals:
             getData(ticker, interval)
-            print(f'Finish getting data for {ticker} in {interval} and save in the {const_app.saveDataFolder} folder')

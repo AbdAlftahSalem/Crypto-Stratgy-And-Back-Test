@@ -8,13 +8,15 @@ def longBackTest(combined_df, ticker: str, frame: str, ema: str):
 
     enterCandle = combined_df.iloc[0]
     outPut = {"ticker": ticker, "frame": frame, "profitNum": 0, "loseNum": 0, "data": []}
+
     for i in range(len(combined_df)):
         enterCandleSearch = combined_df.iloc[i]
 
-        if enterCandleSearch["signal"] == "buy" and not searchProfit and getChange(
-                enterCandleSearch["high"],
-                enterCandleSearch[
-                    "low"]) < 2 and getEMALong(ema, enterCandleSearch):
+        if enterCandleSearch["signal"] == "buy" and not searchProfit and getChange(enterCandleSearch["high"],
+                                                                                   enterCandleSearch[
+                                                                                       "low"]) < 2 and getEMA(ema,
+                                                                                                              enterCandleSearch,
+                                                                                                              "long"):
             enterCandle = combined_df.iloc[i]
             profitPCT = getProfit(frame)
             profit = getNumByChange(enterCandle["close"], profitPCT)
@@ -23,17 +25,13 @@ def longBackTest(combined_df, ticker: str, frame: str, ema: str):
 
         if searchProfit:
             if combined_df.iloc[i]["high"] >= profit:
-                outPut["data"].append({"entryDate": enterCandle['date'], "outDate": combined_df.iloc[i]['date'],
-                                       "enterPrice": enterCandle['close'], "tp": profit, "sl": stop, "status": "tp",
-                                       "change": getProfit(frame)})
+                outPut["data"].append(getTradeData(enterCandle, combined_df.iloc[i], profit, stop, "tp", frame))
                 outPut["profitNum"] += 1
                 searchProfit = False
                 continue
 
             elif combined_df.iloc[i]["low"] <= stop:
-                outPut["data"].append({"entryDate": enterCandle['date'], "outDate": combined_df.iloc[i]['date'],
-                                       "enterPrice": enterCandle['close'], "tp": profit, "sl": stop, "status": "sl",
-                                       "change": -getProfit(frame) / 2})
+                outPut["data"].append(getTradeData(enterCandle, combined_df.iloc[i], profit, stop, "sl", frame))
                 outPut["loseNum"] += 1
                 searchProfit = False
                 continue
@@ -48,12 +46,14 @@ def sellBackTest(combined_df, ticker: str, frame: str, ema: str):
     enterCandle = combined_df.iloc[0]
 
     outPut = {"ticker": ticker, "frame": frame, "profitNum": 0, "loseNum": 0, "data": []}
+
     for i in range(len(combined_df)):
         enterCandleSearch = combined_df.iloc[i]
-        if enterCandleSearch["signal"] == "sell" and not searchProfit and getChange(
-                enterCandleSearch["high"],
-                enterCandleSearch[
-                    "low"]) < 2 and getEMAShort(ema, enterCandleSearch):
+        if enterCandleSearch["signal"] == "sell" and not searchProfit and getChange(enterCandleSearch["high"],
+                                                                                    enterCandleSearch[
+                                                                                        "low"]) < 2 and getEMA(ema,
+                                                                                                               enterCandleSearch,
+                                                                                                               "short"):
             enterCandle = combined_df.iloc[i]
             profitPCT = getProfit(frame)
             profit = getNumByChange(enterCandle["close"], profitPCT * -1)
@@ -62,18 +62,14 @@ def sellBackTest(combined_df, ticker: str, frame: str, ema: str):
 
         if searchProfit:
             if combined_df.iloc[i]["low"] <= profit:
-                outPut["data"].append({"entryDate": enterCandle['date'], "outDate": combined_df.iloc[i]['date'],
-                                       "enterPrice": enterCandle['close'], "tp": profit, "sl": stop, "status": "tp",
-                                       "change": getProfit(frame)})
+                outPut["data"].append(getTradeData(enterCandle, combined_df.iloc[i], profit, stop, "tp", frame))
                 outPut["profitNum"] += 1
                 searchProfit = False
                 i += 1
                 continue
 
             elif combined_df.iloc[i]["high"] >= stop:
-                outPut["data"].append({"entryDate": enterCandle['date'], "outDate": combined_df.iloc[i]['date'],
-                                       "enterPrice": enterCandle['close'], "tp": profit, "sl": stop, "status": "sl",
-                                       "change": -getProfit(frame) / 2})
+                outPut["data"].append(getTradeData(enterCandle, combined_df.iloc[i], profit, stop, "sl", frame))
                 outPut["loseNum"] += 1
                 searchProfit = False
                 i += 1
@@ -93,41 +89,22 @@ def getProfit(frame: str):
         return 5
 
 
-def getEMALong(ema: str, enterCandleSearch):
-    if ema == "EMA200":
-        return enterCandleSearch["EMA200"] <= enterCandleSearch["close"]
-
-    elif ema == "EMA100":
-        return enterCandleSearch["EMA100"] <= enterCandleSearch["close"]
-
-    elif ema == "EMA50":
-        return enterCandleSearch["EMA50"] <= enterCandleSearch["close"]
-
-    elif ema == "EMA20":
-        return enterCandleSearch["EMA20"] <= enterCandleSearch["close"]
-
-    elif ema == "EMA10":
-        return enterCandleSearch["EMA10"] <= enterCandleSearch["close"]
-
-    elif ema == "None":
-        return True
+def getTradeData(enterCandle, exitCandle, profit, stop, status, frame):
+    return {
+        "entryDate": enterCandle['date'],
+        "outDate": exitCandle['date'],
+        "enterPrice": enterCandle['close'],
+        "tp": profit,
+        "sl": stop,
+        "status": status,
+        "change": getProfit(frame)
+    }
 
 
-def getEMAShort(ema: str, enterCandleSearch):
-    if ema == "EMA200":
-        return enterCandleSearch["EMA200"] >= enterCandleSearch["close"]
-
-    elif ema == "EMA100":
-        return enterCandleSearch["EMA100"] >= enterCandleSearch["close"]
-
-    elif ema == "EMA50":
-        return enterCandleSearch["EMA50"] >= enterCandleSearch["close"]
-
-    elif ema == "EMA20":
-        return enterCandleSearch["EMA20"] >= enterCandleSearch["close"]
-
-    elif ema == "EMA10":
-        return enterCandleSearch["EMA10"] >= enterCandleSearch["close"]
-
+def getEMA(ema: str, enterCandleSearch, trade_type: str):
+    if trade_type == "long":
+        return enterCandleSearch[ema] <= enterCandleSearch["close"]
+    elif trade_type == "short":
+        return enterCandleSearch[ema] >= enterCandleSearch["close"]
     elif ema == "None":
         return True

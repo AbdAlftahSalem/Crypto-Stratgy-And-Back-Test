@@ -1,10 +1,9 @@
-get_data = True
+get_data = False
 """
 Flag to control whether to retrieve historical data or not.
 """
 
-tickers = ["BTCUSDT", "ETHUSDT", "BNBUSDT", "XRPUSDT", "ADAUSDT", "MATICUSDT", "SOLUSDT", "DOTUSDT", "AVAXUSDT",
-           "LINKUSDT"]
+tickers = ["BTCUSDT"]
 """
 List of tickers for which historical data will be retrieved.
 """
@@ -19,7 +18,7 @@ saveDataFolder = "D:\\Python project\\nadaraya_watson_envelope\\data\\"
 The folder path where the retrieved data will be saved.
 """
 
-ema = ["None", "EMA10", "EMA20", "EMA50", "EMA100", "EMA200"]
+ema = ["None", "ema10", "ema20", "ema50", "ema100", "ema200"]
 """
 List of Exponential Moving Average (EMA) periods to be calculated.
 """
@@ -42,7 +41,12 @@ Variable to store the message to be sent to Telegram.
 interval15mTpPCT = 1.5
 interval30mTpPCT = 3
 interval1hTpPCT = 5
+"""
+PCT TP change
+"""
 
+stopLosePCTFromTPPCT = 1
+"""
 # This variable will divide it from TP PCT
 # if TP : 3 -> SL will be 3 / 2 = 1.5 . etc
-stopLosePCTFromTPPCT = 2
+"""

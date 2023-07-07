@@ -41,7 +41,6 @@ def getData(ticker, interval):
 
     # Apply indicators to the DataFrame
     applyIndicator(df)
-    print(f'* Finish getting data for {ticker} in {interval} and save in the {const_app.saveDataFolder} folder')
 
 
 def getDataForAllTickers():
@@ -53,3 +52,4 @@ def getDataForAllTickers():
     for ticker in const_app.tickers:
         for interval in const_app.intervals:
             getData(ticker, interval)
+            print(f'* Finish getting data for {ticker} in {interval} and save in the {const_app.saveDataFolder} folder')

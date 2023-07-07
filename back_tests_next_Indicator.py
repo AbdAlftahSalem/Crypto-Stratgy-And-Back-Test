@@ -30,7 +30,8 @@ def longBackTest(combined_df, ticker: str, frame: str, ema: str):
                 enterCandleSearch["signal"] == "buy"
                 and not searchProfit
                 and getChange(enterCandleSearch["high"], enterCandleSearch["low"]) < 2
-                and getEMA(ema, enterCandleSearch, "long")
+                #  this condition to search in strategy with EMA and without it
+                and getEMA(ema, enterCandleSearch, "long") if ema != "None" else True
         ):
             enterCandle = combined_df.iloc[i]
             profitPCT = getProfit(frame)
@@ -86,7 +87,8 @@ def sellBackTest(combined_df, ticker: str, frame: str, ema: str):
                 enterCandleSearch["signal"] == "sell"
                 and not searchProfit
                 and getChange(enterCandleSearch["high"], enterCandleSearch["low"]) < 2
-                and getEMA(ema, enterCandleSearch, "short")
+                #  this condition to search in strategy with EMA and without it
+                and getEMA(ema, enterCandleSearch, "long") if ema != "None" else True
         ):
             enterCandle = combined_df.iloc[i]
             profitPCT = getProfit(frame)

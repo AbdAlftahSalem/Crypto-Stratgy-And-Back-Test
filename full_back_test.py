@@ -8,7 +8,7 @@ from back_tests_next_Indicator import longBackTest, sellBackTest
 # Function to show next indicator data
 def showNextIndicatorData(ticker, frame, ema):
     # Read data from CSV file
-    df = pandas.read_csv(f"{const_app.saveDataFolder}{ticker}-{frame}-2022.csv")
+    df = pandas.read_csv(f"{const_app.saveDataFolder}{ticker}-{frame}-indicator.csv")
 
     # Perform long backtest
     dataLong = longBackTest(df, ticker, frame, ema)
@@ -42,7 +42,7 @@ def showNextIndicatorData(ticker, frame, ema):
 
     # Print buy signal statistics
     print(
-        f"BUY || Ticker: {ticker}, Frame: {frame}, Profit number: {dataLong['profitNum']}, Lose number: {dataLong['loseNum']} || ALL WIN CHANGE: +{total_win_pct}% || ALL LOSE CHANGE: {total_lose_pct}% || SUCCESS PCT: {round((dataLong['profitNum'] / (dataLong['profitNum'] + dataLong['loseNum'])) * 100, 2)}%\n")
+        f"{ema} || BUY || Ticker: {ticker}, Frame: {frame}, Profit number: {dataLong['profitNum']}, Lose number: {dataLong['loseNum']} || ALL WIN CHANGE: +{total_win_pct}% || ALL LOSE CHANGE: {total_lose_pct}% || SUCCESS PCT: {round((dataLong['profitNum'] / (dataLong['profitNum'] + dataLong['loseNum'])) * 100, 2)}%\n")
 
     # Update overall win and lose counts
     const_app.allWin += dataLong['profitNum']
@@ -50,7 +50,7 @@ def showNextIndicatorData(ticker, frame, ema):
 
     # Generate message for Telegram
     const_app.messageToTele = f"Next indicator + {ema} || LONG\n\nTICKER: {ticker}\n⏰Frame: {frame}\n💹Win number: {winNumLong}\n❌Lose number: {loseNumLong}\🔥Win change: {changeWinLong}\n🔴Change lose: {changeLoseLong}\n✅Start wallet: {startWalletLong}\n❇End wallet: {endWalletLong}\n💯PCT success: {pctSuccessLong}\n⌛AVG waiting time (h): {avgWaitingLong}\n\n\nNext indicator + {ema} || SHORT\n\nTICKER: {ticker}\n⏰Frame: {frame}\n💹Win number: {winNumShort}\n❌Lose number: {loseNumShort}\n🔥Win change: {changeWinShort}\n🔴Change lose: {changeLoseShort}\n✅Start wallet: {startWalletShort}\n❇End wallet: {endWalletShort}\n💯PCT success: {pctSuccessShort}\n⌛AVG waiting time (h): {avgWaitingShort}\n\n\n\n"
-    print(const_app.messageToTele)
+    # print(const_app.messageToTele)
 
 
 #  This method to increase speed for back test by using threads
@@ -79,11 +79,11 @@ def nextIndicatorBackText():
             const_app.allWin = 0
             const_app.allLose = 0
             boost(showNextIndicatorData, const_app.tickers, frame, ema)
-            print("************************************************************************************\n")
-            print(f"ALL WIN {frame}: {const_app.allWin}")
-            print(f"ALL LOSE {frame}: {const_app.allLose}")
-            print(f"SUCCESS PCT: {round((const_app.allWin / (const_app.allWin + const_app.allLose)) * 100, 2)}%")
-            print("************************************************************************************\n\n")
+            # print("************************************************************************************\n")
+            # print(f"ALL WIN {frame}: {const_app.allWin}")
+            # print(f"ALL LOSE {frame}: {const_app.allLose}")
+            # print(f"SUCCESS PCT: {round((const_app.allWin / (const_app.allWin + const_app.allLose)) * 100, 2)}%")
+            # print("************************************************************************************\n\n")
 
 
 def getDetailOfSignals(data):

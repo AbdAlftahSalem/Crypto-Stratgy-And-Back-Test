@@ -8,7 +8,7 @@ from back_tests_next_Indicator import longBackTest, sellBackTest
 # Function to show next indicator data
 def showNextIndicatorData(ticker, frame, ema):
     # Read data from CSV file
-    df = pandas.read_csv(f"{const_app.saveDataFolder}{ticker}-{frame}-indicator.csv")
+    df = pandas.read_csv(f"{const_app.saveDataFolder}{ticker}-{frame}-indicators.csv")
 
     # Perform long backtest
     dataLong = longBackTest(df, ticker, frame, ema)
@@ -53,6 +53,23 @@ def showNextIndicatorData(ticker, frame, ema):
     # print(const_app.messageToTele)
 
 
+def nextIndicatorBackText():
+    # Create a list to store the threads
+    thread_list = []
+
+    # Iterate over ema and frame intervals
+    for ema in const_app.ema:
+        for frame in const_app.intervals:
+            # Create a thread for each combination of ema and frame
+            th = threading.Thread(target=boost, args=(showNextIndicatorData, const_app.tickers, frame, ema))
+            thread_list.append(th)
+            th.start()
+
+    # Wait for all threads to complete
+    for thread in thread_list:
+        thread.join()
+
+
 #  This method to increase speed for back test by using threads
 #  This link in linkedin talks about using threads in this code :
 #  https://www.linkedin.com/posts/abd-alftah-salem-a3ba0b1bb_%D9%83%D9%86%D8%AA-%D8%A7%D9%84%D9%8A%D9%88%D9%85-%D8%B4%D8%BA%D8%A7%D9%84-%D8%B9%D9%84%D9%89-%D8%A8%D8%B1%D9%88%D8%AC%D9%8A%D9%83%D8%AA-%D8%A8%D8%A7%D9%8A%D8%AB%D9%88%D9%86-%D9%83%D9%86%D8%AA-%D8%A8%D8%AC%D8%B1%D8%A8-activity-7072175553000222720-uYA1?utm_source=share&utm_medium=member_desktop
@@ -72,18 +89,11 @@ def boost(callback, inputTickers, interval, ema):
         print(f"An error occurred: {e}")
 
 
-def nextIndicatorBackText():
-    # Iterate over ema and frame intervals
-    for ema in const_app.ema:
-        for frame in const_app.intervals:
-            const_app.allWin = 0
-            const_app.allLose = 0
-            boost(showNextIndicatorData, const_app.tickers, frame, ema)
-            # print("************************************************************************************\n")
-            # print(f"ALL WIN {frame}: {const_app.allWin}")
-            # print(f"ALL LOSE {frame}: {const_app.allLose}")
-            # print(f"SUCCESS PCT: {round((const_app.allWin / (const_app.allWin + const_app.allLose)) * 100, 2)}%")
-            # print("************************************************************************************\n\n")
+# def nextIndicatorBackText():
+#     # Iterate over ema and frame intervals
+#     for ema in const_app.ema:
+#         for frame in const_app.intervals:
+#             boost(showNextIndicatorData, const_app.tickers, frame, ema)
 
 
 def getDetailOfSignals(data):

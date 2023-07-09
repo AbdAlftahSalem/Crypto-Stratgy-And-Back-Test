@@ -3,7 +3,7 @@ get_data = False
 Flag to control whether to retrieve historical data or not.
 """
 
-tickers = ["BTCUSDT"]
+tickers = ["ETHUSDT", "SOLUSDT"]
 """
 List of tickers for which historical data will be retrieved.
 """
@@ -18,7 +18,7 @@ saveDataFolder = "D:\\Python project\\nadaraya_watson_envelope\\data\\"
 The folder path where the retrieved data will be saved.
 """
 
-ema = ["None", "ema10", "ema20", "ema50", "ema100", "ema200"]
+ema = ["ema10", "ema20", "ema50", "ema100", "ema200"]
 """
 List of Exponential Moving Average (EMA) periods to be calculated.
 """

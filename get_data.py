@@ -2,7 +2,7 @@ import pandas as pd
 from binance.client import Client
 
 import const_app
-from next_indecator_backtest import applyIndicator
+from next_indecator_backtest import applyIndicators
 
 client = Client()
 
@@ -40,7 +40,7 @@ def getData(ticker, interval):
         df[f'{ema_period.lower()}'] = df['close'].ewm(span=span, adjust=False).mean()
 
     # Apply indicators to the DataFrame
-    applyIndicator(df)
+    applyIndicators(df)
 
 
 def getDataForAllTickers():

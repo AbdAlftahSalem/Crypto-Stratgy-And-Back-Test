@@ -1,49 +1,55 @@
 import pandas as pd
 
 import const_app
-from indecator import nadaraya_watson_envelope
+import indecators
+from indecators import nadaraya_watson_envelope, vwap_score
 from util import divideDf
 
 
-def applyIndicator(df: pd.DataFrame):
+def applyIndicators(df: pd.DataFrame, ticker: str, interval: str):
     """
     Apply indicators to the DataFrame.
 
     Args:
         df: The DataFrame to apply the indicators to.
+        ticker: The ticker symbol.
+        interval: The time interval for the data.
 
     """
-    for k in const_app.intervals:
-        for ticker in const_app.tickers:
-            # read df
-            data = divideDf(df)
 
-            fullDF = []
-            for i in data:
-                if len(i) > 499:
-                    close = i["close"]
+    data = divideDf(df)
 
-                    # Calculate the Nadaraya-Watson envelope
-                    envelope = nadaraya_watson_envelope(500, 8., 3., close)
+    fullDF = []
+    for i in data:
+        if len(i) > 499:
+            close = i["close"]
 
-                    # Extract upper and lower bands from the envelope
-                    upper = envelope[0]
-                    lower = envelope[1]
+            # Calculate the Nadaraya-Watson envelope
+            envelope = nadaraya_watson_envelope(500, 8., 3., close)
 
-                    # Calculate signals based on the close prices and bands
-                    i["upper"] = upper
-                    i["lower"] = lower
-                    i['signal'] = ''
-                    i.loc[i['close'].astype(float) > i['upper'].astype(float), 'signal'] = 'sell'
-                    i.loc[i['close'].astype(float) < i['lower'].astype(float), 'signal'] = 'buy'
+            # Extract upper and lower bands from the envelope
+            upper = envelope[0]
+            lower = envelope[1]
 
-                    fullDF.append(i)
-                else:
-                    print(f"PASS {i.iloc[0]['date']} , to {i.iloc[-1]['date']}")
-                    pass
+            # Calculate signals based on the close prices and bands
+            i["upper"] = upper
+            i["lower"] = lower
+            i['signal'] = ''
+            i.loc[i['close'].astype(float) > i['upper'].astype(float), 'signal'] = 'sell'
+            i.loc[i['close'].astype(float) < i['lower'].astype(float), 'signal'] = 'buy'
 
-            combined_df = pd.concat(fullDF, ignore_index=True)
-            combined_df = combined_df.reset_index()
+            fullDF.append(i)
+        else:
+            print(f"PASS {i.iloc[0]['date']} , to {i.iloc[-1]['date']}")
+            pass
 
-            # Save the combined DataFrame with indicators to a CSV file
-            combined_df.to_csv(f"{const_app.saveDataFolder}{ticker}-{k}-indicator.csv")
+    combined_df = pd.concat(fullDF, ignore_index=True)
+    combined_df = combined_df.reset_index()
+
+    combined_df = vwap_score(combined_df, 21)
+    combined_df = vwap_score(combined_df, 48)
+    combined_df = vwap_score(combined_df, 96)
+    combined_df = vwap_score(combined_df, 192)
+    combined_df = vwap_score(combined_df, 384)
+    # Save the combined DataFrame with indicators to a CSV file
+    combined_df.to_csv(f"{const_app.saveDataFolder}{ticker}-{interval}-indicators.csv")

@@ -43,9 +43,3 @@ def nadaraya_watson_envelope(length, bandwidth, error_multiplier, source_data):
     cross_down = envelope_values[0] - mean_absolute_error
 
     return upper_band, lower_band, cross_up, cross_down
-
-
-def vwap_score(df, period):
-    df['vc'] = df["volume"] * df["close"]
-    return round((df['vc'].rolling(window=period).sum()) / (df['volume'].rolling(window=period).sum()),
-                 10).fillna(method='bfill')

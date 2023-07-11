@@ -1,8 +1,7 @@
 import pandas as pd
 
 import const_app
-import indecators
-from indecators import nadaraya_watson_envelope, vwap_score
+from indecators import nadaraya_watson_envelope as nadaraya, vwap_score as vwap
 from util import divideDf
 
 
@@ -16,6 +15,11 @@ def applyIndicators(df: pd.DataFrame, ticker: str, interval: str):
         interval: The time interval for the data.
 
     """
+    # calculate vwap
+    df["vwap21"] = vwap.vwap_score(df, 21)
+    df["vwap50"] = vwap.vwap_score(df, 50)
+    df["vwap100"] = vwap.vwap_score(df, 100)
+    df["vwap200"] = vwap.vwap_score(df, 200)
 
     data = divideDf(df)
 
@@ -25,7 +29,7 @@ def applyIndicators(df: pd.DataFrame, ticker: str, interval: str):
             close = i["close"]
 
             # Calculate the Nadaraya-Watson envelope
-            envelope = nadaraya_watson_envelope(500, 8., 3., close)
+            envelope = nadaraya.nadaraya_watson_envelope(500, 8., 3., close)
 
             # Extract upper and lower bands from the envelope
             upper = envelope[0]
@@ -46,10 +50,6 @@ def applyIndicators(df: pd.DataFrame, ticker: str, interval: str):
     combined_df = pd.concat(fullDF, ignore_index=True)
     combined_df = combined_df.reset_index()
 
-    combined_df = vwap_score(combined_df, 21)
-    combined_df = vwap_score(combined_df, 48)
-    combined_df = vwap_score(combined_df, 96)
-    combined_df = vwap_score(combined_df, 192)
-    combined_df = vwap_score(combined_df, 384)
     # Save the combined DataFrame with indicators to a CSV file
-    combined_df.to_csv(f"{const_app.saveDataFolder}{ticker}-{interval}-indicators.csv")
+    combined_df.to_csv(f"{const_app.saveDataFolder}{ticker}-{interval}-indicator.csv")
+    print(f'* Finish getting data for {ticker} in {interval} and save in the {const_app.saveDataFolder} folder')

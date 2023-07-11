@@ -1,5 +1,6 @@
 import math
 
+
 def divideDf(df) -> list:
     """
     Divide a DataFrame into smaller chunks of size 500.

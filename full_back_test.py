@@ -1,6 +1,8 @@
 import threading
 from datetime import datetime
+
 import pandas
+
 import const_app
 from back_tests_next_Indicator import longBackTest, sellBackTest
 
@@ -8,7 +10,7 @@ from back_tests_next_Indicator import longBackTest, sellBackTest
 # Function to show next indicator data
 def showNextIndicatorData(ticker, frame, ema):
     # Read data from CSV file
-    df = pandas.read_csv(f"{const_app.saveDataFolder}{ticker}-{frame}-indicators.csv")
+    df = pandas.read_csv(f"{const_app.saveDataFolder}{ticker}-{frame}-indicator.csv")
 
     # Perform long backtest
     dataLong = longBackTest(df, ticker, frame, ema)

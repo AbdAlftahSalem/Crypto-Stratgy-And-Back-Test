@@ -2,7 +2,7 @@ import pandas as pd
 from binance.client import Client
 
 import const_app
-from next_indecator_backtest import applyIndicators
+from indecators import applay
 
 client = Client()
 
@@ -19,7 +19,7 @@ def getData(ticker, interval):
         A DataFrame containing the retrieved data.
 
     """
-    kLine = client.get_historical_klines(ticker, interval, "1 Jan, 2022")
+    kLine = client.get_historical_klines(ticker, interval, "1 jan, 2022")
     df = pd.DataFrame(
         kLine,
         columns=['date', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'qav', 'num_trades', 'taker_base_vol',
@@ -40,7 +40,7 @@ def getData(ticker, interval):
         df[f'{ema_period.lower()}'] = df['close'].ewm(span=span, adjust=False).mean()
 
     # Apply indicators to the DataFrame
-    applyIndicators(df)
+    applay.applyIndicators(df, ticker, interval)
 
 
 def getDataForAllTickers():
@@ -52,4 +52,3 @@ def getDataForAllTickers():
     for ticker in const_app.tickers:
         for interval in const_app.intervals:
             getData(ticker, interval)
-            print(f'* Finish getting data for {ticker} in {interval} and save in the {const_app.saveDataFolder} folder')

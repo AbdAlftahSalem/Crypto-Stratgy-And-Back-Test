@@ -29,29 +29,33 @@ def showNextIndicatorData(ticker, frame, ema, vwap):
     # Calculate total win and lose percentages for sell signals
     total_lose_pct = round(sum((float(d["change"]) if d["status"] == "sl" else 0) for d in dateSell["data"]), 2)
     total_win_pct = round(sum((float(d["change"]) if d["status"] == "tp" else 0) for d in dateSell["data"]), 2)
-    const_app.successLong += total_win_pct
-    const_app.successShort += total_lose_pct
-    const_app.counter += 1
 
     # Print sell signal statistics
     print(
         f"{ema} || SELL || Ticker: {ticker}, Frame: {frame}, Profit number: {dateSell['profitNum']}, Lose number: {dateSell['loseNum']} || ALL WIN CHANGE: +{total_win_pct}% || ALL LOSE CHANGE: {total_lose_pct}% || SUCCESS PCT: {round((dateSell['profitNum'] / (dateSell['profitNum'] + dateSell['loseNum'])) * 100, 2)}%")
 
+    # Calculate total win and lose percentages for long signals
+    total_lose_pct = round(sum((d["change"] if d["status"] == "sl" else 0) for d in dataLong["data"]), 2)
+    total_win_pct = round(sum((d["change"] if d["status"] == "tp" else 0) for d in dataLong["data"]), 2)
+
     # Update overall win and lose counts
     const_app.allWin += dateSell['profitNum']
     const_app.allLose += dateSell['loseNum']
 
-    # Calculate total win and lose percentages for long signals
-    total_lose_pct = round(sum((d["change"] if d["status"] == "sl" else 0) for d in dataLong["data"]), 2)
-    total_win_pct = round(sum((d["change"] if d["status"] == "tp" else 0) for d in dataLong["data"]), 2)
+    const_app.numberOfSuccessShortSignal += dataLong['profitNum']
+    const_app.numberOfLoseShortSignal += dataLong['loseNum']
+    const_app.summationOfSuccessShortPCT += total_win_pct
+    const_app.summationOfLoseShortPCT += total_lose_pct
 
     # Print buy signal statistics
     print(
         f"{vwap} || BUY || Ticker: {ticker}, Frame: {frame}, Profit number: {dataLong['profitNum']}, Lose number: {dataLong['loseNum']} || ALL WIN CHANGE: +{total_win_pct}% || ALL LOSE CHANGE: {total_lose_pct}% || SUCCESS PCT: {round((dataLong['profitNum'] / (dataLong['profitNum'] + dataLong['loseNum'])) * 100, 2)}%\n")
 
     # Update overall win and lose counts
-    const_app.allWin += dataLong['profitNum']
-    const_app.allLose += dataLong['loseNum']
+    const_app.numberOfSuccessLongSignal += dataLong['loseNum']
+    const_app.numberOfLoseLongSignal += dataLong['profitNum']
+    const_app.summationOfSuccessLongPCT += total_win_pct
+    const_app.summationOfLoseLongPCT += total_lose_pct
 
     # Generate message for Telegram
     const_app.messageToTele = f"Next indicator + {ema} || LONG\n\nTICKER: {ticker}\n⏰Frame: {frame}\n💹Win number: {winNumLong}\n❌Lose number: {loseNumLong}\🔥Win change: {changeWinLong}\n🔴Change lose: {changeLoseLong}\n✅Start wallet: {startWalletLong}\n❇End wallet: {endWalletLong}\n💯PCT success: {pctSuccessLong}\n⌛AVG waiting time (h): {avgWaitingLong}\n\n\nNext indicator + {ema} || SHORT\n\nTICKER: {ticker}\n⏰Frame: {frame}\n💹Win number: {winNumShort}\n❌Lose number: {loseNumShort}\n🔥Win change: {changeWinShort}\n🔴Change lose: {changeLoseShort}\n✅Start wallet: {startWalletShort}\n❇End wallet: {endWalletShort}\n💯PCT success: {pctSuccessShort}\n⌛AVG waiting time (h): {avgWaitingShort}\n\n\n\n"
@@ -77,8 +81,16 @@ def nextIndicatorBackText():
         thread.join()
 
     print(f"******************************************************************************\n")
-    print(f"Tickers search           : {const_app.tickers}")
-    print(f"Interval search          : {const_app.intervals}")
+    print(f"Tickers search                         : {const_app.tickers}")
+    print(f"Interval search                        : {const_app.intervals}")
+    print(f"Number Of Success Long Signal          : {const_app.numberOfSuccessLongSignal}")
+    print(f"Number Of Success Long Signal          : {const_app.numberOfSuccessShortSignal}")
+    print(f"Number Of Lose Long Signal             : {const_app.numberOfLoseLongSignal}")
+    print(f"Number Of Lose Short Signal            : {const_app.numberOfLoseShortSignal}")
+    print(f"Summation Of Success Long PCT          : {const_app.summationOfSuccessLongPCT} %")
+    print(f"Summation Of Success Short PCT         : {const_app.summationOfSuccessShortPCT} %")
+    print(f"Summation Of Lose Long PCT             : {const_app.summationOfLoseLongPCT} %")
+    print(f"Summation Of Lose Short PCT            : {const_app.summationOfLoseShortPCT} %")
     print(f"******************************************************************************\n")
 
 

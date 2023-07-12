@@ -56,6 +56,14 @@ stopLosePCTFromTPPCT = 1
 # if TP : 3 -> SL will be 3 / 2 = 1.5 . etc
 """
 
-successLong = 0
-successShort = 0
-counter = 0
+numberOfSuccessLongSignal = 0
+numberOfSuccessShortSignal = 0
+
+numberOfLoseLongSignal = 0
+numberOfLoseShortSignal = 0
+
+summationOfSuccessLongPCT = 0
+summationOfSuccessShortPCT = 0
+
+summationOfLoseLongPCT = 0
+summationOfLoseShortPCT = 0

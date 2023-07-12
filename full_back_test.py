@@ -30,14 +30,6 @@ def showNextIndicatorData(ticker, frame, ema, vwap):
     total_lose_pct = round(sum((float(d["change"]) if d["status"] == "sl" else 0) for d in dateSell["data"]), 2)
     total_win_pct = round(sum((float(d["change"]) if d["status"] == "tp" else 0) for d in dateSell["data"]), 2)
 
-    # Print sell signal statistics
-    print(
-        f"{ema} || SELL || Ticker: {ticker}, Frame: {frame}, Profit number: {dateSell['profitNum']}, Lose number: {dateSell['loseNum']} || ALL WIN CHANGE: +{total_win_pct}% || ALL LOSE CHANGE: {total_lose_pct}% || SUCCESS PCT: {round((dateSell['profitNum'] / (dateSell['profitNum'] + dateSell['loseNum'])) * 100, 2)}%")
-
-    # Calculate total win and lose percentages for long signals
-    total_lose_pct = round(sum((d["change"] if d["status"] == "sl" else 0) for d in dataLong["data"]), 2)
-    total_win_pct = round(sum((d["change"] if d["status"] == "tp" else 0) for d in dataLong["data"]), 2)
-
     # Update overall win and lose counts
     const_app.allWin += dateSell['profitNum']
     const_app.allLose += dateSell['loseNum']
@@ -47,13 +39,21 @@ def showNextIndicatorData(ticker, frame, ema, vwap):
     const_app.summationOfSuccessShortPCT += total_win_pct
     const_app.summationOfLoseShortPCT += total_lose_pct
 
+    # Print sell signal statistics
+    print(
+        f"{ema} || SELL || Ticker: {ticker}, Frame: {frame}, Profit number: {dateSell['profitNum']}, Lose number: {dateSell['loseNum']} || ALL WIN CHANGE: +{total_win_pct}% || ALL LOSE CHANGE: {total_lose_pct}% || SUCCESS PCT: {round((dateSell['profitNum'] / (dateSell['profitNum'] + dateSell['loseNum'])) * 100, 2)}%")
+
+    # Calculate total win and lose percentages for long signals
+    total_lose_pct = round(sum((d["change"] if d["status"] == "sl" else 0) for d in dataLong["data"]), 2)
+    total_win_pct = round(sum((d["change"] if d["status"] == "tp" else 0) for d in dataLong["data"]), 2)
+
     # Print buy signal statistics
     print(
         f"{vwap} || BUY || Ticker: {ticker}, Frame: {frame}, Profit number: {dataLong['profitNum']}, Lose number: {dataLong['loseNum']} || ALL WIN CHANGE: +{total_win_pct}% || ALL LOSE CHANGE: {total_lose_pct}% || SUCCESS PCT: {round((dataLong['profitNum'] / (dataLong['profitNum'] + dataLong['loseNum'])) * 100, 2)}%\n")
 
     # Update overall win and lose counts
-    const_app.numberOfSuccessLongSignal += dataLong['loseNum']
-    const_app.numberOfLoseLongSignal += dataLong['profitNum']
+    const_app.numberOfSuccessLongSignal += dataLong['profitNum']
+    const_app.numberOfLoseLongSignal += dataLong['loseNum']
     const_app.summationOfSuccessLongPCT += total_win_pct
     const_app.summationOfLoseLongPCT += total_lose_pct
 
@@ -85,13 +85,13 @@ def nextIndicatorBackText():
     print(f"Interval search                        : {const_app.intervals}")
     print(f"Number Of Success Long Signal          : {const_app.numberOfSuccessLongSignal}")
     print(f"Number Of Success Long Signal          : {const_app.numberOfSuccessShortSignal}")
-    print(f"Number Of Lose Long Signal             : {const_app.numberOfLoseLongSignal}")
-    print(f"Number Of Lose Short Signal            : {const_app.numberOfLoseShortSignal}")
     print(f"Summation Of Success Long PCT          : {const_app.summationOfSuccessLongPCT} %")
     print(f"Summation Of Success Short PCT         : {const_app.summationOfSuccessShortPCT} %")
-    print(f"Summation Of Lose Long PCT             : {const_app.summationOfLoseLongPCT} %")
-    print(f"Summation Of Lose Short PCT            : {const_app.summationOfLoseShortPCT} %")
-    print(f"******************************************************************************\n")
+    print(f"Number Of Lose Long Signal             : -{const_app.numberOfLoseLongSignal}")
+    print(f"Number Of Lose Short Signal            : -{const_app.numberOfLoseShortSignal}")
+    print(f"Summation Of Lose Long PCT             : -{const_app.summationOfLoseLongPCT} %")
+    print(f"Summation Of Lose Short PCT            : -{const_app.summationOfLoseShortPCT} %\n")
+    print(f"******************************************************************************")
 
 
 #  This method to increase speed for back test by using threads

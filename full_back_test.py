@@ -8,15 +8,15 @@ from back_tests_next_Indicator import longBackTest, sellBackTest
 
 
 # Function to show next indicator data
-def showNextIndicatorData(ticker, frame, ema):
+def showNextIndicatorData(ticker, frame, ema, vwap):
     # Read data from CSV file
     df = pandas.read_csv(f"{const_app.saveDataFolder}{ticker}-{frame}-indicator.csv")
 
     # Perform long backtest
-    dataLong = longBackTest(df, ticker, frame, ema)
+    dataLong = longBackTest(df, ticker, frame, ema, vwap)
 
     # Perform sell backtest
-    dateSell = sellBackTest(df, ticker, frame, ema)
+    dateSell = sellBackTest(df, ticker, frame, ema, vwap)
 
     # Calculate statistics for long trades
     winNumLong, loseNumLong, changeWinLong, changeLoseLong, startWalletLong, endWalletLong, pctSuccessLong, avgWaitingLong = getDetailOfSignals(
@@ -29,6 +29,9 @@ def showNextIndicatorData(ticker, frame, ema):
     # Calculate total win and lose percentages for sell signals
     total_lose_pct = round(sum((float(d["change"]) if d["status"] == "sl" else 0) for d in dateSell["data"]), 2)
     total_win_pct = round(sum((float(d["change"]) if d["status"] == "tp" else 0) for d in dateSell["data"]), 2)
+    const_app.successLong += total_win_pct
+    const_app.successShort += total_lose_pct
+    const_app.counter += 1
 
     # Print sell signal statistics
     print(
@@ -44,7 +47,7 @@ def showNextIndicatorData(ticker, frame, ema):
 
     # Print buy signal statistics
     print(
-        f"{ema} || BUY || Ticker: {ticker}, Frame: {frame}, Profit number: {dataLong['profitNum']}, Lose number: {dataLong['loseNum']} || ALL WIN CHANGE: +{total_win_pct}% || ALL LOSE CHANGE: {total_lose_pct}% || SUCCESS PCT: {round((dataLong['profitNum'] / (dataLong['profitNum'] + dataLong['loseNum'])) * 100, 2)}%\n")
+        f"{vwap} || BUY || Ticker: {ticker}, Frame: {frame}, Profit number: {dataLong['profitNum']}, Lose number: {dataLong['loseNum']} || ALL WIN CHANGE: +{total_win_pct}% || ALL LOSE CHANGE: {total_lose_pct}% || SUCCESS PCT: {round((dataLong['profitNum'] / (dataLong['profitNum'] + dataLong['loseNum'])) * 100, 2)}%\n")
 
     # Update overall win and lose counts
     const_app.allWin += dataLong['profitNum']
@@ -60,10 +63,12 @@ def nextIndicatorBackText():
     thread_list = []
 
     # Iterate over ema and frame intervals
-    for ema in const_app.ema:
+    for index in range(len(const_app.vwap)):
         for frame in const_app.intervals:
             # Create a thread for each combination of ema and frame
-            th = threading.Thread(target=boost, args=(showNextIndicatorData, const_app.tickers, frame, ema))
+            th = threading.Thread(target=boost,
+                                  args=(showNextIndicatorData, const_app.tickers, frame, const_app.ema[index],
+                                        const_app.vwap[index]))
             thread_list.append(th)
             th.start()
 
@@ -71,16 +76,21 @@ def nextIndicatorBackText():
     for thread in thread_list:
         thread.join()
 
+    print(f"******************************************************************************\n")
+    print(f"Tickers search           : {const_app.tickers}")
+    print(f"Interval search          : {const_app.intervals}")
+    print(f"******************************************************************************\n")
+
 
 #  This method to increase speed for back test by using threads
 #  This link in linkedin talks about using threads in this code :
 #  https://www.linkedin.com/posts/abd-alftah-salem-a3ba0b1bb_%D9%83%D9%86%D8%AA-%D8%A7%D9%84%D9%8A%D9%88%D9%85-%D8%B4%D8%BA%D8%A7%D9%84-%D8%B9%D9%84%D9%89-%D8%A8%D8%B1%D9%88%D8%AC%D9%8A%D9%83%D8%AA-%D8%A8%D8%A7%D9%8A%D8%AB%D9%88%D9%86-%D9%83%D9%86%D8%AA-%D8%A8%D8%AC%D8%B1%D8%A8-activity-7072175553000222720-uYA1?utm_source=share&utm_medium=member_desktop
 
-def boost(callback, inputTickers, interval, ema):
+def boost(callback, inputTickers, interval, ema, vwap):
     try:
         thread_list = []
         for ticker in inputTickers:
-            th = threading.Thread(target=callback, args=(ticker, interval, ema))
+            th = threading.Thread(target=callback, args=(ticker, interval, ema, vwap))
             thread_list.append(th)
             th.start()
 

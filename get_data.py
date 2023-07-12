@@ -4,8 +4,6 @@ from binance.client import Client
 import const_app
 from indecators import applay
 
-client = Client()
-
 
 def getData(ticker, interval):
     """
@@ -19,6 +17,7 @@ def getData(ticker, interval):
         A DataFrame containing the retrieved data.
 
     """
+    client = Client()
     kLine = client.get_historical_klines(ticker, interval, "1 jan, 2022")
     df = pd.DataFrame(
         kLine,

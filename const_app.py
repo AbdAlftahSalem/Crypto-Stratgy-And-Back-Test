@@ -23,6 +23,11 @@ ema = ["ema10", "ema20", "ema50", "ema100", "ema200"]
 List of Exponential Moving Average (EMA) periods to be calculated.
 """
 
+"""
+List of VWAP periods to be calculated.
+"""
+vwap = ["vwap21", "vwap50", "vwap21", "vwap100", "vwap200"]
+
 allWin = 0
 """
 Variable to keep track of the total number of wins.
@@ -50,3 +55,7 @@ stopLosePCTFromTPPCT = 1
 # This variable will divide it from TP PCT
 # if TP : 3 -> SL will be 3 / 2 = 1.5 . etc
 """
+
+successLong = 0
+successShort = 0
+counter = 0

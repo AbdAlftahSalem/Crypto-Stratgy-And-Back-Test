@@ -2,7 +2,7 @@ import const_app
 from util import getChange, getNumByChange
 
 
-def longBackTest(combined_df, ticker: str, frame: str, ema: str):
+def longBackTest(combined_df, ticker: str, frame: str, ema: str, vwap: str):
     """
     Perform a long backtest on the combined DataFrame.
 
@@ -11,9 +11,11 @@ def longBackTest(combined_df, ticker: str, frame: str, ema: str):
         ticker: The ticker symbol.
         frame: The time frame.
         ema: The Exponential Moving Average (EMA) to consider.
+        vwap: VWAP.
 
     Returns:
         A dictionary containing the backtest results.
+
 
     """
     searchProfit = False
@@ -25,13 +27,12 @@ def longBackTest(combined_df, ticker: str, frame: str, ema: str):
 
     for i in range(len(combined_df)):
         enterCandleSearch = combined_df.iloc[i]
-
         if (
                 enterCandleSearch["signal"] == "buy"
                 and not searchProfit
                 and getChange(enterCandleSearch["high"], enterCandleSearch["low"]) < 2
                 #  this condition to search in strategy with EMA and without it
-                and getEMA(ema, enterCandleSearch, "long")
+                and getVWAP(vwap, enterCandleSearch, "long")
         ):
             enterCandle = combined_df.iloc[i]
             profitPCT = getProfit(frame)
@@ -59,7 +60,7 @@ def longBackTest(combined_df, ticker: str, frame: str, ema: str):
     return output
 
 
-def sellBackTest(combined_df, ticker: str, frame: str, ema: str):
+def sellBackTest(combined_df, ticker: str, frame: str, ema: str, vwap: str):
     """
     Perform a sell backtest on the combined DataFrame.
 
@@ -68,6 +69,8 @@ def sellBackTest(combined_df, ticker: str, frame: str, ema: str):
         ticker: The ticker symbol.
         frame: The time frame.
         ema: The Exponential Moving Average (EMA) to consider.
+        vwap: VWAP.
+
 
     Returns:
         A dictionary containing the backtest results.
@@ -183,5 +186,26 @@ def getEMA(ema: str, enterCandleSearch, trade_type: str):
         return enterCandleSearch[ema] >= enterCandleSearch["close"]
     elif trade_type == "short":
         return enterCandleSearch[ema] <= enterCandleSearch["close"]
+    elif ema == "None":
+        return True
+
+
+def getVWAP(ema: str, enterCandleSearch, trade_type: str):
+    """
+    Check if the current candle satisfies the EMA condition.
+
+    Args:
+        ema: The EMA to consider.
+        enterCandleSearch: The current candle data.
+        trade_type: The trade type (long or short).
+
+    Returns:
+        True if the condition is satisfied, False otherwise.
+
+    """
+    if trade_type == "long":
+        return enterCandleSearch[ema] <= enterCandleSearch["close"]
+    elif trade_type == "short":
+        return enterCandleSearch[ema] >= enterCandleSearch["close"]
     elif ema == "None":
         return True

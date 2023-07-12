@@ -2,6 +2,7 @@ import threading
 from datetime import datetime
 
 import pandas
+from colorama import Fore
 
 import const_app
 from back_tests_next_Indicator import longBackTest, sellBackTest
@@ -84,22 +85,21 @@ def nextIndicatorBackText():
 
     print(f"******************************************************************************\n")
     print(f"Tickers search                         : {const_app.tickers}")
-    print(f"Interval search                        : {const_app.intervals}")
-    print(f"Number Of Success Long Signal          : +{const_app.numberOfSuccessLongSignal}")
-    print(f"Number Of Success Short Signal         : +{const_app.numberOfSuccessShortSignal}")
-    print(f"Number Of Lose Long Signal             : -{const_app.numberOfLoseLongSignal} %")
-    print(f"Number Of Lose Short Signal            : -{const_app.numberOfLoseShortSignal} %")
-    print(f"Summation Of Success Long PCT          : +{const_app.summationOfSuccessLongPCT} %")
-    print(f"Summation Of Success Short PCT         : +{const_app.summationOfSuccessShortPCT} %")
-    print(
-        f"Summation of Success in Long and Short : +{const_app.summationOfSuccessShortPCT + const_app.summationOfSuccessLongPCT} %")
+    print(f"Interval search                        : {const_app.intervals}\n\n")
+    print(Fore.GREEN + f"Number Of Success Long Signal          : +{const_app.numberOfSuccessLongSignal}")
+    print(Fore.GREEN + f"Number Of Success Short Signal         : +{const_app.numberOfSuccessShortSignal}\n")
+    print(Fore.RED + f"Number Of Lose Long Signal             : -{const_app.numberOfLoseLongSignal}")
+    print(Fore.RED + f"Number Of Lose Short Signal            : -{const_app.numberOfLoseShortSignal}\n")
+    print(Fore.GREEN + f"Summation Of Success Long PCT          : +{const_app.summationOfSuccessLongPCT} %")
+    print(Fore.GREEN + f"Summation Of Success Short PCT         : +{const_app.summationOfSuccessShortPCT} %")
 
-    print(f"Summation Of Lose Long PCT             : -{const_app.summationOfLoseLongPCT} %")
-    print(f"Summation Of Lose Short PCT            : -{const_app.summationOfLoseShortPCT} %")
+    print(Fore.RED + f"Summation Of Lose Long PCT             : -{const_app.summationOfLoseLongPCT} %")
+    print(Fore.RED + f"Summation Of Lose Short PCT            : -{const_app.summationOfLoseShortPCT} %\n")
     print(
-        f"Summation of Lose in Long and Short    : -{const_app.summationOfLoseShortPCT + const_app.summationOfLoseLongPCT} %\n")
-
-    print(f"******************************************************************************")
+        Fore.RED + f"Summation of Lose in Long and Short    : -{const_app.summationOfLoseShortPCT + const_app.summationOfLoseLongPCT} %")
+    print(
+        Fore.GREEN + f"Summation of Success in Long and Short : +{const_app.summationOfSuccessShortPCT + const_app.summationOfSuccessLongPCT} %\n")
+    print(f"******************************************************************************\n")
 
 
 #  This method to increase speed for back test by using threads

@@ -16,7 +16,7 @@ def showNextIndicatorData(ticker, frame, ema, vwap):
     dataLong = longBackTest(df, ticker, frame, ema, vwap)
 
     # Perform sell backtest
-    dateSell = sellBackTest(df, ticker, frame, ema, vwap)
+    dataSell = sellBackTest(df, ticker, frame, ema, vwap)
 
     # Calculate statistics for long trades
     winNumLong, loseNumLong, changeWinLong, changeLoseLong, startWalletLong, endWalletLong, pctSuccessLong, avgWaitingLong = getDetailOfSignals(
@@ -24,24 +24,25 @@ def showNextIndicatorData(ticker, frame, ema, vwap):
 
     # Calculate statistics for short trades
     winNumShort, loseNumShort, changeWinShort, changeLoseShort, startWalletShort, endWalletShort, pctSuccessShort, avgWaitingShort = getDetailOfSignals(
-        dateSell["data"])
+        dataSell["data"])
 
     # Calculate total win and lose percentages for sell signals
-    total_lose_pct = round(sum((float(d["change"]) if d["status"] == "sl" else 0) for d in dateSell["data"]), 2)
-    total_win_pct = round(sum((float(d["change"]) if d["status"] == "tp" else 0) for d in dateSell["data"]), 2)
+    total_lose_pct = round(sum((float(d["change"]) if d["status"] == "sl" else 0) for d in dataSell["data"]), 2)
+    total_win_pct = round(sum((float(d["change"]) if d["status"] == "tp" else 0) for d in dataSell["data"]), 2)
 
     # Update overall win and lose counts
-    const_app.allWin += dateSell['profitNum']
-    const_app.allLose += dateSell['loseNum']
+    const_app.allWin += dataSell['profitNum']
+    const_app.allLose += dataSell['loseNum']
 
-    const_app.numberOfSuccessShortSignal += dataLong['profitNum']
-    const_app.numberOfLoseShortSignal += dataLong['loseNum']
+    const_app.numberOfSuccessShortSignal += dataSell['profitNum']
+    const_app.numberOfLoseShortSignal += dataSell['loseNum']
+
     const_app.summationOfSuccessShortPCT += total_win_pct
     const_app.summationOfLoseShortPCT += total_lose_pct
 
     # Print sell signal statistics
     print(
-        f"{ema} || SELL || Ticker: {ticker}, Frame: {frame}, Profit number: {dateSell['profitNum']}, Lose number: {dateSell['loseNum']} || ALL WIN CHANGE: +{total_win_pct}% || ALL LOSE CHANGE: {total_lose_pct}% || SUCCESS PCT: {round((dateSell['profitNum'] / (dateSell['profitNum'] + dateSell['loseNum'])) * 100, 2)}%")
+        f"{vwap} || SELL || Ticker: {ticker}, Frame: {frame}, Profit number: {dataSell['profitNum']}, Lose number: {dataSell['loseNum']} || ALL WIN CHANGE: +{total_win_pct}% || ALL LOSE CHANGE: {total_lose_pct}% || SUCCESS PCT: {round((dataSell['profitNum'] / (dataSell['profitNum'] + dataSell['loseNum'])) * 100, 2)}%")
 
     # Calculate total win and lose percentages for long signals
     total_lose_pct = round(sum((d["change"] if d["status"] == "sl" else 0) for d in dataLong["data"]), 2)
@@ -54,6 +55,7 @@ def showNextIndicatorData(ticker, frame, ema, vwap):
     # Update overall win and lose counts
     const_app.numberOfSuccessLongSignal += dataLong['profitNum']
     const_app.numberOfLoseLongSignal += dataLong['loseNum']
+
     const_app.summationOfSuccessLongPCT += total_win_pct
     const_app.summationOfLoseLongPCT += total_lose_pct
 
@@ -83,14 +85,20 @@ def nextIndicatorBackText():
     print(f"******************************************************************************\n")
     print(f"Tickers search                         : {const_app.tickers}")
     print(f"Interval search                        : {const_app.intervals}")
-    print(f"Number Of Success Long Signal          : {const_app.numberOfSuccessLongSignal}")
-    print(f"Number Of Success Long Signal          : {const_app.numberOfSuccessShortSignal}")
-    print(f"Summation Of Success Long PCT          : {const_app.summationOfSuccessLongPCT} %")
-    print(f"Summation Of Success Short PCT         : {const_app.summationOfSuccessShortPCT} %")
-    print(f"Number Of Lose Long Signal             : -{const_app.numberOfLoseLongSignal}")
-    print(f"Number Of Lose Short Signal            : -{const_app.numberOfLoseShortSignal}")
+    print(f"Number Of Success Long Signal          : +{const_app.numberOfSuccessLongSignal}")
+    print(f"Number Of Success Short Signal         : +{const_app.numberOfSuccessShortSignal}")
+    print(f"Number Of Lose Long Signal             : -{const_app.numberOfLoseLongSignal} %")
+    print(f"Number Of Lose Short Signal            : -{const_app.numberOfLoseShortSignal} %")
+    print(f"Summation Of Success Long PCT          : +{const_app.summationOfSuccessLongPCT} %")
+    print(f"Summation Of Success Short PCT         : +{const_app.summationOfSuccessShortPCT} %")
+    print(
+        f"Summation of Success in Long and Short : +{const_app.summationOfSuccessShortPCT + const_app.summationOfSuccessLongPCT} %")
+
     print(f"Summation Of Lose Long PCT             : -{const_app.summationOfLoseLongPCT} %")
-    print(f"Summation Of Lose Short PCT            : -{const_app.summationOfLoseShortPCT} %\n")
+    print(f"Summation Of Lose Short PCT            : -{const_app.summationOfLoseShortPCT} %")
+    print(
+        f"Summation of Lose in Long and Short    : -{const_app.summationOfLoseShortPCT + const_app.summationOfLoseLongPCT} %\n")
+
     print(f"******************************************************************************")
 
 

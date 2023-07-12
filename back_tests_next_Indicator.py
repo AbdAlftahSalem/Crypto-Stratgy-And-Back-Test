@@ -91,7 +91,7 @@ def sellBackTest(combined_df, ticker: str, frame: str, ema: str, vwap: str):
                 and not searchProfit
                 and getChange(enterCandleSearch["high"], enterCandleSearch["low"]) < 2
                 #  this condition to search in strategy with EMA and without it
-                and getEMA(ema, enterCandleSearch, "short")
+                and getVWAP(ema, enterCandleSearch, "short")
         ):
             enterCandle = combined_df.iloc[i]
             profitPCT = getProfit(frame)
@@ -190,12 +190,12 @@ def getEMA(ema: str, enterCandleSearch, trade_type: str):
         return True
 
 
-def getVWAP(ema: str, enterCandleSearch, trade_type: str):
+def getVWAP(vwap: str, enterCandleSearch, trade_type: str):
     """
     Check if the current candle satisfies the EMA condition.
 
     Args:
-        ema: The EMA to consider.
+        vwap: The EMA to consider.
         enterCandleSearch: The current candle data.
         trade_type: The trade type (long or short).
 
@@ -204,8 +204,8 @@ def getVWAP(ema: str, enterCandleSearch, trade_type: str):
 
     """
     if trade_type == "long":
-        return enterCandleSearch[ema] <= enterCandleSearch["close"]
+        return enterCandleSearch[vwap] >= enterCandleSearch["close"]
     elif trade_type == "short":
-        return enterCandleSearch[ema] >= enterCandleSearch["close"]
-    elif ema == "None":
+        return enterCandleSearch[vwap] <= enterCandleSearch["close"]
+    elif vwap == "None":
         return True

@@ -1,11 +1,10 @@
 # Importing the 'const_app' module
-import const_app
+from back_test import const_app, get_data
 
 # Importing the 'get_data' module
-import get_data
 
 # Importing the 'nextIndicatorBackText' function from 'full_back_test' module
-from full_back_test import nextIndicatorBackText
+from back_test.full_back_test import nextIndicatorBackText
 
 # Checking the value of 'get_data' attribute in 'const_app' module to check to get data from binance or not
 if const_app.get_data:

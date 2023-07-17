@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0f59376b-505b-4a08-9909-443cf0fdd200" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/strategy/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/nadaraya_watson_envelope.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/nadaraya_watson_envelope.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/back_test/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/output.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/back_test/assets/output.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_tests_next_Indicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/back_test/back_tests_next_Indicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/const_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/back_test/const_app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ETHUSDT-15m-indicator.csv" beforeDir="false" afterPath="$PROJECT_DIR$/back_test/data/ETHUSDT-15m-indicator.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ETHUSDT-1h-indicator.csv" beforeDir="false" afterPath="$PROJECT_DIR$/back_test/data/ETHUSDT-1h-indicator.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ETHUSDT-30m-indicator.csv" beforeDir="false" afterPath="$PROJECT_DIR$/back_test/data/ETHUSDT-30m-indicator.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SOLUSDT-15m-indicator.csv" beforeDir="false" afterPath="$PROJECT_DIR$/back_test/data/SOLUSDT-15m-indicator.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SOLUSDT-1h-indicator.csv" beforeDir="false" afterPath="$PROJECT_DIR$/back_test/data/SOLUSDT-1h-indicator.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SOLUSDT-30m-indicator.csv" beforeDir="false" afterPath="$PROJECT_DIR$/back_test/data/SOLUSDT-30m-indicator.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/full_back_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/back_test/full_back_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/get_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/back_test/get_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/indecators/applay.py" beforeDir="false" afterPath="$PROJECT_DIR$/back_test/indecators/applay.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/indecators/nadaraya_watson_envelope.py" beforeDir="false" afterPath="$PROJECT_DIR$/back_test/indecators/nadaraya_watson_envelope.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/indecators/vwap_score.py" beforeDir="false" afterPath="$PROJECT_DIR$/back_test/indecators/vwap_score.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/back_test/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/back_test/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/back_test/util.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2SCEGMM3Nx38kGUBwJbXfMXKKAs" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/Python project/nadaraya_watson_envelope/strategy/main.py",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Python project\nadaraya_watson_envelope" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Python project\nadaraya_watson_envelope\back_test" />
+      <recent name="D:\Python project\nadaraya_watson_envelope\assets" />
+      <recent name="D:\Python project\nadaraya_watson_envelope\indecators" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.Run Strategy">
+    <configuration name="Run Back Test" type="PythonConfigurationType" factoryName="Python">
+      <module name="nadaraya_watson_envelope" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/back_test/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Run Strategy" type="PythonConfigurationType" factoryName="Python">
+      <module name="nadaraya_watson_envelope" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\hp\AppData\Local\Programs\Python\Python310\python.exe" />
+      <option name="SDK_NAME" value="Python 3.10 (test)" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/strategy" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/strategy/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.Run Back Test" />
+      <item itemvalue="Python.Run Strategy" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0f59376b-505b-4a08-9909-443cf0fdd200" name="Changes" comment="" />
+      <created>1688642065443</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1688642065443</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

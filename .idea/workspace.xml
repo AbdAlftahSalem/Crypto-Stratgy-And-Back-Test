@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f59376b-505b-4a08-9909-443cf0fdd200" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/strategy/data_adapter.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/strategy/get_data.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/strategy/apply_strategy.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/strategy/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/strategy/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,14 +37,14 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/Python project/nadaraya_watson_envelope/strategy",
+    "last_opened_file_path": "D:/Python project/bot_tele_operation",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Python project\nadaraya_watson_envelope\strategy" />
       <recent name="D:\Python project\nadaraya_watson_envelope" />
+      <recent name="D:\Python project\nadaraya_watson_envelope\strategy" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Python project\nadaraya_watson_envelope\back_test" />
@@ -54,7 +52,7 @@
       <recent name="D:\Python project\nadaraya_watson_envelope\indecators" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Run Strategy">
+  <component name="RunManager" selected="Python.Run Back Test">
     <configuration name="Run Back Test" type="PythonConfigurationType" factoryName="Python">
       <module name="nadaraya_watson_envelope" />
       <option name="INTERPRETER_OPTIONS" value="" />

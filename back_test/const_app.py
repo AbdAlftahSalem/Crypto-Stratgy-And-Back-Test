@@ -13,7 +13,7 @@ intervals = ["15m", "30m", "1h"]
 List of intervals for which historical data will be retrieved.
 """
 
-saveDataFolder = "D:\\Python project\\nadaraya_watson_envelope\\data\\"
+saveDataFolder = "D:\\Python project\\nadaraya_watson_envelope\\data"
 """
 The folder path where the retrieved data will be saved.
 """
@@ -67,3 +67,11 @@ summationOfSuccessShortPCT = 0
 
 summationOfLoseLongPCT = 0
 summationOfLoseShortPCT = 0
+
+#  data for strategy
+
+time_start_15m = [14, 29, 44, 59]
+time_start_30m = [29, 59]
+time_start_1h = [59]
+
+tickers_search = ["SOLUSDT", "ETHUSDT", "SOLUSDT"]

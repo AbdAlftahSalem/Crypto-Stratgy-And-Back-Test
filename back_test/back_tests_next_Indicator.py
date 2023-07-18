@@ -1,5 +1,5 @@
-import const_app
-from util import getChange, getNumByChange
+import back_test.const_app as const_app
+from back_test.util import getChange, getNumByChange
 
 
 def longBackTest(combined_df, ticker: str, frame: str, ema: str, vwap: str):

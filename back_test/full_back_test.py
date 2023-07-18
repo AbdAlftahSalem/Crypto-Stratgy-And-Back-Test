@@ -4,14 +4,14 @@ from datetime import datetime
 import pandas
 from colorama import Fore
 
-import const_app
-from back_tests_next_Indicator import longBackTest, sellBackTest
+import back_test.const_app as const_app
+from back_test.back_tests_next_Indicator import longBackTest, sellBackTest
 
 
 # Function to show next indicator data
 def showNextIndicatorData(ticker, frame, ema, vwap):
     # Read data from CSV file
-    df = pandas.read_csv(f"{const_app.saveDataFolder}{ticker}-{frame}-indicator.csv")
+    df = pandas.read_csv(f"data/{ticker}-{frame}-indicator.csv")
 
     # Perform long backtest
     dataLong = longBackTest(df, ticker, frame, ema, vwap)

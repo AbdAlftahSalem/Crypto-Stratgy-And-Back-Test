@@ -1,7 +1,7 @@
 const {Sequelize, DataTypes} = require('sequelize');
 const sequelize = new Sequelize('mysql::memory:');
 
-module.exports = sequelize.define('signals', {
+module.exports = sequelize.define('signal_table', {
     id: {
         type: DataTypes.BIGINT.UNSIGNED,
         primaryKey: true,

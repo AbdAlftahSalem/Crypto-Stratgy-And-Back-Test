@@ -1,0 +1,88 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Signal {
+  id         Int      @id @default(autoincrement())
+  ticker     String
+  interval   String
+  entry_date DateTime
+  out_date   DateTime
+  tp         String
+  sl         String
+  status     String   @default("progress")
+  vwap21     Int
+  vwap48     Int
+  vwap84     Int
+  user       User     @relation(fields: [user_id], references: [id])
+  user_id    Int
+}
+
+model User {
+  id                 Int      @id @default(autoincrement())
+  first_name         String
+  last_name          String
+  email              String
+  password           String
+  phone_number       String
+  telegram_id        String
+  active_telegram    Boolean  @default(false)
+  plan_id            Int
+  role               String
+  signals            Int
+  language           String   @default("en")
+  theme              String   @default("dark")
+  api_key            String   @unique
+  secret_key         String   @unique
+  user_name_telegram String
+  balance_trade      Int
+  plan               Plan     @relation(fields: [plan_id], references: [id])
+  signalsList        Signal[]
+}
+
+model Plan {
+  id          Int     @id @default(autoincrement())
+  title       String
+  description Int
+  features_id Int
+  features    Feature @relation(fields: [features_id], references: [id])
+  users       User[]
+}
+
+model SignalBackTest {
+  id         Int       @id @default(autoincrement())
+  entry_date DateTime
+  out_date   DateTime
+  tp         Int
+  sl         Int
+  status     Int
+  change     Int
+  vwap_value Int
+  ema_value  Int
+  ticker_id  Int       @unique
+  ticker     BackTest? @relation(fields: [ticker_id], references: [id])
+}
+
+model BackTest {
+  id                Int              @id @default(autoincrement())
+  ticker            String
+  interval          String
+  exchange          String
+  column_5          Int
+  signals_back_test SignalBackTest[]
+}
+
+model OnBoarding {
+  id          Int    @id @default(autoincrement())
+  title       String
+  description String
+  image       String
+}
+
+model Feature {
+  id          Int    @id @default(autoincrement())
+  title       String
+  description Int
+  plans       Plan[]
+}

@@ -49,38 +49,30 @@ exports.protectRout = async (req, res, next, role = []) => {
         const token = req.headers.authorization?.split(" ")[1];
 
         if (!token) {
-            return res.status(401).json({
-                message: "You are not logged in", status: false,
-            });
+            return next(new ApiError(401, "You are not logged in"))
         }
 
         //  verify token if valid expired token
         const decodeToken = jwt.verify(token, process.env.TOKEN_SECRET);
 
         //  check if user in Database
-        const currentUser = await User.findById(decodeToken.user_id);
+        const currentUser = await UserModel.findOne({where: {id: decodeToken.user_id}});
 
         //  check found user success
         if (!currentUser) {
-            return res.status(401).json({
-                message: "You are not logged in", status: false,
-            });
+            return next(new ApiError(401, "You are not logged in"))
         }
 
         //  check role for user
         if (role.length !== 0 && !role.includes(currentUser["role"])) {
-            return res.status(403).json({
-                message: "You don't have permission to access this route", status: false,
-            });
+            return next(new ApiError(403, "You don't have permission to access this route"))
         }
 
         //  add user in body of request
         req.body.user = currentUser;
         next();
     } catch (error) {
-        return res.status(404).json({
-            status: false, msg: "User not found",
-        });
+        return next(new ApiError(404, "User not found"))
     }
 };
 

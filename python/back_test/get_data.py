@@ -2,7 +2,7 @@ import pandas as pd
 from binance.client import Client
 
 import const_app
-from back_test.indecators import applay
+from python.back_test.indecators import applay
 
 
 def getData(ticker, interval):

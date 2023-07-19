@@ -1,5 +1,5 @@
-import back_test.const_app as const_app
-from back_test.util import getChange, getNumByChange
+import python.back_test.const_app as const_app
+from python.back_test.util import getChange, getNumByChange
 
 
 def longBackTest(combined_df, ticker: str, frame: str, ema: str, vwap: str):
@@ -159,7 +159,7 @@ def getTradeData(enterCandle, exitCandle, profit, stop, status, frame):
 
     """
     return {
-        "entryDate": enterCandle["date"],
+            "entryDate": enterCandle["date"],
         "outDate": exitCandle["date"],
         "enterPrice": enterCandle["close"],
         "tp": profit,

@@ -4,6 +4,8 @@ const jwt = require("jsonwebtoken")
 const ApiSuccess = require("../util/success_handel")
 
 const env = require("dotenv");
+const {where} = require("sequelize");
+const {ApiError} = require("../util/error_handeler");
 env.config({path: "./config.env"})
 
 exports.registerUser = async (req, res) => {
@@ -15,35 +17,29 @@ exports.registerUser = async (req, res) => {
     ApiSuccess(res, {date: user, token})
 }
 
-exports.loginUser = async (req, res) => {
-    let user = await UserModel.findOne({email: req.body.email})
+exports.loginUser = async (req, res, next) => {
+    let user = await UserModel.findOne({where: {email: req.body["email"]}})
 
     if (!user) {
-        return res.status(404).json({"status": false, "error": [{"msg": " Email or password incorrect"}]})
+        return next(new ApiError(404, " Email or password incorrect"))
     }
 
     if (await bcrypt.compare(req.body.password, user["password"])) {
-        const token = generateToken(user["_id"])
-        user["posts"] = await getPostsUser(req, res, user["_id"])
-        return res.status(200).json({data: user, token})
+        const token = generateToken(user["id"])
+        ApiSuccess(res, {date: user, token})
     }
 
-    return res.status(404).json({"status": false, "error": [{"msg": " Email or password incorrect"}]})
+    return next(new ApiError(404, " Email or password incorrect"))
 
 }
 
 
-exports.getMe = async (req, res) => {
-    const user = await User.findById(req.body.user._id).populate("categories")
-        .populate("sub_categories").select('-__v -password')
+exports.getMe = async (req, res, next) => {
+    let user = await UserModel.findOne({where: {id: req.body.user["id"]}});
     if (!user) {
-        res.status(404).json({"message": "user not found , please login again"})
-    } else {
-        user["posts"] = await getPostsUser(req, res, user["_id"])
-
-        res.status(200).json(user)
-
+        return next(new ApiError(404, "user not found"))
     }
+    ApiSuccess(res, user)
 
 }
 

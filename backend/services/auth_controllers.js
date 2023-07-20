@@ -1,10 +1,9 @@
-const {UserModel} = require("../model/index")
+const {UserModel} = require("../model")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const ApiSuccess = require("../util/success_handel")
 
 const env = require("dotenv");
-const {where} = require("sequelize");
 const {ApiError} = require("../util/error_handeler");
 env.config({path: "./config.env"})
 
@@ -18,7 +17,10 @@ exports.registerUser = async (req, res) => {
 }
 
 exports.loginUser = async (req, res, next) => {
-    let user = await UserModel.findOne({where: {email: req.body["email"]}})
+    let user = await UserModel.findOne({
+            where: {email: req.body["email"]},
+        }
+    )
 
     if (!user) {
         return next(new ApiError(404, " Email or password incorrect"))
@@ -35,7 +37,12 @@ exports.loginUser = async (req, res, next) => {
 
 
 exports.getMe = async (req, res, next) => {
-    let user = await UserModel.findOne({where: {id: req.body.user["id"]}});
+    let user = await UserModel.findOne({
+            where: {
+                id: req.body.user["id"]
+            },
+        }
+    );
     if (!user) {
         return next(new ApiError(404, "user not found"))
     }

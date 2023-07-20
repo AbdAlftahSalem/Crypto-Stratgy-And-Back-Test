@@ -10,6 +10,8 @@ const globalError = require("./middlewere/error_handle");
 const {ApiError} = require("./util/error_handeler");
 const {json} = require("body-parser");
 const app = express();
+const mountRoutes = require("./routs/index");
+
 
 app.use(bodyParser.json());
 
@@ -22,7 +24,7 @@ dbConnection.authenticate().then(_ => console.log("connected to db")).catch(e =>
 
 app.use(cors())
 
-// mountRoutes(app);
+mountRoutes(app);
 
 
 // compress all responses

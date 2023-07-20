@@ -2,12 +2,19 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('signal_back_tests', {
-
+    await queryInterface.createTable('signals', {
       id: {
         type: Sequelize.BIGINT.UNSIGNED,
         primaryKey: true,
         autoIncrement: true,
+        allowNull: false
+      },
+      ticker: {
+        type: Sequelize.STRING(255),
+        allowNull: false
+      },
+      interval: {
+        type: Sequelize.STRING(255),
         allowNull: false
       },
       entry_date: {
@@ -19,37 +26,33 @@ module.exports = {
         allowNull: false
       },
       tp: {
-        type: Sequelize.BIGINT,
+        type: Sequelize.STRING(255),
         allowNull: false
       },
       sl: {
-        type: Sequelize.BIGINT,
+        type: Sequelize.STRING(255),
         allowNull: false
       },
       status: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false
+        type: Sequelize.ENUM(''),
+        allowNull: false,
+        defaultValue: 'progress'
       },
-      change: {
+      vwap21: {
         type: Sequelize.BIGINT,
         allowNull: false
       },
-      vwap_value: {
+      vwap48: {
         type: Sequelize.BIGINT,
         allowNull: false
       },
-      ema_value: {
-        type: Sequelize.BIGINT,
-        allowNull: false
-      },
-      ticker_id: {
+      vwap84: {
         type: Sequelize.BIGINT,
         allowNull: false
       }
-
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('signal_back_tests');
+    await queryInterface.dropTable('signals');
   }
 };

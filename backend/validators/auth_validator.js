@@ -64,7 +64,25 @@ exports.loginUser = [
     check("password")
         .notEmpty()
         .isLength({min: 6})
-        .withMessage("password at lease have 6 char"), validator,]
+        .withMessage("password at lease have 6 char"),
+    validator,
+]
+
+exports.activeTelegram = [
+
+    check("email").notEmpty().isEmail().withMessage("Enter valid email"),
+
+    check("password")
+        .notEmpty()
+        .isLength({min: 6})
+        .withMessage("password at lease have 6 char"),
+
+    check("telegram_id").notEmpty().withMessage("Enter valid telegram id"),
+    check("user_name_telegram").notEmpty().withMessage("Enter valid username telegram"),
+
+
+    validator,
+]
 
 
 exports.activePlan = [

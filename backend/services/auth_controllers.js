@@ -49,12 +49,7 @@ exports.loginUser = async (req, res, next) => {
 exports.activeTelegram = async (req, res, next) => {
     const filter = {email: req.body["email"]}
     let user = await User.findOne({
-        where: filter,
-        include: [
-            {
-                model: Plan,
-            }
-        ]
+        where: filter
     })
 
     // check if user is null
@@ -76,9 +71,9 @@ exports.activeTelegram = async (req, res, next) => {
         }, {
             where: filter
         })
-        const updatedUser = await User.findOne({where: filter});
 
-        return successResponse(res, updatedUser, 200, "User logged in successfully")
+
+        return successResponse(res, {"user": "updated telegram successfully"}, 200, "User logged in successfully")
     }
 
     return next(new ApiError("Email or password incorrect", 404))

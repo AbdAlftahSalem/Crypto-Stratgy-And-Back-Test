@@ -13,11 +13,9 @@ exports.registerUser = async (req, res) => {
     req.body["password"] = await bcrypt.hash(req.body["password"], 10)
     const user = await User.create(req.body, {
         include: [
-
             {
                 model: Plan,
             }
-
         ]
     })
 
@@ -29,15 +27,11 @@ exports.registerUser = async (req, res) => {
 exports.loginUser = async (req, res, next) => {
     let user = await User.findOne({
         where: {email: req.body["email"]},
-
         include: [
-
             {
                 model: Plan,
             }
-
         ]
-
     })
 
     if (user == null) {
@@ -50,35 +44,41 @@ exports.loginUser = async (req, res, next) => {
     }
 
     return next(new ApiError("Email or password incorrect", 404))
-
 }
 
 exports.activeTelegram = async (req, res, next) => {
     const filter = {email: req.body["email"]}
     let user = await User.findOne({
         where: filter,
-
         include: [
-
             {
                 model: Plan,
             }
-
         ]
-
     })
 
+    // check if user is null
     if (user == null) {
-        return next(new ApiError("Email or password incorrect", 404))
+        return next(new ApiError("Can`t active telegram , email or password is not correct", 404))
     }
 
+    // check if telegram is already active
+    if (user["dataValues"]["active_telegram"]) {
+        return next(new ApiError("Telegram is already active", 400))
+    }
+
+    // check if password is correct
     if (await bcrypt.compare(req.body.password, user["password"])) {
-        const updateData = await User.update({
-            telegram_id: req.body.telegram_id, active_telegram: true, user_name_telegram: req.body.user_name_telegram,
+        await User.update({
+            telegram_id: req.body.telegram_id,
+            active_telegram: true,
+            user_name_telegram: req.body.user_name_telegram,
         }, {
             where: filter
         })
-        return successResponse(res, updateData, 200, "User logged in successfully")
+        const updatedUser = await User.findOne({where: filter});
+
+        return successResponse(res, updatedUser, 200, "User logged in successfully")
     }
 
     return next(new ApiError("Email or password incorrect", 404))

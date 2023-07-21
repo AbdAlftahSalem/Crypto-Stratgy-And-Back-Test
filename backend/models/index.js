@@ -1,48 +1,48 @@
-'use strict';
-
-const fs = require('fs');
-const path = require('path');
 const Sequelize = require('sequelize');
-const process = require('process');
-const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.json')[env];
-const db = {};
+const db = require('../config/database');
 
-let sequelize;
-console.log(config)
-if (config["use_env_variable"]) {
-    console.log("HERE")
-    sequelize = new Sequelize(process.env[config["use_env_variable"]], config);
-} else {
-    console.log("HERE2")
-    sequelize = new Sequelize(config.database, config.username, config.password, config
-    );
-    console.log(sequelize)
-}
+//  models
+const BackTestModel = require('./back_test');
+const FeaturesModel = require('./features');
+const OnBoardingModel = require('./on_boarding');
+const PlanModel = require('./plan');
+const SignalModel = require('./signal');
+const SignalBackTestModel = require('./signal_back_test');
+const UserModel = require('./user');
 
-fs
-    .readdirSync(__dirname)
-    .filter(file => {
-        return (
-            !file.startsWith('.') &&
-            file !== basename &&
-            file.endsWith('.js') &&
-            file.indexOf('.test.js') === -1
-        );
-    })
-    .forEach(file => {
-        const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
-        db[model.name] = model;
-    });
 
-Object.keys(db).forEach(modelName => {
-    if (db[modelName].associate) {
-        db[modelName].associate(db);
-    }
-});
+//  create objects
+const BackTest = BackTestModel(db, Sequelize);
+const Features = FeaturesModel(db, Sequelize);
+const OnBoarding = OnBoardingModel(db, Sequelize);
+const Plan = PlanModel(db, Sequelize);
+const Signal = SignalModel(db, Sequelize);
+const SignalBackTest = SignalBackTestModel(db, Sequelize);
+const User = UserModel(db, Sequelize);
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
 
-module.exports = db;
+// Associations
+User.hasOne(Plan, {foreignKey: 'user_id'});
+Plan.belongsTo(User, {foreignKey: 'user_id'});
+
+User.hasMany(Signal, {foreignKey: 'user_id'});
+Signal.belongsTo(User, {foreignKey: 'user_id'});
+
+Plan.hasMany(Features, {foreignKey: 'plan_id'});
+Features.belongsTo(Plan, {foreignKey: 'plan_id'});
+
+BackTest.hasMany(SignalBackTest, {foreignKey: 'back_test_id'});
+SignalBackTest.belongsTo(BackTest, {foreignKey: 'back_test_id'});
+
+
+db.sync({force: false}).then(_ => console.log("db synced")).catch(e => console.log(e))
+
+module.exports = {
+    BackTest,
+    Features,
+    OnBoarding,
+    Plan,
+    Signal,
+    SignalBackTest,
+    User,
+};

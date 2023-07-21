@@ -1,3 +1,5 @@
-module.exports = (res, data, statusCode = 200) => {
-    res.status(statusCode).json({status: true, date: data})
+function sendSuccessResponse(res, data, statusCode = 200, message = "success") {
+    return res.status(statusCode).json({success: true, data});
 }
+
+module.exports = sendSuccessResponse;

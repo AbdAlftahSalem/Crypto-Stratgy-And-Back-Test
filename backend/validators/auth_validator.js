@@ -1,20 +1,33 @@
 const {check} = require('express-validator');
 
 const validator = require("../middlewere/validator")
-const {UserModel} = require("../model/index")
+const {User} = require("../models/index")
 
 exports.registerUser = [
 
-    check("user_name")
+    check("first_name")
         .isLength({min: 3})
-        .withMessage("Too Short username")
-        .isLength({max: 20}).withMessage("Too long username"),
+        .withMessage("Too Short first_name")
+        .isLength({max: 20}).withMessage("Too long first_name"),
+
+    check("last_name")
+        .isLength({min: 3})
+        .withMessage("Too Short last_name")
+        .isLength({max: 20}).withMessage("Too long last_name"),
 
     check("email").notEmpty().isEmail().withMessage("Enter valid email")
         .isLength({min: 3})
         .withMessage("Too Short email")
         .isLength({max: 18})
-        .withMessage("Too long email"),
+        .withMessage("Too long email").custom((v) => {
+        return User.findOne({
+            where: {email: v}
+        }).then((r) => {
+            if (r) {
+                return Promise.reject("email is already in database");
+            }
+        })
+    }).withMessage("The email is already exists"),
 
     check("password")
         .notEmpty()
@@ -32,19 +45,18 @@ exports.registerUser = [
         .isLength({min: 6})
         .withMessage("password at lease have 6 char"),
 
-    check("email").notEmpty().isEmail().withMessage("Enter valid email")
-        .isLength({min: 3})
-        .withMessage("Too Short email")
-        .isLength({max: 18})
-        .withMessage("Too long email").custom((v) => {
-        return UserModel.findOne({
-            where: {email: v}
-        }).then((r) => {
-            if (r) {
-                return Promise.reject("email is already in database");
-            }
-        })
-    }).withMessage("The email is already exists"), validator,]
+    check("phone_number")
+        .isLength({min: 7})
+        .withMessage("Too Short phone_number")
+        .isLength({max: 12}).withMessage("Too long phone_number"),
+
+    check("api_key").notEmpty().withMessage("api_key is empty"),
+    check("secret_key").notEmpty().withMessage("secret_key is empty"),
+
+
+
+    validator,
+]
 
 exports.loginUser = [
 

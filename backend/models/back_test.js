@@ -1,48 +1,22 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class back_test extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
-  }
-  back_test.init({
-    id: {
-      type: DataTypes.BIGINT.UNSIGNED,
-      primaryKey: true,
-      autoIncrement: true,
-      allowNull: false
-    },
+module.exports = (db, type) => db.define('BackTest', {
     ticker: {
-      type: DataTypes.STRING(255),
-      allowNull: false
+        type: type.STRING,
+        allowNull: false,
     },
     interval: {
-      type: DataTypes.STRING(255),
-      allowNull: false
+        type: type.STRING,
+        allowNull: false,
     },
     exchange: {
-      type: DataTypes.STRING(255),
-      allowNull: false
+        type: type.STRING,
+        allowNull: false,
     },
     column_5: {
-      type: DataTypes.BIGINT,
-      allowNull: false
+        type: type.BIGINT,
+        allowNull: false,
     },
-    signals_back_test_id: {
-      type: DataTypes.BIGINT,
-      allowNull: false
-    }
-  }, {
-    sequelize,
-    modelName: 'back_test',
-  });
-  return back_test;
-};
+}, {
+    freezeTableName: true,
+    timestamps: true,
+    tableName: 'back_test',
+});

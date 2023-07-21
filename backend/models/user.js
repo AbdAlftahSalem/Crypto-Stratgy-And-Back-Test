@@ -1,97 +1,74 @@
-'use strict';
-const {
-    Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-    class User extends Model {
-        /**
-         * Helper method for defining associations.
-         * This method is not a part of Sequelize lifecycle.
-         * The `models/index` file will call this method automatically.
-         */
-        static associate(models) {
-            // define association here
-        }
-    }
-
-    User.init({
-        id: {
-            type: DataTypes.BIGINT.UNSIGNED,
-            primaryKey: true,
-            autoIncrement: true,
-            allowNull: false,
-        },
-        first_name: {
-            type: DataTypes.STRING(255),
-            allowNull: false
-        },
-        last_name: {
-            type: DataTypes.STRING(255),
-            allowNull: false
-        },
-        email: {
-            type: DataTypes.STRING(255),
-            allowNull: false
-        },
-        password: {
-            type: DataTypes.STRING(255),
-            allowNull: false
-        },
-        phone_number: {
-            type: DataTypes.STRING(255),
-            allowNull: false
-        },
-        telegram_id: {
-            type: DataTypes.STRING(255),
-            allowNull: false
-        },
-        active_telegram: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false,
-            defaultValue: false
-        },
-        plan_id: {
-            type: DataTypes.BIGINT,
-            allowNull: false
-        },
-        role: {
-            type: DataTypes.ENUM('user', 'admin', 'manger'),
-            defaultValue: 'user',
-            allowNull: false
-        },
-        signals: {
-            type: DataTypes.BIGINT,
-            allowNull: false
-        },
-        language: {
-            type: DataTypes.ENUM('en', 'ar'),
-            allowNull: false,
-            defaultValue: 'en'
-        },
-        theme: {
-            type: DataTypes.ENUM('dark', 'light'),
-            allowNull: false,
-            defaultValue: 'dark'
-        },
-        api_key: {
-            type: DataTypes.STRING(255),
-            allowNull: false
-        },
-        secret_key: {
-            type: DataTypes.STRING(255),
-            allowNull: false
-        },
-        user_name_telegram: {
-            type: DataTypes.STRING(255),
-            allowNull: false
-        },
-        balance_trade: {
-            type: DataTypes.BIGINT,
-            allowNull: false
-        }
-    }, {
-        sequelize,
-        modelName: 'User',
-    });
-    return User;
-};
+module.exports = (db, type) => db.define('User', {
+    first_name: {
+        type: type.STRING,
+        allowNull: false,
+    },
+    last_name: {
+        type: type.STRING,
+        allowNull: false,
+    },
+    email: {
+        type: type.STRING,
+        allowNull: false,
+        unique: true,
+    },
+    password: {
+        type: type.STRING,
+        allowNull: false,
+    },
+    phone_number: {
+        type: type.STRING,
+        allowNull: false,
+    },
+    telegram_id: {
+        type: type.STRING,
+        allowNull: true,
+        defaultValue: null,
+    },
+    active_telegram: {
+        type: type.BOOLEAN,
+        allowNull: true,
+        defaultValue: false,
+    },
+    role: {
+        type: type.ENUM('user', 'admin', 'super_admin', 'manger'),
+        defaultValue: 'user',
+        allowNull: true,
+    },
+    signals: {
+        type: type.BIGINT,
+        allowNull: true,
+    },
+    language: {
+        type: type.ENUM('en', 'ar'),
+        allowNull: false,
+        defaultValue: 'en',
+    },
+    theme: {
+        type: type.ENUM('dark', 'white'),
+        allowNull: false,
+        defaultValue: 'dark',
+    },
+    api_key: {
+        type: type.STRING,
+        allowNull: false,
+    },
+    secret_key: {
+        type: type.STRING,
+        allowNull: false,
+    },
+    user_name_telegram: {
+        type: type.STRING,
+        allowNull: true,
+        defaultValue: null,
+    },
+    balance_trade: {
+        type: type.BIGINT,
+        allowNull: false,
+        defaultValue: 0,
+    },
+}, {
+    freezeTableName: true,
+    timestamps: true,
+    tableName: 'users',
+});

@@ -11,7 +11,15 @@ env.config({path: "./config.env"})
 exports.registerUser = async (req, res) => {
 
     req.body["password"] = await bcrypt.hash(req.body["password"], 10)
-    const user = await User.create(req.body)
+    const user = await User.create(req.body, {
+        include: [
+
+            {
+                model: Plan,
+            }
+
+        ]
+    })
 
     const token = generateToken(user["id"])
 
@@ -21,6 +29,15 @@ exports.registerUser = async (req, res) => {
 exports.loginUser = async (req, res, next) => {
     let user = await User.findOne({
             where: {email: req.body["email"]},
+
+            include: [
+
+                {
+                    model: Plan,
+                }
+
+            ]
+
         }
     )
 
@@ -37,6 +54,41 @@ exports.loginUser = async (req, res, next) => {
 
 }
 
+exports.activeTelegram = async (req, res, next) => {
+    // send email and password
+    const filter = {email: req.body["email"]}
+    let user = await User.findOne({
+            where: filter,
+
+            include: [
+
+                {
+                    model: Plan,
+                }
+
+            ]
+
+        }
+    )
+
+    if (user == null) {
+        return next(new ApiError("Email or password incorrect", 404))
+    }
+
+    if (await bcrypt.compare(req.body.password, user["password"])) {
+        const updateData = await User.update({
+            telegram_id: req.body.telegram_id,
+            active_telegram: true,
+            user_name_telegram: req.body.user_name_telegram,
+        }, {
+            where: filter
+        })
+        return successResponse(res, updateData, 200, "User logged in successfully")
+    }
+
+    return next(new ApiError("Email or password incorrect", 404))
+
+}
 
 exports.getMe = async (req, res, next) => {
     let user = await User.findOne({

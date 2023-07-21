@@ -54,7 +54,6 @@ exports.registerUser = [
     check("secret_key").notEmpty().withMessage("secret_key is empty"),
 
 
-
     validator,
 ]
 
@@ -66,6 +65,23 @@ exports.loginUser = [
         .notEmpty()
         .isLength({min: 6})
         .withMessage("password at lease have 6 char"), validator,]
+
+exports.resetPassword = [check("currentPassword").notEmpty().withMessage("Enter password"), check("newPassword")
+    .notEmpty()
+    .isLength({min: 6})
+    .withMessage("password at lease have 6 char"),
+
+    validator,]
+
+exports.activeTelegram = [
+
+    check("email").notEmpty().isEmail().withMessage("Enter valid email"),
+
+    check("password")
+        .notEmpty()
+        .isLength({min: 6})
+        .withMessage("password at lease have 6 char"),
+    validator,]
 
 exports.resetPassword = [check("currentPassword").notEmpty().withMessage("Enter password"), check("newPassword")
     .notEmpty()

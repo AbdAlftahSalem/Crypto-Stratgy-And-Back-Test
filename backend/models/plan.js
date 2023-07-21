@@ -7,7 +7,14 @@ module.exports = (db, type) => db.define('Plan', {
         type: type.STRING,
         allowNull: false,
     },
-
+    price: {
+        type: type.BIGINT,
+        allowNull: false,
+    },
+    duration: {
+        type: type.BIGINT,
+        allowNull: false,
+    }
 }, {
     freezeTableName: true,
     timestamps: true,

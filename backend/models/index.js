@@ -22,8 +22,9 @@ const User = UserModel(db, Sequelize);
 
 
 // Associations
-User.hasOne(Plan, {foreignKey: 'user_id'});
-Plan.belongsTo(User, {foreignKey: 'user_id'});
+// create associations between plan and user by plan_id
+User.hasOne(Plan, {foreignKey: 'plan_id'});
+Plan.belongsTo(User, {foreignKey: 'plan_id'});
 
 User.hasMany(Signal, {foreignKey: 'user_id'});
 Signal.belongsTo(User, {foreignKey: 'user_id'});
@@ -35,7 +36,7 @@ BackTest.hasMany(SignalBackTest, {foreignKey: 'back_test_id'});
 SignalBackTest.belongsTo(BackTest, {foreignKey: 'back_test_id'});
 
 
-db.sync({force: false}).then(_ => console.log("db synced")).catch(e => console.log(e))
+db.sync({force: true}).then(_ => console.log("db synced")).catch(e => console.log(e))
 
 module.exports = {
     BackTest,

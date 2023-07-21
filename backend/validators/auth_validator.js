@@ -66,26 +66,8 @@ exports.loginUser = [
         .isLength({min: 6})
         .withMessage("password at lease have 6 char"), validator,]
 
-exports.resetPassword = [check("currentPassword").notEmpty().withMessage("Enter password"), check("newPassword")
-    .notEmpty()
-    .isLength({min: 6})
-    .withMessage("password at lease have 6 char"),
 
-    validator,]
+exports.activePlan = [
 
-exports.activeTelegram = [
-
-    check("email").notEmpty().isEmail().withMessage("Enter valid email"),
-
-    check("password")
-        .notEmpty()
-        .isLength({min: 6})
-        .withMessage("password at lease have 6 char"),
-    validator,]
-
-exports.resetPassword = [check("currentPassword").notEmpty().withMessage("Enter password"), check("newPassword")
-    .notEmpty()
-    .isLength({min: 6})
-    .withMessage("password at lease have 6 char"),
-
-    validator,]
+    check("plan_id").notEmpty().isEmail().withMessage("Enter valid plan id"),
+]

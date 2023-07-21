@@ -28,18 +28,17 @@ exports.registerUser = async (req, res) => {
 
 exports.loginUser = async (req, res, next) => {
     let user = await User.findOne({
-            where: {email: req.body["email"]},
+        where: {email: req.body["email"]},
 
-            include: [
+        include: [
 
-                {
-                    model: Plan,
-                }
+            {
+                model: Plan,
+            }
 
-            ]
+        ]
 
-        }
-    )
+    })
 
     if (user == null) {
         return next(new ApiError("Email or password incorrect", 404))
@@ -55,21 +54,19 @@ exports.loginUser = async (req, res, next) => {
 }
 
 exports.activeTelegram = async (req, res, next) => {
-    // send email and password
     const filter = {email: req.body["email"]}
     let user = await User.findOne({
-            where: filter,
+        where: filter,
 
-            include: [
+        include: [
 
-                {
-                    model: Plan,
-                }
+            {
+                model: Plan,
+            }
 
-            ]
+        ]
 
-        }
-    )
+    })
 
     if (user == null) {
         return next(new ApiError("Email or password incorrect", 404))
@@ -77,9 +74,7 @@ exports.activeTelegram = async (req, res, next) => {
 
     if (await bcrypt.compare(req.body.password, user["password"])) {
         const updateData = await User.update({
-            telegram_id: req.body.telegram_id,
-            active_telegram: true,
-            user_name_telegram: req.body.user_name_telegram,
+            telegram_id: req.body.telegram_id, active_telegram: true, user_name_telegram: req.body.user_name_telegram,
         }, {
             where: filter
         })
@@ -90,21 +85,54 @@ exports.activeTelegram = async (req, res, next) => {
 
 }
 
+exports.activePlan = async (req, res, next) => {
+    const filter = {id: req.body.user["id"]}
+    let user = await User.findOne({
+        where: filter,
+    })
+
+
+    if (user == null) {
+        return next(new ApiError("Email or password incorrect", 404))
+    }
+
+    const plan = await Plan.findOne({
+        where: {id: req.body.plan_id}
+    })
+
+    if (plan == null) {
+        return next(new ApiError("Plan not found", 404))
+    }
+
+    // add to end_subscription_date in user, the number of days in plan
+    let end_subscription_date = new Date()
+    end_subscription_date.setDate(end_subscription_date.getDate() + plan["dataValues"]["duration"])
+
+    // update user
+    const updateData = await User.update({
+        plan_id: req.body.plan_id,
+        last_subscription_date: new Date(),
+        end_subscription_date: end_subscription_date,
+        last_subscription_price: plan["price"],
+    }, {
+        where: filter,
+    })
+
+
+    return successResponse(res, updateData, 200, "User logged in successfully")
+
+}
+
 exports.getMe = async (req, res, next) => {
     let user = await User.findOne({
-            where: {
-                id: req.body.user["id"]
-            },
-            attributes: {
-                exclude: ['password']
-            },
-            include: [
-                {
-                    model: Plan,
-                },
-            ]
-        }
-    );
+        where: {
+            id: req.body.user["id"]
+        }, attributes: {
+            exclude: ['password']
+        }, include: [{
+            model: Plan,
+        },]
+    });
     if (!user) {
         return next(new ApiError("User not found", 404))
     }

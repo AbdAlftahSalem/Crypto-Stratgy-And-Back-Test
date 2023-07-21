@@ -67,6 +67,14 @@ module.exports = (db, type) => db.define('User', {
         allowNull: false,
         defaultValue: 0,
     },
+
+    plan_id: {
+        type: type.INTEGER,
+        allowNull: true,
+        defaultValue: null,
+        ref: 'Plan',
+    }
+
 }, {
     freezeTableName: true,
     timestamps: true,

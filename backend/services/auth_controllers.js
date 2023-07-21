@@ -1,11 +1,11 @@
-const {User} = require("../models/index")
+const {User, Plan} = require("../models/index")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
+
 const successResponse = require("../util/success_handel")
+const {ApiError} = require("../util/error_handeler");
 
 const env = require("dotenv");
-const {ApiError} = require("../util/error_handeler");
-const {Logger} = require("sequelize/lib/utils/logger");
 env.config({path: "./config.env"})
 
 exports.registerUser = async (req, res) => {
@@ -45,7 +45,12 @@ exports.getMe = async (req, res, next) => {
             },
             attributes: {
                 exclude: ['password']
-            }
+            },
+            include: [
+                {
+                    model: Plan,
+                },
+            ]
         }
     );
     if (!user) {

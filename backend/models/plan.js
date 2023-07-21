@@ -4,9 +4,10 @@ module.exports = (db, type) => db.define('Plan', {
         allowNull: false,
     },
     description: {
-        type: type.BIGINT,
+        type: type.STRING,
         allowNull: false,
     },
+
 }, {
     freezeTableName: true,
     timestamps: true,

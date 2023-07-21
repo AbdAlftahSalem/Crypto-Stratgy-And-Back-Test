@@ -109,7 +109,7 @@ exports.activePlan = async (req, res, next) => {
     end_subscription_date.setDate(end_subscription_date.getDate() + plan["dataValues"]["duration"])
 
     // update user
-    const updateData = await User.update({
+    await User.update({
         plan_id: req.body.plan_id,
         last_subscription_date: new Date(),
         end_subscription_date: end_subscription_date,
@@ -118,9 +118,7 @@ exports.activePlan = async (req, res, next) => {
         where: filter,
     })
 
-
-    return successResponse(res, updateData, 200, "User logged in successfully")
-
+    return successResponse(res, {data: "updated successfully"}, 200, "User logged in successfully")
 }
 
 exports.getMe = async (req, res, next) => {

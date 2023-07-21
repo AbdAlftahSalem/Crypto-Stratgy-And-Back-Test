@@ -1,7 +1,7 @@
 const {check} = require('express-validator');
 
 const validator = require("../middlewere/validator")
-const {User} = require("../models/index")
+const {User, Plan} = require("../models/index")
 
 exports.registerUser = [
 
@@ -19,9 +19,9 @@ exports.registerUser = [
         .isLength({min: 3})
         .withMessage("Too Short email")
         .isLength({max: 18})
-        .withMessage("Too long email").custom((v) => {
+        .withMessage("Too long email").custom((email) => {
         return User.findOne({
-            where: {email: v}
+            where: {email: email}
         }).then((r) => {
             if (r) {
                 return Promise.reject("email is already in database");
@@ -69,5 +69,15 @@ exports.loginUser = [
 
 exports.activePlan = [
 
-    check("plan_id").notEmpty().isEmail().withMessage("Enter valid plan id"),
+    check("plan_id").notEmpty().withMessage("Enter valid plan id")
+        .custom((plan_id) => {
+            return Plan.findOne({
+                where: {id: plan_id}
+            }).then((value) => {
+                if (value == null) {
+                    return Promise.reject("plan is not defined");
+                }
+            })
+        }).withMessage("plan is not defined"),
+    validator,
 ]

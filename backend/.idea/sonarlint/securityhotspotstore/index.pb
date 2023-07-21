@@ -21,5 +21,3 @@ C
 models/back_test.js,2\0\209cd0c668ee3aa790aaa52da8a6b9190a507f28
 K
 services/plan_controller.js,a\9\a907adcd77200ab96524d171d7447f3dcf285221
-F
-util/success_handel.js,f\2\f26a0a6677af65d2b2ee4e2846b22b7d0b55cb60

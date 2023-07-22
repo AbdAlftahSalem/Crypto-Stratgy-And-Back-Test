@@ -52,3 +52,14 @@ exports.addSignal = async (req, res, next) => {
     return successResponse(res, signal, 200, "Signal created successfully")
 
 }
+
+exports.updateSignal = async (req, res, next) => {
+//     update status in signal to req.body.status
+    const filter = {id: req.body["signal_id"]}
+    await Signal.update({
+        status: req.body.status,
+    }, {
+        where: filter,
+    })
+    return successResponse(res, {}, 200, "Signal updated successfully")
+}

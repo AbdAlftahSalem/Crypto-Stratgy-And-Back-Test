@@ -21,6 +21,28 @@ exports.getSignals = async (req, res, next) => {
 
 exports.addSignal = async (req, res, next) => {
 
+    // check if type signal is empty or not equal to long or short
+    if (req.body["type_signal"] === "" || (req.body["type_signal"] !== "long" && req.body["type_signal"] !== "short")) {
+        return next(new ApiError("Type signal is not correct", 400))
+    }
+    // check if signal is long
+    if (req.body["type_signal"] === "long") {
+        //  check if stop loss is less than entry price and tp is greater than entry price
+        if (req.body["stop_loss"] < req.body["entry_price"] || req.body["take_profit"] < req.body["entry_price"]) {
+            return next(new ApiError("Stop loss or take profit is not correct", 400))
+        }
+    }
+
+    // check if signal is short
+    if (req.body["type_signal"] === "short") {
+
+        //  check if stop loss is greater than entry price and tp is less than entry price
+        if (req.body["stop_loss"] > req.body["entry_price"] || req.body["take_profit"] > req.body["entry_price"]) {
+            return next(new ApiError("Stop loss or take profit is not correct", 400))
+        }
+    }
+
+
     let signal = await Signal.create(req.body)
 
     if (signal == null) {

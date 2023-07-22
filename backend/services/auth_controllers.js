@@ -24,9 +24,12 @@ exports.registerUser = async (req, res) => {
 
 exports.loginUser = async (req, res, next) => {
     let user = await User.findOne({
-        where: {email: req.body["email"]}, include: [{
-            model: Plan,
-        }]
+        where: {email: req.body["email"]},
+        include: [
+            {
+                model: Plan,
+            }
+        ]
     })
 
     if (user == null) {

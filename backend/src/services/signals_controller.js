@@ -1,4 +1,4 @@
-const {Signal} = require("../models/index")
+const {Signal} = require("../models")
 
 const successResponse = require("../util/success_handel")
 const {ApiError} = require("../util/error_handeler");

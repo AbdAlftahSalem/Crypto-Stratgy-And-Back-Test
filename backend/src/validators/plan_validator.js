@@ -1,7 +1,7 @@
 const {check} = require('express-validator');
 
 const validator = require("../middlewere/validator")
-const {Plan} = require("../models/index")
+const {Plan} = require("../models")
 
 exports.addPlan = [
 

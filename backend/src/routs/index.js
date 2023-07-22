@@ -1,6 +1,6 @@
-const AuthRout = require("../routs/auth_rout");
-const PlansRout = require("../routs/plan_rout");
-const SignalRout = require("../routs/signal_rout");
+const AuthRout = require("./auth_rout");
+const PlansRout = require("./plan_rout");
+const SignalRout = require("./signal_rout");
 
 
 const mountRoutes = (app) => {

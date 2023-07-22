@@ -1,16 +1,16 @@
 const express = require("express")
-const dbConnection = require("./config/database");
+const dbConnection = require("./src/config/database");
 const env = require("dotenv");
 env.config({path: "./config.env"})
 const bodyParser = require("body-parser");
 const compression = require('compression');
 const rateLimit = require('express-rate-limit');
 const cors = require('cors');
-const globalError = require("./middlewere/error_handle");
-const {ApiError} = require("./util/error_handeler");
+const globalError = require("./src/middlewere/error_handle");
+const {ApiError} = require("./src/util/error_handeler");
 const {json} = require("body-parser");
 const app = express();
-const mountRoutes = require("./routs/index");
+const mountRoutes = require("./src/routs/index");
 
 
 app.use(bodyParser.json());

@@ -26,7 +26,6 @@ exports.addSignal = [check("ticker").notEmpty().withMessage("Enter valid ticker"
         }
 
         const {ticker, interval} = req.body;
-        console.log(ticker, interval)
         try {
             // Check if the signal with trade_type = "progress" and matching ticker and interval exists
             const existingSignal = await Signal.findOne({
@@ -34,14 +33,12 @@ exports.addSignal = [check("ticker").notEmpty().withMessage("Enter valid ticker"
                     status: 'progress', ticker: ticker, interval: interval,
                 }
             });
-            console.log(existingSignal)
             if (existingSignal) {
                 return next(new ApiError('Signal already exists', 400));
             }
             // If the signal doesn't exist, continue with the next middleware
             next();
         } catch (err) {
-            console.log(err)
             return next(new ApiError('Something went wrong', 500));
         }
     },
@@ -68,7 +65,6 @@ exports.editStatusSignal = [
         }
 
         const signalId = req.body["signal_id"];
-        console.log(signalId)
         try {
             // Check if the signal with trade_type = "progress" and matching ticker and interval exists
             const existingSignal = await Signal.findOne({
@@ -77,14 +73,12 @@ exports.editStatusSignal = [
                 }
             });
 
-            console.log(existingSignal)
             if (existingSignal == null) {
                 return next(new ApiError('Signal not found', 404));
             }
             // If the signal doesn't exist, continue with the next middleware
             next();
         } catch (err) {
-            console.log(err)
             return next(new ApiError('Something went wrong', 500));
         }
     },
@@ -100,7 +94,6 @@ exports.deleteSignal = [
         }
 
         const signalId = req.body["signal_id"];
-        console.log(signalId)
         try {
             // Check if the signal with trade_type = "progress" and matching ticker and interval exists
             const existingSignal = await Signal.findOne({
@@ -109,14 +102,12 @@ exports.deleteSignal = [
                 }
             });
 
-            console.log(existingSignal)
             if (existingSignal == null) {
                 return next(new ApiError('Signal not found', 404));
             }
             // If the signal doesn't exist, continue with the next middleware
             next();
         } catch (err) {
-            console.log(err)
             return next(new ApiError('Something went wrong', 500));
         }
     },

@@ -40,7 +40,7 @@ module.exports = async () => {
                 description: feature.description,
             })
 
-            Plan.create(plan)
+            await Plan.create(plan)
         }
 
 

@@ -63,3 +63,11 @@ exports.updateSignal = async (req, res, next) => {
     })
     return successResponse(res, {}, 200, "Signal updated successfully")
 }
+
+exports.deleteSignal = async (req, res, next) => {
+    const filter = {id: req.body["signal_id"]}
+    await Signal.destroy({
+        where: filter,
+    })
+    return successResponse(res, {}, 200, "Signal deleted successfully")
+}

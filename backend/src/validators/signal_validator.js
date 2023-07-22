@@ -55,7 +55,6 @@ exports.editStatusSignal = [
     check("signal_id").notEmpty().withMessage("Enter valid signal id"),
 
     (req, res, next) => {
-
         if (!["progress", "fail", "success"].includes(req.body.status)) {
             return next(new ApiError("Status signal is not correct", 404))
         }
@@ -90,4 +89,35 @@ exports.editStatusSignal = [
         }
     },
     validator
+]
+
+exports.deleteSignal = [
+    check("signal_id").notEmpty().withMessage("Enter valid signal id"),
+    async (req, res, next) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({errors: errors.array()});
+        }
+
+        const signalId = req.body["signal_id"];
+        console.log(signalId)
+        try {
+            // Check if the signal with trade_type = "progress" and matching ticker and interval exists
+            const existingSignal = await Signal.findOne({
+                where: {
+                    id: signalId,
+                }
+            });
+
+            console.log(existingSignal)
+            if (existingSignal == null) {
+                return next(new ApiError('Signal not found', 404));
+            }
+            // If the signal doesn't exist, continue with the next middleware
+            next();
+        } catch (err) {
+            console.log(err)
+            return next(new ApiError('Something went wrong', 500));
+        }
+    },
 ]

@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f59376b-505b-4a08-9909-443cf0fdd200" name="Changes" comment="" />
+    <list default="true" id="0f59376b-505b-4a08-9909-443cf0fdd200" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,13 +33,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/Python project/nadaraya_watson_envelope/python/strategy/main.py",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Python project/nadaraya_watson_envelope&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Python project\nadaraya_watson_envelope" />
@@ -50,7 +52,7 @@
       <recent name="D:\Python project\nadaraya_watson_envelope\indecators" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Run Strategy">
+  <component name="RunManager" selected="Python.Run Back Test">
     <configuration name="Run Back Test" type="PythonConfigurationType" factoryName="Python">
       <module name="nadaraya_watson_envelope" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -59,11 +61,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/python/back_test" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python/back_test/main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/back_test/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -81,11 +83,11 @@
       </envs>
       <option name="SDK_HOME" value="C:\Users\hp\AppData\Local\Programs\Python\Python310\python.exe" />
       <option name="SDK_NAME" value="Python 3.10 (test)" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/python/strategy" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/strategy" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python/strategy/main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/strategy/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />

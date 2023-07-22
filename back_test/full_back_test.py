@@ -4,8 +4,8 @@ from datetime import datetime
 import pandas
 from colorama import Fore
 
-import python.back_test.const_app as const_app
-from python.back_test.back_tests_next_Indicator import longBackTest, sellBackTest
+import back_test.const_app as const_app
+from back_test.back_tests_next_Indicator import longBackTest, sellBackTest
 
 
 # Function to show next indicator data

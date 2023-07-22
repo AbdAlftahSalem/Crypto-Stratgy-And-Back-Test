@@ -1,8 +1,8 @@
 import pandas as pd
 
-from python.back_test import const_app
-from python.back_test.indecators import vwap_score as vwap, nadaraya_watson_envelope as nadaraya
-from python.back_test.util import divideDf
+back_test import const_app
+back_test.indecators import vwap_score as vwap, nadaraya_watson_envelope as nadaraya
+back_test.util import divideDf
 
 
 def applyIndicators(df: pd.DataFrame, ticker: str, interval: str):

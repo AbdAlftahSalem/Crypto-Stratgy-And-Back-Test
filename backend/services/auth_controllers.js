@@ -12,11 +12,9 @@ exports.registerUser = async (req, res) => {
 
     req.body["password"] = await bcrypt.hash(req.body["password"], 10)
     const user = await User.create(req.body, {
-        include: [
-            {
-                model: Plan,
-            }
-        ]
+        include: [{
+            model: Plan,
+        }]
     })
 
     const token = generateToken(user["id"])
@@ -26,12 +24,9 @@ exports.registerUser = async (req, res) => {
 
 exports.loginUser = async (req, res, next) => {
     let user = await User.findOne({
-        where: {email: req.body["email"]},
-        include: [
-            {
-                model: Plan,
-            }
-        ]
+        where: {email: req.body["email"]}, include: [{
+            model: Plan,
+        }]
     })
 
     if (user == null) {
@@ -65,9 +60,7 @@ exports.activeTelegram = async (req, res, next) => {
     // check if password is correct
     if (await bcrypt.compare(req.body.password, user["password"])) {
         await User.update({
-            telegram_id: req.body.telegram_id,
-            active_telegram: true,
-            user_name_telegram: req.body.user_name_telegram,
+            telegram_id: req.body.telegram_id, active_telegram: true, user_name_telegram: req.body.user_name_telegram,
         }, {
             where: filter
         })
@@ -159,6 +152,10 @@ exports.protectRout = async (req, res, next, role = []) => {
             return next(new ApiError("You don't have permission to access this route", 403))
         }
 
+        // check if user is active date
+        if (currentUser["end_subscription_date"] < new Date()) {
+            return next(new ApiError("Your subscription has expired", 401))
+        }
         //  add user in body of request
         req.body.user = currentUser;
         next();

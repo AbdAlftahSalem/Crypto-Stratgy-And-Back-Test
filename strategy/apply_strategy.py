@@ -13,32 +13,36 @@ def apply_strategy():
             # Get data from with indicator for [ 15m, 1h, 30m ] intervals
             df, df30, df1h, nwe, nwe1h, nwe30, vwap15m, vwap30, vwap1h = get_data_frame_with_indicator(ticker, "15m",
                                                                                                        800, 48)
-            # search in last row of df of close , is upper than or equal upper line from nwe indicator and close is upper than vwap1h
-            if df["close"].iloc[-1] >= nwe["upper"].iloc[-1] and df["close"].iloc[-1] >= vwap1h:
-                print(
-                    f"Sell {ticker} signal in 1h interval , price : {df['close'].iloc[-1]} , vwap : {vwap1h}  , nwe : {nwe['upper'].iloc[-1]}")
+            filter_strategy(df, nwe, ticker, vwap15m, vwap1h, vwap30)
 
-            if df["close"].iloc[-1] <= nwe["lower"].iloc[-1] and df["close"].iloc[-1] <= vwap1h:
-                print(
-                    f"Buy {ticker} signal in 1h interval , price : {df['close'].iloc[-1]} , vwap : {vwap1h}  , nwe : {nwe['lower'].iloc[-1]}")
 
-            # search in last row of df of close , is upper than or equal upper line from nwe indicator and close is upper than vwap30
-            if df["close"].iloc[-1] >= nwe["upper"].iloc[-1] and df["close"].iloc[-1] >= vwap30:
-                print(
-                    f"Sell {ticker} signal in 30m interval , price : {df['close'].iloc[-1]} , vwap : {vwap30}  , nwe : {nwe['upper'].iloc[-1]}")
+def filter_strategy(df, nwe, ticker, vwap15m, vwap1h, vwap30):
+    # search in last row of df of close , is upper than or equal upper line from nwe indicator and close is upper than vwap15m
+    if df["close"].iloc[-1] >= nwe["upper"].iloc[-1] and df["close"].iloc[-1] >= vwap15m:
+        print(
+            f"Sell {ticker} signal in 15m interval , price : {df['close'].iloc[-1]} , vwap : {vwap15m}  , nwe : {nwe['upper'].iloc[-1]}")
+    if df["close"].iloc[-1] <= nwe["lower"].iloc[-1] and df["close"].iloc[-1] <= vwap15m:
+        print(
+            f"Buy {ticker} signal in 15m interval , price : {df['close'].iloc[-1]} , vwap : {vwap15m}  , nwe : {nwe['lower'].iloc[-1]}")
 
-            if df["close"].iloc[-1] <= nwe["lower"].iloc[-1] and df["close"].iloc[-1] <= vwap30:
-                print(
-                    f"Buy {ticker} signal in 30m interval , price : {df['close'].iloc[-1]} , vwap : {vwap30}  , nwe : {nwe['lower'].iloc[-1]}")
+    # search in last row of df of close , is upper than or equal upper line from nwe indicator and close is upper than vwap1h
+    if datetime.datetime.now().minute == 59:
+        if df["close"].iloc[-1] >= nwe["upper"].iloc[-1] and df["close"].iloc[-1] >= vwap1h:
+            print(
+                f"Sell {ticker} signal in 1h interval , price : {df['close'].iloc[-1]} , vwap : {vwap1h}  , nwe : {nwe['upper'].iloc[-1]}")
+        if df["close"].iloc[-1] <= nwe["lower"].iloc[-1] and df["close"].iloc[-1] <= vwap1h:
+            print(
+                f"Buy {ticker} signal in 1h interval , price : {df['close'].iloc[-1]} , vwap : {vwap1h}  , nwe : {nwe['lower'].iloc[-1]}")
 
-            # search in last row of df of close , is upper than or equal upper line from nwe indicator and close is upper than vwap15m
-            if df["close"].iloc[-1] >= nwe["upper"].iloc[-1] and df["close"].iloc[-1] >= vwap15m:
-                print(
-                    f"Sell {ticker} signal in 15m interval , price : {df['close'].iloc[-1]} , vwap : {vwap15m}  , nwe : {nwe['upper'].iloc[-1]}")
+    # search in last row of df of close , is upper than or equal upper line from nwe indicator and close is upper than vwap30
+    if datetime.datetime.now().minute == 59 or datetime.datetime.now().minute == 29:
 
-            if df["close"].iloc[-1] <= nwe["lower"].iloc[-1] and df["close"].iloc[-1] <= vwap15m:
-                print(
-                    f"Buy {ticker} signal in 15m interval , price : {df['close'].iloc[-1]} , vwap : {vwap15m}  , nwe : {nwe['lower'].iloc[-1]}")
+        if df["close"].iloc[-1] >= nwe["upper"].iloc[-1] and df["close"].iloc[-1] >= vwap30:
+            print(
+                f"Sell {ticker} signal in 30m interval , price : {df['close'].iloc[-1]} , vwap : {vwap30}  , nwe : {nwe['upper'].iloc[-1]}")
+        if df["close"].iloc[-1] <= nwe["lower"].iloc[-1] and df["close"].iloc[-1] <= vwap30:
+            print(
+                f"Buy {ticker} signal in 30m interval , price : {df['close'].iloc[-1]} , vwap : {vwap30}  , nwe : {nwe['lower'].iloc[-1]}")
 
 
 def get_data_frame_with_indicator(ticker: str, frame: str, limit: int, vwap_value):

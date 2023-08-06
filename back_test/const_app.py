@@ -3,17 +3,17 @@ get_data = False
 Flag to control whether to retrieve historical data or not.
 """
 
-tickers = ["ETHUSDT", "SOLUSDT"]
+tickers = ["BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT", "ADAUSDT"]
 """
 List of tickers for which historical data will be retrieved.
 """
 
-intervals = ["15m", "30m", "1h"]
+intervals = ["5m", "15m", "30m", "1h", "4h"]
 """
 List of intervals for which historical data will be retrieved.
 """
 
-saveDataFolder = "D:\\Python project\\nadaraya_watson_envelope\\data"
+saveDataFolder = "D:\\Python project\\nadaraya_watson_envelope\\data\\"
 """
 The folder path where the retrieved data will be saved.
 """

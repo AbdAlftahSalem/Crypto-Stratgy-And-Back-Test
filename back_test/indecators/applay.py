@@ -3,7 +3,7 @@ import pandas as pd
 from back_test import const_app
 from back_test.indecators import vwap_score as vwap, nadaraya_watson_envelope as nadaraya
 from back_test.util import divideDf
-
+from back_test.send_to_tele import sentToTelegram
 
 def applyIndicators(df: pd.DataFrame, ticker: str, interval: str):
     """
@@ -43,9 +43,6 @@ def applyIndicators(df: pd.DataFrame, ticker: str, interval: str):
             i.loc[i['close'].astype(float) < i['lower'].astype(float), 'signal'] = 'buy'
 
             fullDF.append(i)
-        else:
-            print(f"PASS {i.iloc[0]['date']} , to {i.iloc[-1]['date']}")
-            pass
 
     combined_df = pd.concat(fullDF, ignore_index=True)
     combined_df = combined_df.reset_index()
@@ -53,3 +50,4 @@ def applyIndicators(df: pd.DataFrame, ticker: str, interval: str):
     # Save the combined DataFrame with indicators to a CSV file
     combined_df.to_csv(f"{const_app.saveDataFolder}{ticker}-{interval}-indicator.csv")
     print(f'* Finish getting data for {ticker} in {interval} and save in the {const_app.saveDataFolder} folder')
+    sentToTelegram(f"FINISH {ticker} {interval}")

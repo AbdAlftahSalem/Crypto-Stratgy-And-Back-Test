@@ -5,17 +5,80 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f59376b-505b-4a08-9909-443cf0fdd200" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/back_test/send_to_tele.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/nadaraya_watson_envelope.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/nadaraya_watson_envelope.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/const_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/back_test/const_app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/indecators/applay.py" beforeDir="false" afterPath="$PROJECT_DIR$/back_test/indecators/applay.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/back_test/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/ETHUSDT-15m-indicator.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/ETHUSDT-1h-indicator.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/ETHUSDT-30m-indicator.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/SOLUSDT-15m-indicator.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/SOLUSDT-1h-indicator.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/SOLUSDT-30m-indicator.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_test/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_test/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_test/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_test/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_test/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_test/.idea/nadaraya_watson_envelope.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_test/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_test/assets/output.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_test/back_tests_next_Indicator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_test/const_app.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_test/data/ETHUSDT-15m-indicator.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_test/data/ETHUSDT-1h-indicator.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_test/data/ETHUSDT-30m-indicator.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_test/data/SOLUSDT-15m-indicator.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_test/data/SOLUSDT-1h-indicator.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_test/data/SOLUSDT-30m-indicator.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_test/full_back_test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_test/get_data.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_test/indecators/applay.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_test/indecators/cci.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_test/indecators/mfi.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_test/indecators/nadaraya_watson_envelope.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_test/indecators/rsi.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_test/indecators/super_trend.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_test/indecators/vwap_score.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_test/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_test/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_test/send_to_tele.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_test/util.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ADAUSDT-15m.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ADAUSDT-1h.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ADAUSDT-30m.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ADAUSDT-4h.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ADAUSDT-5m.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/BNBUSDT-15m.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/BNBUSDT-1h.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/BNBUSDT-30m.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/BNBUSDT-4h.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/BNBUSDT-5m.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/BTCUSDT-15m.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/BTCUSDT-1h.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/BTCUSDT-30m.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/BTCUSDT-4h.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/BTCUSDT-5m.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ETHUSDT-15m.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ETHUSDT-1h.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ETHUSDT-30m.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ETHUSDT-4h.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ETHUSDT-5m.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SOLUSDT-15m.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SOLUSDT-1h.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SOLUSDT-30m.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SOLUSDT-4h.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/SOLUSDT-5m.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/indecators/applay.py" beforeDir="false" afterPath="$PROJECT_DIR$/indecators/applay.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/indecators/nadaraya_watson_envelope.py" beforeDir="false" afterPath="$PROJECT_DIR$/indecators/nadaraya_watson_envelope.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mfi_rsi/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/strategy/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/strategy/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/strategy/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/strategy/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/strategy/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/strategy/.idea/strategy.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/strategy/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/strategy/apply_strategy.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/strategy/data_adapter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/strategy/get_data.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/strategy/main.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +98,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 0
+}]]></component>
   <component name="ProjectId" id="2SCEGMM3Nx38kGUBwJbXfMXKKAs" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -46,25 +112,22 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/Python project/nadaraya_watson_envelope/back_test",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+    "last_opened_file_path": "D:/Python project/backtest/Crypto-Stratgy-And-Back-Test/main.py",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Python project\nadaraya_watson_envelope\back_test" />
       <recent name="D:\Python project\nadaraya_watson_envelope" />
-      <recent name="D:\Python project\nadaraya_watson_envelope\strategy" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Python project\nadaraya_watson_envelope" />
       <recent name="D:\Python project\nadaraya_watson_envelope\back_test" />
       <recent name="D:\Python project\nadaraya_watson_envelope\assets" />
       <recent name="D:\Python project\nadaraya_watson_envelope\indecators" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Run Back Test">
-    <configuration name="Run Back Test" type="PythonConfigurationType" factoryName="Python">
+  <component name="RunManager">
+    <configuration name="Run" type="PythonConfigurationType" factoryName="Python">
       <module name="nadaraya_watson_envelope" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -72,33 +135,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/back_test/main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Run Strategy" type="PythonConfigurationType" factoryName="Python">
-      <module name="nadaraya_watson_envelope" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="C:\Users\hp\AppData\Local\Programs\Python\Python310\python.exe" />
-      <option name="SDK_NAME" value="Python 3.10 (test)" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/strategy" />
+      <option name="SDK_NAME" value="Python 3.10 (nadaraya_watson_envelope)" />
+      <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/strategy/main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -107,10 +149,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <list>
-      <item itemvalue="Python.Run Back Test" />
-      <item itemvalue="Python.Run Strategy" />
-    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

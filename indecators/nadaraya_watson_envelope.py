@@ -2,6 +2,8 @@ import math
 
 import pandas as pd
 
+from util import divideDf
+
 
 def nadaraya_watson_envelope(length, bandwidth, error_multiplier, source_data):
     """
@@ -43,3 +45,30 @@ def nadaraya_watson_envelope(length, bandwidth, error_multiplier, source_data):
     cross_down = envelope_values[0] - mean_absolute_error
 
     return upper_band, lower_band, cross_up, cross_down
+
+
+def apply_waston_envelope(df: pd.DataFrame):
+    data = divideDf(df)
+
+    fullDF = []
+    for i in data:
+        if len(i) > 499:
+            close = i["close"]
+
+            # Calculate the Nadaraya-Watson envelope
+            envelope = nadaraya_watson_envelope(500, 8., 3., close)
+
+            # Extract upper and lower bands from the envelope
+            upper = envelope[0]
+            lower = envelope[1]
+
+            # Calculate signals based on the close prices and bands
+            i["upper"] = upper
+            i["lower"] = lower
+            i['signal'] = ''
+            i.loc[i['close'].astype(float) > i['upper'].astype(float), 'signal'] = 'sell'
+            i.loc[i['close'].astype(float) < i['lower'].astype(float), 'signal'] = 'buy'
+
+            fullDF.append(i)
+
+    return pd.concat(fullDF, ignore_index=True)

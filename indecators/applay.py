@@ -1,8 +1,12 @@
 import pandas as pd
 
-back_test import const_app
-back_test.indecators import vwap_score as vwap, nadaraya_watson_envelope as nadaraya
-back_test.util import divideDf
+import const_app
+from indecators import vwap_score as vwap
+from indecators.cci import calculate_cci
+from indecators.mfi import calculate_mfi
+from indecators.nadaraya_watson_envelope import apply_waston_envelope
+from indecators.rsi import calculate_rsi
+from indecators.super_trend import calculate_super_trend
 
 
 def applyIndicators(df: pd.DataFrame, ticker: str, interval: str):
@@ -20,36 +24,34 @@ def applyIndicators(df: pd.DataFrame, ticker: str, interval: str):
     df["vwap50"] = vwap.vwap_score(df, 50)
     df["vwap100"] = vwap.vwap_score(df, 100)
     df["vwap200"] = vwap.vwap_score(df, 200)
+    print("Finish calculate vwap")
 
-    data = divideDf(df)
+    # calculate cci
+    df = calculate_cci(df, 20)
+    print("Finish calculate cci")
 
-    fullDF = []
-    for i in data:
-        if len(i) > 499:
-            close = i["close"]
+    # calculate EMA for each specified period
+    for ema_period in const_app.ema:
+        if ema_period == "None":
+            continue
+        span = int(ema_period[3:])
+        df[f'{ema_period.lower()}'] = df['close'].ewm(span=span, adjust=False).mean()
+    print("Finish calculate EMA")
 
-            # Calculate the Nadaraya-Watson envelope
-            envelope = nadaraya.nadaraya_watson_envelope(500, 8., 3., close)
+    # calculate mfi
+    df = calculate_mfi(df, 14)
+    print("Finish calculate mfi")
 
-            # Extract upper and lower bands from the envelope
-            upper = envelope[0]
-            lower = envelope[1]
+    # calculate rsi
+    df = calculate_rsi(df, 14)
+    print("Finish calculate rsi")
 
-            # Calculate signals based on the close prices and bands
-            i["upper"] = upper
-            i["lower"] = lower
-            i['signal'] = ''
-            i.loc[i['close'].astype(float) > i['upper'].astype(float), 'signal'] = 'sell'
-            i.loc[i['close'].astype(float) < i['lower'].astype(float), 'signal'] = 'buy'
+    # calculate super trend
+    df = calculate_super_trend(df, 10, 3)
+    print("Finish calculate super trend")
 
-            fullDF.append(i)
-        else:
-            print(f"PASS {i.iloc[0]['date']} , to {i.iloc[-1]['date']}")
-            pass
+    # calculate waston_envelopewaston_envelope
+    df = apply_waston_envelope(df)
+    print("Finish calculate waston_envelope \n\n\n")
 
-    combined_df = pd.concat(fullDF, ignore_index=True)
-    combined_df = combined_df.reset_index()
-
-    # Save the combined DataFrame with indicators to a CSV file
-    combined_df.to_csv(f"{const_app.saveDataFolder}{ticker}-{interval}-indicator.csv")
-    print(f'* Finish getting data for {ticker} in {interval} and save in the {const_app.saveDataFolder} folder')
+    return df

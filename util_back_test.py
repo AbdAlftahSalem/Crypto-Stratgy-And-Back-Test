@@ -1,3 +1,7 @@
+from datetime import datetime
+
+from colorama import Fore
+
 import const_app
 
 
@@ -53,3 +57,90 @@ def getTradeData(enterCandle, exitCandle, profit, stop, status, frame):
         "status": status,
         "change": getProfit(frame),
     }
+
+
+def getDetailOfSignals(data):
+    loseNum = 0
+    winNum = 0
+    changeWin = 0
+    changeLose = 0
+    wallet = 100
+    summDiffDate = 0
+
+    for i in data:
+        entryDate = datetime.strptime(i["entryDate"], '%Y-%m-%d %H:%M:%S')
+        outDate = datetime.strptime(i["outDate"], '%Y-%m-%d %H:%M:%S')
+
+        summDiffDate += (outDate - entryDate).total_seconds() / 3600
+        if i["status"] == "tp":
+            winNum += 1
+            changeWin += i["change"]
+            wallet += ((i["change"] / 100) * wallet)
+        else:
+            loseNum += 1
+            changeLose -= i["change"]
+            wallet -= ((i["change"] / 100) * wallet)
+
+    pctSuccess = f"{round((winNum / (winNum + loseNum)) * 100, 2)}%"
+    wallet = f"{round(wallet, 2)} $"
+    avgWaitingDate = summDiffDate / len(data)
+
+    return winNum, loseNum, round(changeWin, 2), round(changeLose, 2), 100, wallet, pctSuccess, round(avgWaitingDate, 2)
+
+
+def allStatistic(dataLong, dataSell, ema, frame, ticker, prefixMessage):
+    # Calculate statistics for long trades
+    winNumLong, loseNumLong, changeWinLong, changeLoseLong, startWalletLong, endWalletLong, pctSuccessLong, avgWaitingLong = getDetailOfSignals(
+        dataLong["data"])
+    # Calculate statistics for short trades
+    winNumShort, loseNumShort, changeWinShort, changeLoseShort, startWalletShort, endWalletShort, pctSuccessShort, avgWaitingShort = getDetailOfSignals(
+        dataSell["data"])
+    # Calculate total win and lose percentages for sell signals
+    total_lose_pct = round(sum((float(d["change"]) if d["status"] == "sl" else 0) for d in dataSell["data"]), 2)
+    total_win_pct = round(sum((float(d["change"]) if d["status"] == "tp" else 0) for d in dataSell["data"]), 2)
+    # Update overall win and lose counts
+    const_app.allWin += dataSell['profitNum']
+    const_app.allLose += dataSell['loseNum']
+    const_app.numberOfSuccessShortSignal += dataSell['profitNum']
+    const_app.numberOfLoseShortSignal += dataSell['loseNum']
+    const_app.summationOfSuccessShortPCT += total_win_pct
+    const_app.summationOfLoseShortPCT += total_lose_pct
+    # Print sell signal statistics
+    print(
+        Fore.RED + f"{prefixMessage} || SELL || Ticker: {ticker}, Frame: {frame}, Profit number: {dataSell['profitNum']}, Lose number: {dataSell['loseNum']} || ALL WIN CHANGE: +{total_win_pct}% || ALL LOSE CHANGE: {total_lose_pct}% || SUCCESS PCT: {round((dataSell['profitNum'] / (dataSell['profitNum'] + dataSell['loseNum'])) * 100, 2)}%")
+    # Calculate total win and lose percentages for long signals
+    total_lose_pct = round(sum((d["change"] if d["status"] == "sl" else 0) for d in dataLong["data"]), 2)
+    total_win_pct = round(sum((d["change"] if d["status"] == "tp" else 0) for d in dataLong["data"]), 2)
+    # Print buy signal statistics
+    print(
+        Fore.GREEN + f"{prefixMessage} || BUY || Ticker: {ticker}, Frame: {frame}, Profit number: {dataLong['profitNum']}, Lose number: {dataLong['loseNum']} || ALL WIN CHANGE: +{total_win_pct}% || ALL LOSE CHANGE: {total_lose_pct}% || SUCCESS PCT: {round((dataLong['profitNum'] / (dataLong['profitNum'] + dataLong['loseNum'])) * 100, 2)}%\n")
+    # Update overall win and lose counts
+    const_app.numberOfSuccessLongSignal += dataLong['profitNum']
+    const_app.numberOfLoseLongSignal += dataLong['loseNum']
+    const_app.summationOfSuccessLongPCT += total_win_pct
+    const_app.summationOfLoseLongPCT += total_lose_pct
+    # Generate message for Telegram
+    const_app.messageToTele = f"Next indicator + {ema} || LONG\n\nTICKER: {ticker}\n⏰Frame: {frame}\n💹Win number: {winNumLong}\n❌Lose number: {loseNumLong}\🔥Win change: {changeWinLong}\n🔴Change lose: {changeLoseLong}\n✅Start wallet: {startWalletLong}\n❇End wallet: {endWalletLong}\n💯PCT success: {pctSuccessLong}\n⌛AVG waiting time (h): {avgWaitingLong}\n\n\nNext indicator + {ema} || SHORT\n\nTICKER: {ticker}\n⏰Frame: {frame}\n💹Win number: {winNumShort}\n❌Lose number: {loseNumShort}\n🔥Win change: {changeWinShort}\n🔴Change lose: {changeLoseShort}\n✅Start wallet: {startWalletShort}\n❇End wallet: {endWalletShort}\n💯PCT success: {pctSuccessShort}\n⌛AVG waiting time (h): {avgWaitingShort}\n\n\n\n"
+
+
+def printStatistic():
+    print(f"******************************************************************************\n")
+    print(f"Tickers search                         : {const_app.tickers}")
+    print(f"Interval search                        : {const_app.intervals}\n\n")
+    print(Fore.GREEN + f"Number Of Success Long Signal          : +{const_app.numberOfSuccessLongSignal}")
+    print(Fore.GREEN + f"Number Of Success Short Signal         : +{const_app.numberOfSuccessShortSignal}")
+    print(
+        Fore.GREEN + f"Number all success signal               : {round(const_app.numberOfSuccessLongSignal + const_app.numberOfSuccessShortSignal, 2)}\n\n")
+    print(Fore.RED + f"Number Of Lose Long Signal             : -{const_app.numberOfLoseLongSignal}")
+    print(Fore.RED + f"Number Of Lose Short Signal            : -{const_app.numberOfLoseShortSignal}")
+    print(
+        Fore.RED + f"Number all lose signal                 : {round(const_app.numberOfLoseLongSignal + const_app.numberOfLoseShortSignal, 2)}\n\n")
+    print(Fore.GREEN + f"Summation Of Success Long PCT          : +{const_app.summationOfSuccessLongPCT} %")
+    print(Fore.GREEN + f"Summation Of Success Short PCT         : +{const_app.summationOfSuccessShortPCT} %")
+    print(Fore.RED + f"Summation Of Lose Long PCT             : -{const_app.summationOfLoseLongPCT} %")
+    print(Fore.RED + f"Summation Of Lose Short PCT            : -{const_app.summationOfLoseShortPCT} %\n")
+    print(
+        Fore.RED + f"Summation of Lose in Long and Short    : -{const_app.summationOfLoseShortPCT + const_app.summationOfLoseLongPCT} %")
+    print(
+        Fore.GREEN + f"Summation of Success in Long and Short : +{const_app.summationOfSuccessShortPCT + const_app.summationOfSuccessLongPCT} %\n")
+    print(f"******************************************************************************\n")

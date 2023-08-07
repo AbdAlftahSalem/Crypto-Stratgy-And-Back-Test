@@ -1,7 +1,7 @@
 # Importing the 'const_app' module
 import const_app
 import get_data
-from full_back_test import nextIndicatorBackText
+from full_back_test import nweIndicatorBackText
 from indecators.add_all_indecator_to_csv import add_all_indicator_to_csv
 from send_to_tele import sentToTelegram
 
@@ -20,4 +20,4 @@ if const_app.apply_strategy:
     sentToTelegram("******************* \n\nFINISH GET DATA ******************* \n\n")
 
 # Calling the 'nextIndicatorBackText' function from 'full_back_test' module to start testing
-nextIndicatorBackText()
+nweIndicatorBackText()

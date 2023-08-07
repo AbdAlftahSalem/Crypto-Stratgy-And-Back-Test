@@ -1,4 +1,4 @@
-|| SELL || Ticker: BTCUSDT, Frame: 4h, Profit number: 4, Lose number: 1 || ALL WIN CHANGE: +40.0% || ALL LOSE CHANGE: 10.0% || SUCCESS PCT: 80.0%
+||SELL||Ticker: BTCUSDT, Frame: 4h, Profit number: 4, Lose number: 1|| ALL WIN CHANGE: +40.0% || ALL LOSE CHANGE: 10.0% || SUCCESS PCT: 80.0%
  || BUY || Ticker: BTCUSDT, Frame: 4h, Profit number: 3, Lose number: 1 || ALL WIN CHANGE: +30% || ALL LOSE CHANGE: 10% || SUCCESS PCT: 75.0%
 
  || SELL || Ticker: ADAUSDT, Frame: 4h, Profit number: 7, Lose number: 1 || ALL WIN CHANGE: +70.0% || ALL LOSE CHANGE: 10.0% || SUCCESS PCT: 87.5%
@@ -85,13 +85,19 @@ Number Of Success Short Signal         : +1808
 Number Of Lose Long Signal             : -703
 Number Of Lose Short Signal            : -487
 
+
+Summation Of Success Long and Short    : 3870
+Summation Of Lose Long and Short       : -1190
+
+Success PCT                            : 76.48 %
+
 Summation Of Success Long PCT          : +6153 %
 Summation Of Success Short PCT         : +5396.0 %
 Summation Of Lose Long PCT             : -2035 %
 Summation Of Lose Short PCT            : -1492.0 %
 
-Summation of Lose in Long and Short    : -3527.0 %
 Summation of Success in Long and Short : +11549.0 %
+Summation of Lose in Long and Short    : -3527.0 %
 
 ******************************************************************************
 

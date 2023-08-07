@@ -62,10 +62,9 @@ def showNextIndicatorData(ticker, frame, ema, vwap):
 
     # Generate message for Telegram
     const_app.messageToTele = f"Next indicator + {ema} || LONG\n\nTICKER: {ticker}\n⏰Frame: {frame}\n💹Win number: {winNumLong}\n❌Lose number: {loseNumLong}\🔥Win change: {changeWinLong}\n🔴Change lose: {changeLoseLong}\n✅Start wallet: {startWalletLong}\n❇End wallet: {endWalletLong}\n💯PCT success: {pctSuccessLong}\n⌛AVG waiting time (h): {avgWaitingLong}\n\n\nNext indicator + {ema} || SHORT\n\nTICKER: {ticker}\n⏰Frame: {frame}\n💹Win number: {winNumShort}\n❌Lose number: {loseNumShort}\n🔥Win change: {changeWinShort}\n🔴Change lose: {changeLoseShort}\n✅Start wallet: {startWalletShort}\n❇End wallet: {endWalletShort}\n💯PCT success: {pctSuccessShort}\n⌛AVG waiting time (h): {avgWaitingShort}\n\n\n\n"
-    # print(const_app.messageToTele)
 
 
-def nextIndicatorBackText():
+def nweIndicatorBackText():
     # Create a list to store the threads
     thread_list = []
 

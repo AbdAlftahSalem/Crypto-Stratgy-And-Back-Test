@@ -5,80 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f59376b-505b-4a08-9909-443cf0fdd200" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/nadaraya_watson_envelope.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/nadaraya_watson_envelope.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/.idea/nadaraya_watson_envelope.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/assets/output.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/back_tests_next_Indicator.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/const_app.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/data/ETHUSDT-15m-indicator.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/data/ETHUSDT-1h-indicator.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/data/ETHUSDT-30m-indicator.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/data/SOLUSDT-15m-indicator.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/data/SOLUSDT-1h-indicator.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/data/SOLUSDT-30m-indicator.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/full_back_test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/get_data.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/indecators/applay.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/indecators/cci.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/indecators/mfi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/indecators/nadaraya_watson_envelope.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/indecators/rsi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/indecators/super_trend.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/indecators/vwap_score.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/requirements.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/send_to_tele.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test/util.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/ADAUSDT-15m.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/ADAUSDT-1h.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/ADAUSDT-30m.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/ADAUSDT-4h.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/ADAUSDT-5m.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BNBUSDT-15m.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BNBUSDT-1h.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BNBUSDT-30m.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BNBUSDT-4h.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BNBUSDT-5m.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BTCUSDT-15m.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BTCUSDT-1h.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BTCUSDT-30m.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BTCUSDT-4h.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/BTCUSDT-5m.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/ETHUSDT-15m.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/ETHUSDT-1h.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/ETHUSDT-30m.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/ETHUSDT-4h.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/ETHUSDT-5m.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/SOLUSDT-15m.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/SOLUSDT-1h.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/SOLUSDT-30m.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/SOLUSDT-4h.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/SOLUSDT-5m.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/indecators/applay.py" beforeDir="false" afterPath="$PROJECT_DIR$/indecators/applay.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/indecators/nadaraya_watson_envelope.py" beforeDir="false" afterPath="$PROJECT_DIR$/indecators/nadaraya_watson_envelope.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mfi_rsi/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/strategy/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/strategy/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/strategy/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/strategy/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/strategy/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/strategy/.idea/strategy.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/strategy/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/strategy/apply_strategy.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/strategy/data_adapter.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/strategy/get_data.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/strategy/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_test_output/nadaraya v1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/back_test_output/nadaraya v1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/full_back_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/full_back_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

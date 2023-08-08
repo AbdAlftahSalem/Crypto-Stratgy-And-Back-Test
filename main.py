@@ -2,7 +2,7 @@
 import const_app
 import get_data
 from indecators.add_all_indecator_to_csv import add_all_indicator_to_csv
-from nwe.full_back_test import nweIndicatorBackText
+from strategies.nwe.full_back_test import nweIndicatorBackText
 from utils.send_to_tele import sentToTelegram
 
 # Importing the 'get_data' module

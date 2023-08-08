@@ -3,7 +3,7 @@ import threading
 import pandas
 
 import const_app as const_app
-from nwe.back_test_nwe import longBackTest, sellBackTest
+from strategies.nwe.back_test_nwe import longBackTest, sellBackTest
 from utils.boost import boost
 from utils.util_back_test import allStatistic, printStatistic
 

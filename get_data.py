@@ -16,22 +16,29 @@ def getData(ticker, interval):
     Returns:
         A DataFrame containing the retrieved data.
 
-    """
-    client = Client()
-    kLine = client.get_historical_klines(ticker, interval, "1 jan, 2021")
-    df = pd.DataFrame(
-        kLine,
-        columns=['date', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'qav', 'num_trades', 'taker_base_vol',
-                 'taker_quote_vol', 'ignore'])
-    df['date'] = pd.to_datetime(df["date"], unit='ms')
-    del df["taker_quote_vol"]
-    del df["close_time"]
-    del df["qav"]
-    del df["num_trades"]
-    del df["taker_base_vol"]
-    del df["ignore"]
-
-    df.to_csv(f"D:\\Python project\\nadaraya_watson_envelope\\data\\{ticker}-{interval}.csv")
+    import logging
+    
+    def getData(ticker, interval):
+        logging.info(f"Getting data for ticker {ticker} and interval {interval}")
+        try:
+            client = Client()
+            kLine = client.get_historical_klines(ticker, interval, "1 jan, 2021")
+            df = pd.DataFrame(
+                kLine,
+                columns=['date', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'qav', 'num_trades', 'taker_base_vol',
+                         'taker_quote_vol', 'ignore'])
+            df['date'] = pd.to_datetime(df["date"], unit='ms')
+            del df["taker_quote_vol"]
+            del df["close_time"]
+            del df["qav"]
+            del df["num_trades"]
+            del df["taker_base_vol"]
+            del df["ignore"]
+    
+            df.to_csv(f"D:\\Python project\\nadaraya_watson_envelope\\data\\{ticker}-{interval}.csv")
+            logging.info(f"Data for ticker {ticker} and interval {interval} retrieved successfully")
+        except Exception as e:
+            logging.error(f"Error occurred while getting data for ticker {ticker} and interval {interval}: {e}")
 
     # # Calculate EMA for each specified period
     # for ema_period in const_app.ema:

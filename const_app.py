@@ -43,11 +43,10 @@ allLose = 0
 Variable to keep track of the total number of losses.
 """
 
-interval5mTpPCT = 2
-interval15mTpPCT = 3
+interval5mTpPCT = 3
+interval15mTpPCT = 4
 interval30mTpPCT = 5
-interval1hTpPCT = 7
-interval4hTpPCT = 10
+interval1hTpPCT = 6
 """
 PCT TP change
 """

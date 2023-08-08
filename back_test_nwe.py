@@ -1,5 +1,5 @@
 import const_app as const_app
-from util import getNumByChange, getChange
+from util import getNumByChange
 from util_back_test import getProfit, getTradeData
 
 
@@ -35,13 +35,14 @@ def longBackTest(combined_df, ticker: str, frame: str, vwap: str):
 
         # check if low next candle is less than low current candle and less than next next candle low and close next next candle is upper than next candle close
         condition = (condition and
-                     nextCandleSearch["low"] < currentCandleSearch["low"] < nextNextCandleSearch["low"] and
-                     nextNextCandleSearch["close"] > nextCandleSearch["close"])
+                     nextCandleSearch["low"] < currentCandleSearch["low"] < nextNextCandleSearch["low"])
+
+        # check if close upper than superTrend
+        condition = (condition and currentCandleSearch["close"] > currentCandleSearch["superTrend"])
 
         if (
                 condition
                 and not searchProfit
-                and getChange(currentCandleSearch["high"], currentCandleSearch["low"]) < 2
                 #  this condition to search in strategy with EMA and without it
                 # and getVWAP(vwap, currentCandleSearch, "long")
         ):
@@ -103,13 +104,14 @@ def sellBackTest(combined_df, ticker: str, frame: str, vwap: str):
 
         # check if high next candle is greater than high current candle and greater than next next candle high and close next next candle is lower than next candle close
         condition = (condition and
-                     nextCanldeSearch["high"] > enterCandleSearch["high"] > nextNextCandleSearch["high"] and
-                     nextNextCandleSearch["close"] < nextCanldeSearch["close"])
+                     nextCanldeSearch["high"] > enterCandleSearch["high"] > nextNextCandleSearch["high"])
+
+        # check if close lower than superTrend
+        condition = (condition and enterCandleSearch["close"] < enterCandleSearch["superTrend"])
 
         if (
                 condition
                 and not searchProfit
-                and getChange(enterCandleSearch["high"], enterCandleSearch["low"]) < 2
                 #  this condition to search in strategy with EMA and without it
                 # and getVWAP(vwap, enterCandleSearch, "short")
         ):

@@ -9,9 +9,7 @@ from util_back_test import allStatistic, printStatistic
 
 
 # Function to show next indicator data
-def showNweData(ticker, frame, ema, vwap):
-    const_app.numberOfSuccessLongSignal = 0
-    const_app.numberOfSuccessShortSignal = 0
+def showNweData(ticker, frame, ema, vwap, numberOfSuccessLongSignal, numberOfSuccessShortSignal):
 
     # Read data from CSV file
     df = pandas.read_csv(f"{const_app.saveDataFolder}{ticker}-{frame}-indicators.csv")
@@ -28,10 +26,10 @@ def showNweData(ticker, frame, ema, vwap):
 def nweIndicatorBackText():
     # Create a list to store the threads
     thread_list = []
-
-    for frame in const_app.intervals:
-        # Create a thread for each combination of ema and frame
-        th = threading.Thread(target=boost, args=(showNweData, const_app.tickers, frame, '', ''))
+def nweIndicatorBackText(intervals, tickers):
+    thread_list = []
+    for frame in intervals:
+        th = threading.Thread(target=boost, args=(showNweData, tickers, frame, '', ''))
         thread_list.append(th)
         th.start()
 

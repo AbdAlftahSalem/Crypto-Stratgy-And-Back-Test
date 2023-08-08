@@ -3,6 +3,21 @@ from util import getNumByChange, getChange
 from util_back_test import getProfit, getTradeData
 
 
+def check_enter_condition(currentCandleSearch, nextCandleSearch, nextNextCandleSearch):
+    condition = (currentCandleSearch["open"] < currentCandleSearch["lower"])
+    condition = (condition and
+                 nextCandleSearch["low"] < currentCandleSearch["low"] < nextNextCandleSearch["low"] and
+                 nextNextCandleSearch["close"] > nextCandleSearch["close"])
+    return condition
+
+def check_exit_condition(i, combined_df, profit, stop):
+    if combined_df.iloc[i]["high"] >= profit:
+        return "tp"
+    elif combined_df.iloc[i]["low"] <= stop:
+        return "sl"
+    else:
+        return ""
+
 def longBackTest(combined_df, ticker: str, frame: str, vwap: str):
     """
     Perform a long backtest on the combined DataFrame.
@@ -33,10 +48,7 @@ def longBackTest(combined_df, ticker: str, frame: str, vwap: str):
         # check if open and close is less than lower
         condition = (currentCandleSearch["open"] < currentCandleSearch["lower"])
 
-        # check if low next candle is less than low current candle and less than next next candle low and close next next candle is upper than next candle close
-        condition = (condition and
-                     nextCandleSearch["low"] < currentCandleSearch["low"] < nextNextCandleSearch["low"] and
-                     nextNextCandleSearch["close"] > nextCandleSearch["close"])
+        condition = check_enter_condition(currentCandleSearch, nextCandleSearch, nextNextCandleSearch)
 
         if (
                 condition
@@ -52,7 +64,8 @@ def longBackTest(combined_df, ticker: str, frame: str, vwap: str):
             searchProfit = True
 
         if searchProfit:
-            if combined_df.iloc[i]["high"] >= profit:
+            result = check_exit_condition(i, combined_df, profit, stop)
+            if result == "tp":
                 output["data"].append(
                     getTradeData(enterCandle, combined_df.iloc[i], profit, stop, "tp", frame)
                 )
@@ -60,7 +73,7 @@ def longBackTest(combined_df, ticker: str, frame: str, vwap: str):
                 searchProfit = False
                 continue
 
-            elif combined_df.iloc[i]["low"] <= stop:
+            elif result == "sl":
                 output["data"].append(
                     getTradeData(enterCandle, combined_df.iloc[i], profit, stop, "sl", frame)
                 )

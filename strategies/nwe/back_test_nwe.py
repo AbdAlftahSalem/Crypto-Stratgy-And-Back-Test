@@ -3,7 +3,7 @@ from utils.util import getNumByChange
 from utils.util_back_test import getProfit, getTradeData
 
 
-def longBackTest(combined_df, ticker: str, frame: str, vwap: str):
+def longBackTest(combined_df, ticker: str, frame: str):
     """
     Perform a long backtest on the combined DataFrame.
 
@@ -11,7 +11,6 @@ def longBackTest(combined_df, ticker: str, frame: str, vwap: str):
         combined_df: The combined DataFrame containing the data.
         ticker: The ticker symbol.
         frame: The time frame.
-        vwap: VWAP.
 
     Returns:
         A dictionary containing the backtest results.
@@ -72,7 +71,7 @@ def longBackTest(combined_df, ticker: str, frame: str, vwap: str):
     return output
 
 
-def sellBackTest(combined_df, ticker: str, frame: str, vwap: str):
+def sellBackTest(combined_df, ticker: str, frame: str):
     """
     Perform a sell backtest on the combined DataFrame.
 
@@ -80,7 +79,6 @@ def sellBackTest(combined_df, ticker: str, frame: str, vwap: str):
         combined_df: The combined DataFrame containing the data.
         ticker: The ticker symbol.
         frame: The time frame.
-        vwap: VWAP.
 
 
     Returns:
@@ -139,43 +137,4 @@ def sellBackTest(combined_df, ticker: str, frame: str, vwap: str):
     return output
 
 
-def getEMA(ema: str, enterCandleSearch, trade_type: str):
-    """
-    Check if the current candle satisfies the EMA condition.
 
-    Args:
-        ema: The EMA to consider.
-        enterCandleSearch: The current candle data.
-        trade_type: The trade type (long or short).
-
-    Returns:
-        True if the condition is satisfied, False otherwise.
-
-    """
-    if trade_type == "long":
-        return enterCandleSearch[ema] >= enterCandleSearch["close"]
-    elif trade_type == "short":
-        return enterCandleSearch[ema] <= enterCandleSearch["close"]
-    elif ema == "None":
-        return True
-
-
-def getVWAP(vwap: str, enterCandleSearch, trade_type: str):
-    """
-    Check if the current candle satisfies the EMA condition.
-
-    Args:
-        vwap: The EMA to consider.
-        enterCandleSearch: The current candle data.
-        trade_type: The trade type (long or short).
-
-    Returns:
-        True if the condition is satisfied, False otherwise.
-
-    """
-    if trade_type == "long":
-        return enterCandleSearch[vwap] >= enterCandleSearch["close"]
-    elif trade_type == "short":
-        return enterCandleSearch[vwap] <= enterCandleSearch["close"]
-    elif vwap == "None":
-        return True

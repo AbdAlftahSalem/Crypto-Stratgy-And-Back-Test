@@ -2,6 +2,7 @@
 import const_app
 import get_data
 from indecators.add_all_indecator_to_csv import add_all_indicator_to_csv
+from strategies.mrc.full_back_test import mrcIndicatorBackText
 from strategies.nwe.full_back_test import nweIndicatorBackText
 from utils.send_to_tele import sentToTelegram
 
@@ -21,3 +22,4 @@ if const_app.apply_strategy:
 
 # Calling the 'nextIndicatorBackText' function from 'full_back_test' module to start testing
 nweIndicatorBackText()
+# mrcIndicatorBackText()

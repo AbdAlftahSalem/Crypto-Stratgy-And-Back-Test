@@ -5,19 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f59376b-505b-4a08-9909-443cf0fdd200" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/strategies/mrc/back_test_mrc.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/strategies/mrc/full_back_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back_test_nwe.py" beforeDir="false" afterPath="$PROJECT_DIR$/nwe/back_test_nwe.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boost.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/boost.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/const_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/const_app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/full_back_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/nwe/full_back_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/get_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/get_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/indecators/add_all_indecator_to_csv.py" beforeDir="false" afterPath="$PROJECT_DIR$/indecators/add_all_indecator_to_csv.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/indecators/nadaraya_watson_envelope.py" beforeDir="false" afterPath="$PROJECT_DIR$/indecators/nadaraya_watson_envelope.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/send_to_tele.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/send_to_tele.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/util.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util_back_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/util_back_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/strategies/nwe/back_test_nwe.py" beforeDir="false" afterPath="$PROJECT_DIR$/strategies/nwe/back_test_nwe.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/strategies/nwe/full_back_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/strategies/nwe/full_back_test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,23 +42,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Python project/backtest/Crypto-Stratgy-And-Back-Test/main.py&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/Python project/backtest/Crypto-Stratgy-And-Back-Test/strategies/mrc",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Python project\backtest\Crypto-Stratgy-And-Back-Test\strategies\mrc" />
       <recent name="D:\Python project\nadaraya_watson_envelope" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Python project\backtest\Crypto-Stratgy-And-Back-Test\strategies" />
       <recent name="D:\Python project\backtest\Crypto-Stratgy-And-Back-Test\utils" />
       <recent name="D:\Python project\backtest\Crypto-Stratgy-And-Back-Test\nwe" />
       <recent name="D:\Python project\nadaraya_watson_envelope\back_test" />
       <recent name="D:\Python project\nadaraya_watson_envelope\assets" />
-      <recent name="D:\Python project\nadaraya_watson_envelope\indecators" />
     </key>
   </component>
   <component name="RunManager">

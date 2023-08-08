@@ -3,13 +3,13 @@ import threading
 import pandas
 
 import const_app as const_app
-from strategies.nwe.back_test_nwe import longBackTest, sellBackTest
+from strategies.mrc.back_test_mrc import longBackTestOptimized, sellBackTestOptimized
 from utils.boost import boost
 from utils.util_back_test import allStatistic, printStatistic
 
 
 # Function to show next indicator data
-def showNweData(ticker, frame, ema, vwap):
+def showMRCData(ticker, frame, ema, vwap):
     const_app.numberOfSuccessLongSignal = 0
     const_app.numberOfSuccessShortSignal = 0
 
@@ -17,21 +17,21 @@ def showNweData(ticker, frame, ema, vwap):
     df = pandas.read_csv(f"{const_app.saveDataFolder}{ticker}-{frame}-indicators.csv")
 
     # Perform long backtest
-    dataLong = longBackTest(df, ticker, frame)
+    dataLong = longBackTestOptimized(df, ticker, frame)
 
     # Perform sell backtest
-    dataSell = sellBackTest(df, ticker, frame)
+    dataSell = sellBackTestOptimized(df, ticker, frame)
 
-    allStatistic(dataLong, dataSell, ema, frame, ticker, 'NWE')
+    allStatistic(dataLong, dataSell, ema, frame, ticker, 'MRC')
 
 
-def nweIndicatorBackText():
+def mrcIndicatorBackText():
     # Create a list to store the threads
     thread_list = []
 
-    for frame in ["5m", "30m", "15m"]:
+    for frame in const_app.intervals:
         # Create a thread for each combination of ema and frame
-        th = threading.Thread(target=boost, args=(showNweData, const_app.tickers, frame, '', ''))
+        th = threading.Thread(target=boost, args=(showMRCData, const_app.tickers, frame, '', ''))
         thread_list.append(th)
         th.start()
 

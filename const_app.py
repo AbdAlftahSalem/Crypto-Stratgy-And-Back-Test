@@ -47,6 +47,7 @@ interval5mTpPCT = 3
 interval15mTpPCT = 4
 interval30mTpPCT = 5
 interval1hTpPCT = 6
+interval4hTpPCT = 7
 """
 PCT TP change
 """

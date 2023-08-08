@@ -10,8 +10,6 @@ from util_back_test import allStatistic, printStatistic
 
 # Function to show next indicator data
 def showNweData(ticker, frame, ema, vwap, numberOfSuccessLongSignal, numberOfSuccessShortSignal):
-    numberOfSuccessLongSignal = 0
-    numberOfSuccessShortSignal = 0
 
     # Read data from CSV file
     df = pandas.read_csv(f"{const_app.saveDataFolder}{ticker}-{frame}-indicators.csv")

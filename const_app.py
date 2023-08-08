@@ -18,7 +18,7 @@ intervals = ["5m", "15m", "30m", "1h", "4h"]
 List of intervals for which historical data will be retrieved.
 """
 
-saveDataFolder = "D:\\Python project\\nadaraya_watson_envelope\\data2\\"
+saveDataFolder = "E:\\Crypto System\\data2\\"
 """
 The folder path where the retrieved data will be saved.
 """

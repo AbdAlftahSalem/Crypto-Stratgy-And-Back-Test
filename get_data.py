@@ -2,7 +2,6 @@ import pandas as pd
 from binance.client import Client
 
 import const_app
-from send_to_tele import sentToTelegram
 
 
 def getData(ticker, interval):

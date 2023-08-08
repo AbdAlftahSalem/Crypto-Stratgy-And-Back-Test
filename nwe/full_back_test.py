@@ -3,9 +3,9 @@ import threading
 import pandas
 
 import const_app as const_app
-from back_test_nwe import longBackTest, sellBackTest
-from boost import boost
-from util_back_test import allStatistic, printStatistic
+from nwe.back_test_nwe import longBackTest, sellBackTest
+from utils.boost import boost
+from utils.util_back_test import allStatistic, printStatistic
 
 
 # Function to show next indicator data
@@ -29,7 +29,7 @@ def nweIndicatorBackText():
     # Create a list to store the threads
     thread_list = []
 
-    for frame in ["30m", "15m", "5m"]:
+    for frame in ["5m", "30m", "15m"]:
         # Create a thread for each combination of ema and frame
         th = threading.Thread(target=boost, args=(showNweData, const_app.tickers, frame, '', ''))
         thread_list.append(th)

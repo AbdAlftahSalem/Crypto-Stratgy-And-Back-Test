@@ -2,7 +2,7 @@ import pandas as pd
 
 import const_app
 from indecators.applay import applyIndicators
-from send_to_tele import sentToTelegram
+from utils.send_to_tele import sentToTelegram
 
 
 def add_all_indicator_to_csv():

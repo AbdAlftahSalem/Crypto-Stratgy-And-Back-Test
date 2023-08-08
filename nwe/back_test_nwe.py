@@ -1,6 +1,6 @@
 import const_app as const_app
-from util import getNumByChange
-from util_back_test import getProfit, getTradeData
+from utils.util import getNumByChange
+from utils.util_back_test import getProfit, getTradeData
 
 
 def longBackTest(combined_df, ticker: str, frame: str, vwap: str):

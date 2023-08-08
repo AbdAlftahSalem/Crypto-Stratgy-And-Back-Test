@@ -2,7 +2,7 @@ import math
 
 import pandas as pd
 
-from util import divideDf
+from utils.util import divideDf
 
 
 def nadaraya_watson_envelope(length, bandwidth, error_multiplier, source_data):

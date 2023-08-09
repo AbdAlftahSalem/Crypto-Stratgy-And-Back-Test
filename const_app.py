@@ -43,21 +43,6 @@ allLose = 0
 Variable to keep track of the total number of losses.
 """
 
-interval5mTpPCT = 2
-interval15mTpPCT = 3
-interval30mTpPCT = 4
-interval1hTpPCT = 5
-interval4hTpPCT = 6
-"""
-PCT TP change
-"""
-
-stopLosePCTFromTPPCT = 2
-"""
-# This variable will divide it from TP PCT
-# if TP : 3 -> SL will be 3 / 2 = 1.5 . etc
-"""
-
 numberOfSuccessLongSignal = 0
 numberOfSuccessShortSignal = 0
 
@@ -70,10 +55,43 @@ summationOfSuccessShortPCT = 0
 summationOfLoseLongPCT = 0
 summationOfLoseShortPCT = 0
 
-#  data for strategy
+strategies = {
+    "trend_following": {
+        "indicator": {
+            "ema": [10, 20, 50, 100, 200],
+            "super_trend": [10, 3],
+            "candlestick": [3],
+        },
+        "tp": {
+            "tp5m": 2,
+            "tp15m": 3,
+            "tp30m": 4,
+            "tp1h": 5,
+            "tp4h": 6,
+            "sl": 2,
+        },
+        "config": {
+            "long": False,
+            "short": True,
+        }
+    },
 
-time_start_15m = [14, 29, 44, 59]
-time_start_30m = [29, 59]
-time_start_1h = [59]
-
-tickers_search = ["SOLUSDT", "ETHUSDT", "SOLUSDT"]
+    "nwe": {
+        "indicator": {
+            "nadaraya_watson_envelope": [500, 8, 3, "close"],
+            "candlestick": [3],
+        },
+        "tp": {
+            "tp5m": 2,
+            "tp15m": 3,
+            "tp30m": 4,
+            "tp1h": 5,
+            "tp4h": 6,
+            "sl": 2,
+        },
+        "config": {
+            "long": True,
+            "short": True,
+        }
+    }
+}

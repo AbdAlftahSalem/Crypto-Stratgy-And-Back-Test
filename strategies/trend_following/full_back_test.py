@@ -16,20 +16,22 @@ def show_trend_followingData(ticker, frame, ema, vwap):
     # Read data from CSV file
     df = pandas.read_csv(f"{const_app.saveDataFolder}{ticker}-{frame}-indicators.csv")
 
-    # Perform long backtest
-    dataLong = longBackTest_optimized(df, ticker, frame)
+    if const_app.strategies["trend_following"]["config"]["long"]:
+        # Perform long backtest
+        dataLong = longBackTest_optimized(df, ticker, frame)
+        allStatistic(dataLong, ema, frame, ticker, 'Trend Following', False)
 
-    # Perform sell backtest
-    dataSell = sellBackTest_optimized(df, ticker, frame)
-
-    allStatistic(dataLong, dataSell, ema, frame, ticker, 'Trend Following')
+    if const_app.strategies["trend_following"]["config"]["short"]:
+        # Perform sell backtest
+        dataSell = sellBackTest_optimized(df, ticker, frame)
+        allStatistic(dataSell, ema, frame, ticker, 'Trend Following', True)
 
 
 def trendFollowingIndicatorBackText():
     # Create a list to store the threads
     thread_list = []
 
-    for frame in ["5m"]:
+    for frame in const_app.intervals:
         # Create a thread for each combination of ema and frame
         th = threading.Thread(target=boost, args=(show_trend_followingData, const_app.tickers, frame, '', ''))
         thread_list.append(th)

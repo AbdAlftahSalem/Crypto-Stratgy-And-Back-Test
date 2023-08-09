@@ -12,12 +12,21 @@ from utils.util_back_test import allStatistic, printStatistic
 def showNweData(ticker, frame, ema, vwap):
     const_app.numberOfSuccessLongSignal = 0
     const_app.numberOfSuccessShortSignal = 0
+    dataLong = {}
+    dataSell = {}
 
     # Read data from CSV file
     df = pandas.read_csv(f"{const_app.saveDataFolder}{ticker}-{frame}-indicators.csv")
 
-    # Perform long backtest
-    dataLong = longBackTest(df, ticker, frame)
+    if const_app.strategies["nwe"]["config"]["long"]:
+        # Perform long backtest
+        dataLong = longBackTest(df, ticker, frame)
+        allStatistic(dataLong, ema, frame, ticker, 'Nwe', False)
+
+    if const_app.strategies["nwe"]["config"]["short"]:
+        # Perform sell backtest
+        dataSell = sellBackTest(df, ticker, frame)
+        allStatistic(dataSell, ema, frame, ticker, 'Nwe', True)
 
     # Perform sell backtest
     dataSell = sellBackTest(df, ticker, frame)

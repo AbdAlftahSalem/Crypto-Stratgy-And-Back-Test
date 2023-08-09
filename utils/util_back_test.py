@@ -5,34 +5,47 @@ from colorama import Fore
 import const_app
 
 
-def getProfit(frame: str):
+def getProfit(strategy: str, frame: str):
     """
     Get the profit percentage based on the given time frame.
 
-    Args:
-        frame: The time frame.
-
     Returns:
         The profit percentage.
+        :param frame:
+        :param strategy:
 
     """
     if frame == "5m":
-        return const_app.interval5mTpPCT
+        return const_app.strategies[strategy]["tp"]["tp5m"]
 
     elif frame == "15m":
-        return const_app.interval15mTpPCT
+        return const_app.strategies[strategy]["tp"]["tp15m"]
 
     elif frame == "30m":
-        return const_app.interval30mTpPCT
+        return const_app.strategies[strategy]["tp"]["tp30m"]
 
     elif frame == "1h":
-        return const_app.interval1hTpPCT
+        return const_app.strategies[strategy]["tp"]["tp1h"]
 
     elif frame == "4h":
-        return const_app.interval4hTpPCT
+        return const_app.strategies[strategy]["tp"]["tp4h"]
 
 
-def getTradeData(enterCandle, exitCandle, profit, stop, status, frame):
+def getStopLose(strategy: str):
+    """
+    Get the stop lose percentage based on the given strategy.
+
+    Args:
+        strategy: The strategy.
+
+    Returns:
+        The stop lose percentage.
+
+    """
+    return const_app.strategies[strategy]["tp"]["sl"]
+
+
+def getTradeData(strategy, enterCandle, exitCandle, profit, stop, status, frame):
     """
     Get the trade data for a specific trade.
 
@@ -43,6 +56,7 @@ def getTradeData(enterCandle, exitCandle, profit, stop, status, frame):
         stop: The stop loss target.
         status: The trade status.
         frame: The time frame.
+        strategy: The strategy name.
 
     Returns:
         A dictionary containing the trade data.
@@ -55,7 +69,7 @@ def getTradeData(enterCandle, exitCandle, profit, stop, status, frame):
         "tp": profit,
         "sl": stop,
         "status": status,
-        "change": getProfit(frame),
+        "change": getProfit(strategy, frame),
     }
 
 
@@ -88,13 +102,41 @@ def getDetailOfSignals(data):
     return winNum, loseNum, round(changeWin, 2), round(changeLose, 2), 100, wallet, pctSuccess, round(avgWaitingDate, 2)
 
 
-def allStatistic(dataLong, dataSell, ema, frame, ticker, prefixMessage):
-    # Calculate statistics for long trades
-    winNumLong, loseNumLong, changeWinLong, changeLoseLong, startWalletLong, endWalletLong, pctSuccessLong, avgWaitingLong = getDetailOfSignals(
-        dataLong["data"])
-    # Calculate statistics for short trades
-    winNumShort, loseNumShort, changeWinShort, changeLoseShort, startWalletShort, endWalletShort, pctSuccessShort, avgWaitingShort = getDetailOfSignals(
-        dataSell["data"])
+def allStatistic(data, ema, frame, ticker, prefixMessage, sell=False):
+    try:
+        if not sell:
+            # Calculate statistics for long trades
+            winNumLong, loseNumLong, changeWinLong, changeLoseLong, startWalletLong, endWalletLong, pctSuccessLong, avgWaitingLong = getDetailOfSignals(
+                data["data"])
+            print_buy(data, frame, prefixMessage, ticker)
+
+        else:
+            # Calculate statistics for short trades
+            winNumShort, loseNumShort, changeWinShort, changeLoseShort, startWalletShort, endWalletShort, pctSuccessShort, avgWaitingShort = getDetailOfSignals(
+                data["data"])
+            print_sell(data, frame, prefixMessage, ticker)
+
+
+
+    except Exception as e:
+        print(e)
+
+
+def print_buy(dataLong, frame, prefixMessage, ticker):
+    # Calculate total win and lose percentages for long signals
+    total_lose_pct = round(sum((d["change"] if d["status"] == "sl" else 0) for d in dataLong["data"]), 2)
+    total_win_pct = round(sum((d["change"] if d["status"] == "tp" else 0) for d in dataLong["data"]), 2)
+    # Update overall win and lose counts
+    const_app.numberOfSuccessLongSignal += dataLong['profitNum']
+    const_app.numberOfLoseLongSignal += dataLong['loseNum']
+    const_app.summationOfSuccessLongPCT += total_win_pct
+    const_app.summationOfLoseLongPCT += total_lose_pct
+    # Print buy signal statistics
+    print(
+        Fore.GREEN + f"{prefixMessage} || BUY || Ticker: {ticker}, Frame: {frame}, Profit number: {dataLong['profitNum']}, Lose number: {dataLong['loseNum']} || ALL WIN CHANGE: +{total_win_pct}% || ALL LOSE CHANGE: {total_lose_pct}% || SUCCESS PCT: {round((dataLong['profitNum'] / (dataLong['profitNum'] + dataLong['loseNum'])) * 100, 2)}%\n")
+
+
+def print_sell(dataSell, frame, prefixMessage, ticker):
     # Calculate total win and lose percentages for sell signals
     total_lose_pct = round(sum((float(d["change"]) if d["status"] == "sl" else 0) for d in dataSell["data"]), 2)
     total_win_pct = round(sum((float(d["change"]) if d["status"] == "tp" else 0) for d in dataSell["data"]), 2)
@@ -108,19 +150,6 @@ def allStatistic(dataLong, dataSell, ema, frame, ticker, prefixMessage):
     # Print sell signal statistics
     print(
         Fore.RED + f"{prefixMessage} || SELL || Ticker: {ticker}, Frame: {frame}, Profit number: {dataSell['profitNum']}, Lose number: {dataSell['loseNum']} || ALL WIN CHANGE: +{total_win_pct}% || ALL LOSE CHANGE: {total_lose_pct}% || SUCCESS PCT: {round((dataSell['profitNum'] / (dataSell['profitNum'] + dataSell['loseNum'])) * 100, 2)}%")
-    # Calculate total win and lose percentages for long signals
-    total_lose_pct = round(sum((d["change"] if d["status"] == "sl" else 0) for d in dataLong["data"]), 2)
-    total_win_pct = round(sum((d["change"] if d["status"] == "tp" else 0) for d in dataLong["data"]), 2)
-    # Print buy signal statistics
-    print(
-        Fore.GREEN + f"{prefixMessage} || BUY || Ticker: {ticker}, Frame: {frame}, Profit number: {dataLong['profitNum']}, Lose number: {dataLong['loseNum']} || ALL WIN CHANGE: +{total_win_pct}% || ALL LOSE CHANGE: {total_lose_pct}% || SUCCESS PCT: {round((dataLong['profitNum'] / (dataLong['profitNum'] + dataLong['loseNum'])) * 100, 2)}%\n")
-    # Update overall win and lose counts
-    const_app.numberOfSuccessLongSignal += dataLong['profitNum']
-    const_app.numberOfLoseLongSignal += dataLong['loseNum']
-    const_app.summationOfSuccessLongPCT += total_win_pct
-    const_app.summationOfLoseLongPCT += total_lose_pct
-    # Generate message for Telegram
-    const_app.messageToTele = f"Next indicator + {ema} || LONG\n\nTICKER: {ticker}\n⏰Frame: {frame}\n💹Win number: {winNumLong}\n❌Lose number: {loseNumLong}\🔥Win change: {changeWinLong}\n🔴Change lose: {changeLoseLong}\n✅Start wallet: {startWalletLong}\n❇End wallet: {endWalletLong}\n💯PCT success: {pctSuccessLong}\n⌛AVG waiting time (h): {avgWaitingLong}\n\n\nNext indicator + {ema} || SHORT\n\nTICKER: {ticker}\n⏰Frame: {frame}\n💹Win number: {winNumShort}\n❌Lose number: {loseNumShort}\n🔥Win change: {changeWinShort}\n🔴Change lose: {changeLoseShort}\n✅Start wallet: {startWalletShort}\n❇End wallet: {endWalletShort}\n💯PCT success: {pctSuccessShort}\n⌛AVG waiting time (h): {avgWaitingShort}\n\n\n\n"
 
 
 def printStatistic():

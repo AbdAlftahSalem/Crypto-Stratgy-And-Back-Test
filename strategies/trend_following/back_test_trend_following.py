@@ -1,6 +1,5 @@
-import const_app as const_app
 from utils.util import getNumByChange
-from utils.util_back_test import getProfit, getTradeData
+from utils.util_back_test import getProfit, getTradeData, getStopLose
 
 
 def longBackTest_optimized(combined_df, ticker: str, frame: str):
@@ -14,7 +13,7 @@ def longBackTest_optimized(combined_df, ticker: str, frame: str):
     high = combined_df["high"]
     low = combined_df["low"]
 
-    profitPCT = getProfit(frame)
+    profitPCT = getProfit("trend_following", frame)
 
     output = {"ticker": ticker, "frame": frame, "profitNum": 0, "loseNum": 0, "data": []}
 
@@ -26,7 +25,7 @@ def longBackTest_optimized(combined_df, ticker: str, frame: str):
         previousPreviousCandleSearch = combined_df.iloc[i - 2]
 
         profit = getNumByChange(enterCandle["close"], profitPCT)
-        stop = getNumByChange(enterCandle["close"], ((profitPCT / const_app.stopLosePCTFromTPPCT) * -1))
+        stop = getNumByChange(enterCandle["close"], ((profitPCT / getStopLose("trend_following")) * -1))
 
         # check if ema20, ema50, ema100, ema200 is upper than close and close is upper than superTrend
         condition = (
@@ -34,11 +33,10 @@ def longBackTest_optimized(combined_df, ticker: str, frame: str):
                 close[i] > superTrend[i]
         )
 
-        # check if low previous candle is less than previous previous candle low and less than current candle low and close current candle is upper than previous candle close
-        condition = (
-                condition and
+        # check if low previous candle is less than previous previous candle low and less than current candle low and high previous previous candle is upper than previous candle high and current candle high upper than previous candle high and previous previous candle high
+        condition = condition and (
                 previousCandleSearch["low"] < previousPreviousCandleSearch["low"] < currentCandleSearch["low"] and
-                currentCandleSearch["close"] > previousCandleSearch["close"]
+                previousPreviousCandleSearch["high"] > previousCandleSearch["high"] < currentCandleSearch["high"]
         )
 
         if condition and not searchProfit:
@@ -48,14 +46,14 @@ def longBackTest_optimized(combined_df, ticker: str, frame: str):
         if searchProfit:
             if high[i] >= profit:
                 output["data"].append(
-                    getTradeData(enterCandle, currentCandleSearch, profit, stop, "tp", frame)
+                    getTradeData("trend_following", enterCandle, currentCandleSearch, profit, stop, "tp", frame)
                 )
                 output["profitNum"] += 1
                 searchProfit = False
 
             elif low[i] <= stop:
                 output["data"].append(
-                    getTradeData(enterCandle, currentCandleSearch, profit, stop, "sl", frame)
+                    getTradeData("trend_following", enterCandle, currentCandleSearch, profit, stop, "sl", frame)
                 )
                 output["loseNum"] += 1
                 searchProfit = False
@@ -74,7 +72,7 @@ def sellBackTest_optimized(combined_df, ticker: str, frame: str):
     high = combined_df["high"]
     low = combined_df["low"]
 
-    profitPCT = getProfit(frame)
+    profitPCT = getProfit("trend_following", frame)
 
     output = {"ticker": ticker, "frame": frame, "profitNum": 0, "loseNum": 0, "data": []}
 
@@ -86,7 +84,7 @@ def sellBackTest_optimized(combined_df, ticker: str, frame: str):
         previousPreviousCandleSearch = combined_df.iloc[i - 2]
 
         profit = getNumByChange(enterCandle["close"], profitPCT)
-        stop = getNumByChange(enterCandle["close"], ((profitPCT / const_app.stopLosePCTFromTPPCT) * -1))
+        stop = getNumByChange(enterCandle["close"], ((profitPCT / getStopLose("trend_following")) * -1))
 
         # check if ema20, ema50, ema100, ema200 is lower than close and close is lower than superTrend
         condition = (
@@ -109,14 +107,14 @@ def sellBackTest_optimized(combined_df, ticker: str, frame: str):
         if searchProfit:
             if low[i] <= profit:
                 output["data"].append(
-                    getTradeData(enterCandle, enterCandleSearch, profit, stop, "tp", frame)
+                    getTradeData("trend_following", enterCandle, enterCandleSearch, profit, stop, "tp", frame)
                 )
                 output["profitNum"] += 1
                 searchProfit = False
 
             elif high[i] >= stop:
                 output["data"].append(
-                    getTradeData(enterCandle, enterCandleSearch, profit, stop, "sl", frame)
+                    getTradeData("trend_following", enterCandle, enterCandleSearch, profit, stop, "sl", frame)
                 )
                 output["loseNum"] += 1
                 searchProfit = False

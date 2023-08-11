@@ -28,15 +28,15 @@ def longBackTest(combined_df, ticker: str, frame: str):
         nextCandleSearch = combined_df.iloc[i + 1]
         nextNextCandleSearch = combined_df.iloc[i + 2]
 
-        # check if open and close is less than lower
-        condition = (currentCandleSearch["open"] < currentCandleSearch["lower"])
+        # check if open is less than lower
+        condition = (currentCandleSearch["low"] < currentCandleSearch["lower"])
 
         # check if low next candle is less than low current candle and less than next next candle low and close next next candle is upper than next candle close
         condition = (condition and
                      nextCandleSearch["low"] < currentCandleSearch["low"] < nextNextCandleSearch["low"])
 
-        # check if close upper than superTrend
-        condition = (condition and currentCandleSearch["close"] > currentCandleSearch["superTrend"])
+        # # check if close upper than superTrend
+        # condition = (condition and currentCandleSearch["close"] > currentCandleSearch["superTrend"])
 
         if (
                 condition
@@ -45,15 +45,15 @@ def longBackTest(combined_df, ticker: str, frame: str):
                 # and getVWAP(vwap, currentCandleSearch, "long")
         ):
             enterCandle = combined_df.iloc[i]
-            profitPCT = getProfit("nwe", frame)
+            profitPCT = getProfit("nwe", frame, True)
             profit = getNumByChange(enterCandle["close"], profitPCT)
-            stop = getNumByChange(enterCandle["close"], ((profitPCT / getStopLose("nwe")) * -1))
+            stop = getNumByChange(enterCandle["close"], ((profitPCT / getStopLose("nwe", True)) * -1))
             searchProfit = True
 
         if searchProfit:
             if combined_df.iloc[i]["high"] >= profit:
                 output["data"].append(
-                    getTradeData("nwe", enterCandle, combined_df.iloc[i], profit, stop, "tp", frame)
+                    getTradeData("nwe", True, enterCandle, combined_df.iloc[i], profit, stop, "tp", frame)
                 )
                 output["profitNum"] += 1
                 searchProfit = False
@@ -61,7 +61,7 @@ def longBackTest(combined_df, ticker: str, frame: str):
 
             elif combined_df.iloc[i]["low"] <= stop:
                 output["data"].append(
-                    getTradeData("nwe", enterCandle, combined_df.iloc[i], profit, stop, "sl", frame)
+                    getTradeData("nwe", True, enterCandle, combined_df.iloc[i], profit, stop, "sl", frame)
                 )
                 output["loseNum"] += 1
                 searchProfit = False
@@ -97,7 +97,7 @@ def sellBackTest(combined_df, ticker: str, frame: str):
         nextNextCandleSearch = combined_df.iloc[i + 2]
 
         # check if open and close is greater than upper
-        condition = (enterCandleSearch["open"] > enterCandleSearch["upper"])
+        condition = (enterCandleSearch["high"] > enterCandleSearch["upper"])
 
         # check if high next candle is greater than high current candle and greater than next next candle high and close next next candle is lower than next candle close
         condition = (condition and
@@ -113,21 +113,23 @@ def sellBackTest(combined_df, ticker: str, frame: str):
                 # and getVWAP(vwap, enterCandleSearch, "short")
         ):
             enterCandle = combined_df.iloc[i]
-            profitPCT = getProfit("nwe", frame)
+            profitPCT = getProfit("nwe", frame, False)
             profit = getNumByChange(enterCandle["close"], profitPCT * -1)
             stop = getNumByChange(enterCandle["close"], (profitPCT / 2))
             searchProfit = True
 
         if searchProfit:
             if combined_df.iloc[i]["low"] <= profit:
-                output["data"].append(getTradeData("nwe", enterCandle, combined_df.iloc[i], profit, stop, "tp", frame))
+                output["data"].append(
+                    getTradeData("nwe", False, enterCandle, combined_df.iloc[i], profit, stop, "tp", frame))
                 output["profitNum"] += 1
                 searchProfit = False
                 i += 1
                 continue
 
             elif combined_df.iloc[i]["high"] >= stop:
-                output["data"].append(getTradeData("nwe", enterCandle, combined_df.iloc[i], profit, stop, "sl", frame))
+                output["data"].append(
+                    getTradeData("nwe", False, enterCandle, combined_df.iloc[i], profit, stop, "sl", frame))
                 output["loseNum"] += 1
                 searchProfit = False
                 i += 1

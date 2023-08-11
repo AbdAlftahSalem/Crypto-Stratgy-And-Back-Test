@@ -1,46 +1,24 @@
-import math
-
+import numpy as np
 import pandas as pd
+from joblib import Parallel, delayed  # For parallel processing
 
 from utils.util import divideDf
 
 
 def nadaraya_watson_envelope(length, bandwidth, error_multiplier, source_data):
-    """
-    Calculate the Nadaraya-Watson envelope.
+    indices = np.arange(length)
+    weights = np.exp(-((np.subtract.outer(indices, indices) ** 2) / (bandwidth * bandwidth * 2)))
 
-    Args:
-        length: The length of the envelope.
-        bandwidth: The bandwidth parameter.
-        error_multiplier: The multiplier for the mean absolute error.
-        source_data: The source data.
+    weighted_sums = np.dot(weights, source_data)
+    sum_of_weights = weights.sum(axis=1)
 
-    Returns:
-        A tuple containing the upper band, lower band, cross-up, and cross-down values.
-    """
-    envelope_values = []
+    envelope_values = weighted_sums / sum_of_weights
 
-    for i in range(length):
-        weighted_sum = 0.0
-        sum_of_weights = 0.0
+    mean_absolute_error = (np.abs(source_data - envelope_values).mean()) * error_multiplier
 
-        for j in range(length):
-            weight = math.exp(-(math.pow(i - j, 2) / (bandwidth * bandwidth * 2)))
-            weighted_sum += float(source_data[j]) * float(weight)
-            sum_of_weights += weight
+    upper_band = envelope_values + mean_absolute_error
+    lower_band = envelope_values - mean_absolute_error
 
-        y = weighted_sum / sum_of_weights
-        envelope_values.append(y)
-
-    # Calculate mean absolute error
-    source_data = pd.to_numeric(source_data, errors='coerce')
-    mean_absolute_error = (source_data - pd.Series(envelope_values)).abs().mean() * error_multiplier
-
-    # Calculate upper and lower bands
-    upper_band = pd.Series(envelope_values) + mean_absolute_error
-    lower_band = pd.Series(envelope_values) - mean_absolute_error
-
-    # Calculate cross-up and cross-down values
     cross_up = envelope_values[0] + mean_absolute_error
     cross_down = envelope_values[0] - mean_absolute_error
 
@@ -50,25 +28,19 @@ def nadaraya_watson_envelope(length, bandwidth, error_multiplier, source_data):
 def apply_waston_envelope(df: pd.DataFrame):
     data = divideDf(df)
 
-    fullDF = []
-    for i in data:
+    def process_single(i):
         if len(i) > 499:
             close = i["close"]
 
-            # Calculate the Nadaraya-Watson envelope
-            envelope = nadaraya_watson_envelope(500, 8., 3., close)
+            envelope = nadaraya_watson_envelope(500, 17, 4.0, close)
+            upper, lower = envelope[:2]
 
-            # Extract upper and lower bands from the envelope
-            upper = envelope[0]
-            lower = envelope[1]
-
-            # Calculate signals based on the close prices and bands
             i["upper"] = upper
             i["lower"] = lower
-            i['signal'] = ''
-            i.loc[i['close'].astype(float) > i['upper'].astype(float), 'signal'] = 'sell'
-            i.loc[i['close'].astype(float) < i['lower'].astype(float), 'signal'] = 'buy'
 
-            fullDF.append(i)
+            return i
+
+    # Parallelize the processing of individual data chunks
+    fullDF = Parallel(n_jobs=-1)(delayed(process_single)(i) for i in data if len(i) > 499)
 
     return pd.concat(fullDF, ignore_index=True)

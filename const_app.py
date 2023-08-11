@@ -18,7 +18,7 @@ intervals = ["5m", "15m", "30m", "1h", "4h"]
 List of intervals for which historical data will be retrieved.
 """
 
-saveDataFolder = "E:\\Crypto System\\data2\\"
+saveDataFolder = "E:\Crypto System\data\\"
 """
 The folder path where the retrieved data will be saved.
 """
@@ -63,35 +63,54 @@ strategies = {
             "candlestick": [3],
         },
         "tp": {
-            "tp5m": 2,
-            "tp15m": 3,
-            "tp30m": 4,
-            "tp1h": 5,
-            "tp4h": 6,
-            "sl": 2,
+            "short": {
+                "tp5m": 2,
+                "tp15m": 3,
+                "tp30m": 4,
+                "tp1h": 5,
+                "tp4h": 6,
+                "sl": 2,
+            },
+            "long": {
+                "tp5m": 1,
+                "tp15m": 2,
+                "tp30m": 3,
+                "tp1h": 4,
+                "tp4h": 5,
+                "sl": 1.5,
+            },
         },
         "config": {
             "long": False,
             "short": True,
         }
     },
-
     "nwe": {
         "indicator": {
             "nadaraya_watson_envelope": [500, 8, 3, "close"],
             "candlestick": [3],
         },
         "tp": {
-            "tp5m": 2,
-            "tp15m": 3,
-            "tp30m": 4,
-            "tp1h": 5,
-            "tp4h": 6,
-            "sl": 2,
+            "short": {
+                "tp5m": 2,
+                "tp15m": 3,
+                "tp30m": 4,
+                "tp1h": 5,
+                "tp4h": 6,
+                "sl": 2,
+            },
+            "long": {
+                "tp5m": 1,
+                "tp15m": 2,
+                "tp30m": 3,
+                "tp1h": 4,
+                "tp4h": 5,
+                "sl": 1.5,
+            },
         },
         "config": {
             "long": True,
-            "short": True,
+            "short": False,
         }
     }
 }

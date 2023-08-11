@@ -5,47 +5,47 @@ from colorama import Fore
 import const_app
 
 
-def getProfit(strategy: str, frame: str):
+def getProfit(strategy: str, frame: str, long: bool):
     """
     Get the profit percentage based on the given time frame.
 
     Returns:
         The profit percentage.
+        :param long:
         :param frame:
         :param strategy:
 
     """
     if frame == "5m":
-        return const_app.strategies[strategy]["tp"]["tp5m"]
+        return const_app.strategies[strategy]["tp"]["long" if long else "short"]["tp5m"]
 
     elif frame == "15m":
-        return const_app.strategies[strategy]["tp"]["tp15m"]
+        return const_app.strategies[strategy]["tp"]["long" if long else "short"]["tp15m"]
 
     elif frame == "30m":
-        return const_app.strategies[strategy]["tp"]["tp30m"]
+        return const_app.strategies[strategy]["tp"]["long" if long else "short"]["tp30m"]
 
     elif frame == "1h":
-        return const_app.strategies[strategy]["tp"]["tp1h"]
+        return const_app.strategies[strategy]["tp"]["long" if long else "short"]["tp1h"]
 
     elif frame == "4h":
-        return const_app.strategies[strategy]["tp"]["tp4h"]
+        return const_app.strategies[strategy]["tp"]["long" if long else "short"]["tp4h"]
 
 
-def getStopLose(strategy: str):
+def getStopLose(strategy: str, long: bool):
     """
     Get the stop lose percentage based on the given strategy.
 
-    Args:
-        strategy: The strategy.
-
     Returns:
         The stop lose percentage.
+        :param strategy:
+        :param long:
 
     """
-    return const_app.strategies[strategy]["tp"]["sl"]
+    return const_app.strategies[strategy]["tp"]["long" if long else "short"]["sl"]
 
 
-def getTradeData(strategy, enterCandle, exitCandle, profit, stop, status, frame):
+def getTradeData(strategy, long, enterCandle, exitCandle, profit, stop, status, frame):
     """
     Get the trade data for a specific trade.
 
@@ -57,9 +57,7 @@ def getTradeData(strategy, enterCandle, exitCandle, profit, stop, status, frame)
         status: The trade status.
         frame: The time frame.
         strategy: The strategy name.
-
-    Returns:
-        A dictionary containing the trade data.
+        long: The long status.
 
     """
     return {
@@ -69,7 +67,7 @@ def getTradeData(strategy, enterCandle, exitCandle, profit, stop, status, frame)
         "tp": profit,
         "sl": stop,
         "status": status,
-        "change": getProfit(strategy, frame),
+        "change": getProfit(strategy, frame, long),
     }
 
 
@@ -102,7 +100,7 @@ def getDetailOfSignals(data):
     return winNum, loseNum, round(changeWin, 2), round(changeLose, 2), 100, wallet, pctSuccess, round(avgWaitingDate, 2)
 
 
-def allStatistic(data, ema, frame, ticker, prefixMessage, sell=False):
+def allStatistic(data, frame, ticker, prefixMessage, sell=False):
     try:
         if not sell:
             # Calculate statistics for long trades

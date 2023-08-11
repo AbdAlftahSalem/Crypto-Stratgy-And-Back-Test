@@ -1,0 +1,65 @@
+Nwe || BUY || Ticker: BNBUSDT, Frame: 1h, Profit number: 36, Lose number: 7 || ALL WIN CHANGE: +144% || ALL LOSE CHANGE: 28% || SUCCESS PCT: 83.72%
+
+Nwe || BUY || Ticker: ADAUSDT, Frame: 1h, Profit number: 31, Lose number: 5 || ALL WIN CHANGE: +124% || ALL LOSE CHANGE: 20% || SUCCESS PCT: 86.11%
+
+Nwe || BUY || Ticker: SOLUSDT, Frame: 1h, Profit number: 26, Lose number: 10 || ALL WIN CHANGE: +104% || ALL LOSE CHANGE: 40% || SUCCESS PCT: 72.22%
+
+Nwe || BUY || Ticker: BTCUSDT, Frame: 1h, Profit number: 28, Lose number: 3 || ALL WIN CHANGE: +112% || ALL LOSE CHANGE: 12% || SUCCESS PCT: 90.32%
+
+Nwe || BUY || Ticker: ETHUSDT, Frame: 1h, Profit number: 31, Lose number: 4 || ALL WIN CHANGE: +124% || ALL LOSE CHANGE: 16% || SUCCESS PCT: 88.57%
+
+Nwe || BUY || Ticker: SOLUSDT, Frame: 30m, Profit number: 52, Lose number: 12 || ALL WIN CHANGE: +156% || ALL LOSE CHANGE: 36% || SUCCESS PCT: 81.25%
+
+Nwe || BUY || Ticker: ETHUSDT, Frame: 30m, Profit number: 67, Lose number: 11 || ALL WIN CHANGE: +201% || ALL LOSE CHANGE: 33% || SUCCESS PCT: 85.9%
+
+Nwe || BUY || Ticker: BTCUSDT, Frame: 30m, Profit number: 67, Lose number: 13 || ALL WIN CHANGE: +201% || ALL LOSE CHANGE: 39% || SUCCESS PCT: 83.75%
+
+Nwe || BUY || Ticker: BNBUSDT, Frame: 30m, Profit number: 63, Lose number: 14 || ALL WIN CHANGE: +189% || ALL LOSE CHANGE: 42% || SUCCESS PCT: 81.82%
+
+Nwe || BUY || Ticker: ADAUSDT, Frame: 30m, Profit number: 64, Lose number: 15 || ALL WIN CHANGE: +192% || ALL LOSE CHANGE: 45% || SUCCESS PCT: 81.01%
+
+Nwe || BUY || Ticker: BNBUSDT, Frame: 15m, Profit number: 125, Lose number: 34 || ALL WIN CHANGE: +250% || ALL LOSE CHANGE: 68% || SUCCESS PCT: 78.62%
+
+Nwe || BUY || Ticker: SOLUSDT, Frame: 15m, Profit number: 127, Lose number: 24 || ALL WIN CHANGE: +254% || ALL LOSE CHANGE: 48% || SUCCESS PCT: 84.11%
+
+Nwe || BUY || Ticker: ADAUSDT, Frame: 15m, Profit number: 124, Lose number: 19 || ALL WIN CHANGE: +248% || ALL LOSE CHANGE: 38% || SUCCESS PCT: 86.71%
+
+Nwe || BUY || Ticker: ETHUSDT, Frame: 15m, Profit number: 147, Lose number: 34 || ALL WIN CHANGE: +294% || ALL LOSE CHANGE: 68% || SUCCESS PCT: 81.22%
+
+Nwe || BUY || Ticker: BTCUSDT, Frame: 15m, Profit number: 134, Lose number: 36 || ALL WIN CHANGE: +268% || ALL LOSE CHANGE: 72% || SUCCESS PCT: 78.82%
+
+Nwe || BUY || Ticker: ADAUSDT, Frame: 5m, Profit number: 346, Lose number: 67 || ALL WIN CHANGE: +346% || ALL LOSE CHANGE: 67% || SUCCESS PCT: 83.78%
+
+Nwe || BUY || Ticker: BTCUSDT, Frame: 5m, Profit number: 446, Lose number: 101 || ALL WIN CHANGE: +446% || ALL LOSE CHANGE: 101% || SUCCESS PCT: 81.54%
+
+Nwe || BUY || Ticker: SOLUSDT, Frame: 5m, Profit number: 332, Lose number: 61 || ALL WIN CHANGE: +332% || ALL LOSE CHANGE: 61% || SUCCESS PCT: 84.48%
+
+Nwe || BUY || Ticker: BNBUSDT, Frame: 5m, Profit number: 378, Lose number: 68 || ALL WIN CHANGE: +378% || ALL LOSE CHANGE: 68% || SUCCESS PCT: 84.75%
+
+Nwe || BUY || Ticker: ETHUSDT, Frame: 5m, Profit number: 450, Lose number: 86 || ALL WIN CHANGE: +450% || ALL LOSE CHANGE: 86% || SUCCESS PCT: 83.96%
+
+******************************************************************************
+
+Tickers search                         : ['BTCUSDT', 'ETHUSDT', 'SOLUSDT', 'BNBUSDT', 'ADAUSDT']
+Interval search                        : ['5m', '15m', '30m', '1h']
+
+
+Number Of Success Long Signal          : +3074
+Number Of Success Short Signal         : +0
+Number all success signal               : 3074
+
+
+Number Of Lose Long Signal             : -624
+Number Of Lose Short Signal            : -0
+Number all lose signal                 : 624
+
+
+Summation Of Success Long PCT          : +4813 %
+Summation Of Success Short PCT         : +0 %
+Summation Of Lose Long PCT             : -988 %
+Summation Of Lose Short PCT            : -0 %
+
+Summation of Lose in Long and Short    : -988 %
+Summation of Success in Long and Short : +4813 %
+
+******************************************************************************

@@ -9,7 +9,7 @@ from utils.util_back_test import allStatistic, printStatistic
 
 
 # Function to show next indicator data
-def showNweData(ticker, frame, ema, vwap):
+def showNweData(ticker, frame):
     const_app.numberOfSuccessLongSignal = 0
     const_app.numberOfSuccessShortSignal = 0
     dataLong = {}
@@ -21,26 +21,21 @@ def showNweData(ticker, frame, ema, vwap):
     if const_app.strategies["nwe"]["config"]["long"]:
         # Perform long backtest
         dataLong = longBackTest(df, ticker, frame)
-        allStatistic(dataLong, ema, frame, ticker, 'Nwe', False)
+        allStatistic(dataLong, frame, ticker, 'Nwe', False)
 
     if const_app.strategies["nwe"]["config"]["short"]:
         # Perform sell backtest
         dataSell = sellBackTest(df, ticker, frame)
-        allStatistic(dataSell, ema, frame, ticker, 'Nwe', True)
-
-    # Perform sell backtest
-    dataSell = sellBackTest(df, ticker, frame)
-
-    allStatistic(dataLong, dataSell, ema, frame, ticker, 'NWE')
+        allStatistic(dataSell, frame, ticker, 'Nwe', True)
 
 
 def nweIndicatorBackText():
     # Create a list to store the threads
     thread_list = []
 
-    for frame in ["5m", "30m", "15m"]:
+    for frame in ["5m", "30m", "15m", "1h"]:
         # Create a thread for each combination of ema and frame
-        th = threading.Thread(target=boost, args=(showNweData, const_app.tickers, frame, '', ''))
+        th = threading.Thread(target=boost, args=(showNweData, const_app.tickers, frame))
         thread_list.append(th)
         th.start()
 

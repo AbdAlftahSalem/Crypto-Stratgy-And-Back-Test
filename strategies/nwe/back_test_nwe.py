@@ -93,18 +93,18 @@ def sellBackTest(combined_df, ticker: str, frame: str):
 
     for i in range(len(combined_df) - 3):
         enterCandleSearch = combined_df.iloc[i]
-        nextCanldeSearch = combined_df.iloc[i + 1]
+        nextCandleSearch = combined_df.iloc[i + 1]
         nextNextCandleSearch = combined_df.iloc[i + 2]
 
         # check if open and close is greater than upper
         condition = (enterCandleSearch["high"] > enterCandleSearch["upper"])
 
-        # check if high next candle is greater than high current candle and greater than next next candle high and close next next candle is lower than next candle close
+        # # check if high next candle is greater than high current candle and greater than next next candle high and close next next candle is lower than next candle close
         condition = (condition and
-                     nextCanldeSearch["high"] > enterCandleSearch["high"] > nextNextCandleSearch["high"])
+                     nextCandleSearch["high"] > enterCandleSearch["high"] > nextNextCandleSearch["high"])
 
-        # check if close lower than superTrend
-        condition = (condition and enterCandleSearch["close"] < enterCandleSearch["superTrend"])
+        # # check if close lower than superTrend
+        # condition = (condition and enterCandleSearch["close"] < enterCandleSearch["superTrend"])
 
         if (
                 condition
@@ -115,7 +115,7 @@ def sellBackTest(combined_df, ticker: str, frame: str):
             enterCandle = combined_df.iloc[i]
             profitPCT = getProfit("nwe", frame, False)
             profit = getNumByChange(enterCandle["close"], profitPCT * -1)
-            stop = getNumByChange(enterCandle["close"], (profitPCT / 2))
+            stop = getNumByChange(enterCandle["close"], ((profitPCT / getStopLose("nwe", True)) * 1))
             searchProfit = True
 
         if searchProfit:

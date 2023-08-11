@@ -12,8 +12,6 @@ from utils.util_back_test import allStatistic, printStatistic
 def showNweData(ticker, frame):
     const_app.numberOfSuccessLongSignal = 0
     const_app.numberOfSuccessShortSignal = 0
-    dataLong = {}
-    dataSell = {}
 
     # Read data from CSV file
     df = pandas.read_csv(f"{const_app.saveDataFolder}{ticker}-{frame}-indicators.csv")

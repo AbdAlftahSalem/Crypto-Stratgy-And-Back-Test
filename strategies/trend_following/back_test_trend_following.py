@@ -91,9 +91,8 @@ def sellBackTest_optimized(combined_df, ticker: str, frame: str):
         previousCandleSearch = combined_df.iloc[i - 1]
         previousPreviousCandleSearch = combined_df.iloc[i - 2]
 
-        profit = getNumByChange(enterCandle["close"], profitPCT)
-        stop = getNumByChange(enterCandle["close"], ((profitPCT / getStopLose("trend_following", False)) * -1))
-
+        profit = getNumByChange(enterCandle["close"], profitPCT * -1)
+        stop = getNumByChange(enterCandle["close"], ((profitPCT / getStopLose("trend_following", True)) * 1))
         # check if ema20, ema50, ema100, ema200 is lower than close and close is lower than superTrend
         condition = (
                 ema20[i] < ema50[i] < ema100[i] < ema200[i] and

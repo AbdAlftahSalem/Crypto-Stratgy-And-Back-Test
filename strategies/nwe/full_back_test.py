@@ -9,7 +9,7 @@ from utils.util_back_test import allStatistic, printStatistic
 
 
 # Function to show next indicator data
-def showNweData(ticker, frame):
+def show_nwe_data(ticker, frame):
     const_app.numberOfSuccessLongSignal = 0
     const_app.numberOfSuccessShortSignal = 0
 
@@ -31,9 +31,9 @@ def nweIndicatorBackText():
     # Create a list to store the threads
     thread_list = []
 
-    for frame in ["5m", "30m", "15m", "1h"]:
+    for frame in const_app.intervals:
         # Create a thread for each combination of ema and frame
-        th = threading.Thread(target=boost, args=(showNweData, const_app.tickers, frame))
+        th = threading.Thread(target=boost, args=(show_nwe_data, const_app.tickers, frame))
         thread_list.append(th)
         th.start()
 

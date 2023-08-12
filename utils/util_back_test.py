@@ -133,9 +133,9 @@ def print_buy(dataLong, frame, prefixMessage, ticker):
     print(
         Fore.GREEN + f"{prefixMessage} || BUY || Ticker: {ticker}, Frame: {frame}, Profit number: {dataLong['profitNum']}, Lose number: {dataLong['loseNum']} || ALL WIN CHANGE: +{total_win_pct}% || ALL LOSE CHANGE: {total_lose_pct}% || SUCCESS PCT: {round((dataLong['profitNum'] / (dataLong['profitNum'] + dataLong['loseNum'])) * 100, 2)}%\n")
 
-    # print last 7 buy signal
-    for i in dataLong['data'][-7:]:
-        print(Fore.GREEN + f"{i}")
+    # # print last 7 buy signal
+    # for i in dataLong['data'][-7:]:
+    #     print(Fore.GREEN + f"{i}")
 
 
 def print_sell(dataSell, frame, prefixMessage, ticker):
@@ -153,9 +153,9 @@ def print_sell(dataSell, frame, prefixMessage, ticker):
     print(
         Fore.RED + f"{prefixMessage} || SELL || Ticker: {ticker}, Frame: {frame}, Profit number: {dataSell['profitNum']}, Lose number: {dataSell['loseNum']} || ALL WIN CHANGE: +{total_win_pct}% || ALL LOSE CHANGE: {total_lose_pct}% || SUCCESS PCT: {round((dataSell['profitNum'] / (dataSell['profitNum'] + dataSell['loseNum'])) * 100, 2)}%\n")
 
-    # print last 7 sell signal
-    for i in dataSell['data'][-7:]:
-        print(Fore.RED + f"{i}")
+    # # print last 7 sell signal
+    # for i in dataSell['data'][-7:]:
+    #     print(Fore.RED + f"{i}")
 
 
 def printStatistic():

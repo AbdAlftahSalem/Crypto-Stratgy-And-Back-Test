@@ -35,14 +35,9 @@ def longBackTest(combined_df, ticker: str, frame: str):
         condition = (condition and
                      nextCandleSearch["low"] < currentCandleSearch["low"] < nextNextCandleSearch["low"])
 
-        # # check if close upper than superTrend
-        # condition = (condition and currentCandleSearch["close"] > currentCandleSearch["superTrend"])
-
         if (
                 condition
                 and not searchProfit
-                #  this condition to search in strategy with EMA and without it
-                # and getVWAP(vwap, currentCandleSearch, "long")
         ):
             enterCandle = combined_df.iloc[i]
             profitPCT = getProfit("nwe", frame, True)
@@ -103,14 +98,9 @@ def sellBackTest(combined_df, ticker: str, frame: str):
         condition = (condition and
                      nextCandleSearch["high"] > enterCandleSearch["high"] > nextNextCandleSearch["high"])
 
-        # # check if close lower than superTrend
-        # condition = (condition and enterCandleSearch["close"] < enterCandleSearch["superTrend"])
-
         if (
                 condition
                 and not searchProfit
-                #  this condition to search in strategy with EMA and without it
-                # and getVWAP(vwap, enterCandleSearch, "short")
         ):
             enterCandle = combined_df.iloc[i]
             profitPCT = getProfit("nwe", frame, False)

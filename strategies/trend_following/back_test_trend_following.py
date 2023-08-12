@@ -2,7 +2,7 @@ from utils.util import getNumByChange
 from utils.util_back_test import getProfit, getTradeData, getStopLose
 
 
-def longBackTest_optimized(combined_df, ticker: str, frame: str):
+def long_backTest_optimized(combined_df, ticker: str, frame: str):
     enterCandle = combined_df.iloc[0]
     close = combined_df["close"]
     high = combined_df["high"]
@@ -69,7 +69,7 @@ def longBackTest_optimized(combined_df, ticker: str, frame: str):
     return output
 
 
-def sellBackTest_optimized(combined_df, ticker: str, frame: str):
+def sell_backTest_optimized(combined_df, ticker: str, frame: str):
     enterCandle = combined_df.iloc[0]
     ema20 = combined_df["ema20"]
     ema50 = combined_df["ema50"]

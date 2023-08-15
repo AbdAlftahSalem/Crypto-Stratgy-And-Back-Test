@@ -18,7 +18,7 @@ def getData(ticker, interval):
 
     """
     client = Client()
-    kLine = client.get_historical_klines(ticker, interval, "1 Jan, 2021")
+    kLine = client.get_historical_klines(ticker, interval)
     df = pd.DataFrame(
         kLine,
         columns=['date', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'qav', 'num_trades', 'taker_base_vol',
@@ -31,10 +31,11 @@ def getData(ticker, interval):
     del df["taker_base_vol"]
     del df["ignore"]
 
-    df.to_csv(f"{const_app.saveDataFolder}{ticker}-{interval}.csv")
+    return df
+    # df.to_csv(f"{const_app.saveDataFolder}{ticker}-{interval}.csv")
 
-    print(f'* Finish getting data for {ticker} in {interval} and save in the {const_app.saveDataFolder} folder')
-    sentToTelegram(f"FINISH {ticker} {interval}")
+    # print(f'* Finish getting data for {ticker} in {interval} and save in the {const_app.saveDataFolder} folder')
+    # sentToTelegram(f"FINISH {ticker} {interval}")
 
 
 def getDataForAllTickers():

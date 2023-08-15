@@ -20,6 +20,7 @@ def longBackTest(combined_df, ticker: str, frame: str):
     profit = 0
     stop = 0
     enterCandle = combined_df.iloc[0]
+    combined_df["sponge_bob_long"] = combined_df["sponge_bob_long"].fillna(0)
 
     output = {"ticker": ticker, "frame": frame, "profitNum": 0, "loseNum": 0, "data": []}
 
@@ -27,7 +28,7 @@ def longBackTest(combined_df, ticker: str, frame: str):
         currentCandleSearch = combined_df.iloc[i]
 
         # check if open is less than lower
-        condition = (currentCandleSearch["sponge_bob_long"] is not None)
+        condition = (currentCandleSearch["sponge_bob_long"] != 0 and currentCandleSearch["rsi"] >= 65)
 
         if (
                 condition
@@ -77,12 +78,13 @@ def sellBackTest(combined_df, ticker: str, frame: str):
     profit = 0
     stop = 0
     enterCandle = combined_df.iloc[0]
+    combined_df["sponge_bob_short"] = combined_df["sponge_bob_long"].fillna(0)
 
     output = {"ticker": ticker, "frame": frame, "profitNum": 0, "loseNum": 0, "data": []}
 
     for i in range(len(combined_df)):
         enterCandleSearch = combined_df.iloc[i]
-        condition = (enterCandleSearch["sponge_bob_short"] is not None)
+        condition = (enterCandleSearch["sponge_bob_short"] != 0 and enterCandleSearch["rsi"] <= 35)
 
         if (
                 condition

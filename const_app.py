@@ -3,7 +3,7 @@ get_data = False
 Flag to control whether to retrieve historical data or not.
 """
 
-apply_strategy = True
+apply_strategy = False
 """
 Flag to control whether to apply strategy or not.
 """
@@ -100,11 +100,11 @@ strategies = {
         },
         "tp": {
             "short": {
-                "tp5m": 2,
-                "tp15m": 3,
-                "tp30m": 4,
-                "tp1h": 5,
-                "tp4h": 6,
+                "tp5m": 1,
+                "tp15m": 2,
+                "tp30m": 3,
+                "tp1h": 4,
+                "tp4h": 5,
                 "sl": 2,
             },
 

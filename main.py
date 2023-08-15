@@ -1,7 +1,7 @@
 import const_app
 import get_data
 from indecators.add_all_indecator_to_csv import add_all_indicator_to_csv
-from strategies.trend_following.full_back_test import trendFollowingIndicatorBackText
+from strategies.hit_and_run.full_back_test import hitAndRunIndicatorBackText
 from utils.send_to_tele import sentToTelegram
 
 # Importing the 'get_data' module
@@ -20,4 +20,5 @@ if const_app.apply_strategy:
 
 # Calling the 'nextIndicatorBackText' function from 'full_back_test' module to start testing
 # nweIndicatorBackText()
-trendFollowingIndicatorBackText()
+# trendFollowingIndicatorBackText()
+hitAndRunIndicatorBackText()

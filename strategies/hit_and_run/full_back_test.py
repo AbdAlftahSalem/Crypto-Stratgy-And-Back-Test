@@ -9,12 +9,12 @@ from utils.util_back_test import allStatistic, printStatistic
 
 
 # Function to show next indicator data
-def show_nwe_data(ticker, frame):
+def show_hit_and_run_data(ticker, frame):
     const_app.numberOfSuccessLongSignal = 0
     const_app.numberOfSuccessShortSignal = 0
 
     # Read data from CSV file
-    df = pandas.read_csv(f"{const_app.saveDataFolder}{ticker}-{frame}-indicators.csv")
+    df = pandas.read_csv(f"{const_app.saveDataFolderIndicator}{ticker}-{frame}-indicators.csv")
 
     if const_app.strategies["hit_and_run"]["config"]["long"]:
         # Perform long backtest
@@ -27,13 +27,13 @@ def show_nwe_data(ticker, frame):
         allStatistic(dataSell, frame, ticker, 'Nwe', True)
 
 
-def nweIndicatorBackText():
+def hitAndRunIndicatorBackText():
     # Create a list to store the threads
     thread_list = []
 
     for frame in const_app.intervals:
         # Create a thread for each combination of ema and frame
-        th = threading.Thread(target=boost, args=(show_nwe_data, const_app.tickers, frame))
+        th = threading.Thread(target=boost, args=(show_hit_and_run_data, const_app.tickers, frame))
         thread_list.append(th)
         th.start()
 

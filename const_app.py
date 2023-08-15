@@ -3,7 +3,7 @@ get_data = False
 Flag to control whether to retrieve historical data or not.
 """
 
-apply_strategy = False
+apply_strategy = True
 """
 Flag to control whether to apply strategy or not.
 """
@@ -13,12 +13,16 @@ tickers = ["BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT", "ADAUSDT"]
 List of tickers for which historical data will be retrieved.
 """
 
-intervals = ["5m", "15m", "30m", "1h"]
+intervals = ["5m", "15m", "30m", "1h", "4h"]
 """
 List of intervals for which historical data will be retrieved.
 """
 
 saveDataFolder = "E:\Crypto System\data\\"
+"""
+The folder path where the retrieved data will be saved.
+"""
+saveDataFolderIndicator = "E:\Crypto System\dataIndicator\\"
 """
 The folder path where the retrieved data will be saved.
 """
@@ -84,6 +88,39 @@ strategies = {
             "long": False,
             "short": True,
         }
+    },
+    "hit_and_run": {
+        "indicator": {
+            "sponge_bob": {
+                "n1": 10,
+                "n2": 21,
+                "nsc": 53,
+                "nsv": -53,
+            },
+        },
+        "tp": {
+            "short": {
+                "tp5m": 2,
+                "tp15m": 3,
+                "tp30m": 4,
+                "tp1h": 5,
+                "tp4h": 6,
+                "sl": 2,
+            },
+
+            "long": {
+                "tp5m": 1,
+                "tp15m": 2,
+                "tp30m": 3,
+                "tp1h": 4,
+                "tp4h": 5,
+                "sl": 1.5,
+            },
+        },
+        "config": {
+            "long": True,
+            "short": True,
+        },
     },
     "nwe": {
         "indicator": {

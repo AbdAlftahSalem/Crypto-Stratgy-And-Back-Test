@@ -6,6 +6,7 @@ from indecators.cci import calculate_cci
 from indecators.mfi import calculate_mfi
 from indecators.nadaraya_watson_envelope import apply_waston_envelope
 from indecators.rsi import calculate_rsi
+from indecators.sponge_bob import spongebob_indicator
 from indecators.super_trend import calculate_super_trend
 
 
@@ -52,6 +53,9 @@ def applyIndicators(df: pd.DataFrame, ticker: str, interval: str):
 
     # calculate waston_envelopewaston_envelope
     df = apply_waston_envelope(df)
-    print("Finish calculate waston_envelope \n\n\n")
+    print("Finish calculate waston_envelope")
+
+    df = spongebob_indicator(df)
+    print("Finish calculate sponge bob \n\n\n")
 
     return df

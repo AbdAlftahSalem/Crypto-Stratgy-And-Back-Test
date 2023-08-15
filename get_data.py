@@ -2,6 +2,7 @@ import pandas as pd
 from binance.client import Client
 
 import const_app
+from utils.send_to_tele import sentToTelegram
 
 
 def getData(ticker, interval):
@@ -17,7 +18,7 @@ def getData(ticker, interval):
 
     """
     client = Client()
-    kLine = client.get_historical_klines(ticker, interval)
+    kLine = client.get_historical_klines(ticker, interval, "1 Jan, 2021")
     df = pd.DataFrame(
         kLine,
         columns=['date', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'qav', 'num_trades', 'taker_base_vol',
@@ -29,21 +30,11 @@ def getData(ticker, interval):
     del df["num_trades"]
     del df["taker_base_vol"]
     del df["ignore"]
-    return df
 
-    # df.to_csv(f"D:\\Python project\\nadaraya_watson_envelope\\data\\{ticker}-{interval}.csv")
+    df.to_csv(f"{const_app.saveDataFolder}{ticker}-{interval}.csv")
 
-    # # Calculate EMA for each specified period
-    # for ema_period in const_app.ema:
-    #     if ema_period == "None":
-    #         continue
-    #     span = int(ema_period[3:])
-    #     df[f'{ema_period.lower()}'] = df['close'].ewm(span=span, adjust=False).mean()
-    #
-    # # Apply indicators to the DataFrame
-    # # applay.applyIndicators(df, ticker, interval)
-    # print(f'* Finish getting data for {ticker} in {interval} and save in the {const_app.saveDataFolder} folder')
-    # sentToTelegram(f"FINISH {ticker} {interval}")
+    print(f'* Finish getting data for {ticker} in {interval} and save in the {const_app.saveDataFolder} folder')
+    sentToTelegram(f"FINISH {ticker} {interval}")
 
 
 def getDataForAllTickers():

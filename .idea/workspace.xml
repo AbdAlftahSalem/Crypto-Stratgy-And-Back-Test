@@ -6,12 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="0f59376b-505b-4a08-9909-443cf0fdd200" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/const_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/const_app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/strategies/nwe/back_test_nwe.py" beforeDir="false" afterPath="$PROJECT_DIR$/strategies/nwe/back_test_nwe.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/strategies/nwe/full_back_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/strategies/nwe/full_back_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/strategies/trend_following/back_test_trend_following.py" beforeDir="false" afterPath="$PROJECT_DIR$/strategies/trend_following/back_test_trend_following.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/strategies/trend_following/full_back_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/strategies/trend_following/full_back_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/util_back_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/util_back_test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +42,7 @@
   "keyToString": {
     "git-widget-placeholder": "main",
     "last_opened_file_path": "D:/Python project/backtest/Crypto-Stratgy-And-Back-Test/strategies/volume_confirmation",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
+    "settings.editor.selected.configurable": "preferences.keymap"
   }
 }]]></component>
   <component name="RecentsManager">

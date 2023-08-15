@@ -69,7 +69,7 @@ def long_backTest_optimized(combined_df, ticker: str, frame: str):
     return output
 
 
-def sell_backTest_optimized(combined_df, ticker: str, frame: str):
+def sell_backtest_optimized(combined_df, ticker: str, frame: str):
     enterCandle = combined_df.iloc[0]
     ema20 = combined_df["ema20"]
     ema50 = combined_df["ema50"]

@@ -3,7 +3,7 @@ import threading
 import pandas
 
 import const_app as const_app
-from strategies.trend_following.back_test_trend_following import long_backTest_optimized, sell_backTest_optimized
+from strategies.trend_following.back_test_trend_following import long_backTest_optimized, sell_backtest_optimized
 from utils.boost import boost
 from utils.util_back_test import allStatistic, printStatistic
 
@@ -23,7 +23,7 @@ def show_trend_following_data(ticker, frame):
 
     if const_app.strategies["trend_following"]["config"]["short"]:
         # Perform sell backtest
-        dataSell = sell_backTest_optimized(df, ticker, frame)
+        dataSell = sell_backtest_optimized(df, ticker, frame)
         allStatistic(dataSell, frame, ticker, 'Trend Following', True)
 
 

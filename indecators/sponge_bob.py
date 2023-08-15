@@ -27,4 +27,4 @@ def SpongeBob(df, n1=10, n2=21, reaction_wt=1):
         else:
             df.loc[i, 'color'] = 'red'
 
-    print(df)
+    return df

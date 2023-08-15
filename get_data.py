@@ -17,7 +17,7 @@ def getData(ticker, interval):
 
     """
     client = Client()
-    kLine = client.get_historical_klines(ticker, interval, "1 jan, 2021")
+    kLine = client.get_historical_klines(ticker, interval)
     df = pd.DataFrame(
         kLine,
         columns=['date', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'qav', 'num_trades', 'taker_base_vol',
@@ -29,8 +29,9 @@ def getData(ticker, interval):
     del df["num_trades"]
     del df["taker_base_vol"]
     del df["ignore"]
+    return df
 
-    df.to_csv(f"D:\\Python project\\nadaraya_watson_envelope\\data\\{ticker}-{interval}.csv")
+    # df.to_csv(f"D:\\Python project\\nadaraya_watson_envelope\\data\\{ticker}-{interval}.csv")
 
     # # Calculate EMA for each specified period
     # for ema_period in const_app.ema:

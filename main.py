@@ -1,7 +1,6 @@
 import const_app
 import get_data
 from indecators.add_all_indecator_to_csv import add_all_indicator_to_csv
-from strategies.nwe.full_back_test import nweIndicatorBackText
 from strategies.trend_following.full_back_test import trendFollowingIndicatorBackText
 from utils.send_to_tele import sentToTelegram
 

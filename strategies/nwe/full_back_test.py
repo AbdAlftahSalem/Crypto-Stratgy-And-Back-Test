@@ -5,6 +5,7 @@ import pandas
 import const_app as const_app
 from strategies.nwe.back_test_nwe import longBackTest, sellBackTest
 from utils.boost import boost
+from utils.plot_candles import plot_with_signals
 from utils.util_back_test import allStatistic, printStatistic
 
 
@@ -14,12 +15,13 @@ def show_nwe_data(ticker, frame):
     const_app.numberOfSuccessShortSignal = 0
 
     # Read data from CSV file
-    df = pandas.read_csv(f"{const_app.saveDataFolder}{ticker}-{frame}-indicators.csv")
+    df = pandas.read_csv(f"{const_app.saveDataFolderIndicator}{ticker}-{frame}-indicators.csv")
 
     if const_app.strategies["nwe"]["config"]["long"]:
         # Perform long backtest
         dataLong = longBackTest(df, ticker, frame)
-        allStatistic(dataLong, frame, ticker, 'Nwe', False)
+        plot_with_signals(df, dataLong, save_path=f"{const_app.saveDataFolderIndicator}{ticker}-{frame}-long.svg")
+        # allStatistic(dataLong, frame, ticker, 'Nwe', False)
 
     if const_app.strategies["nwe"]["config"]["short"]:
         # Perform sell backtest
@@ -31,9 +33,9 @@ def nweIndicatorBackText():
     # Create a list to store the threads
     thread_list = []
 
-    for frame in const_app.intervals:
+    for frame in ["30m"]:
         # Create a thread for each combination of ema and frame
-        th = threading.Thread(target=boost, args=(show_nwe_data, const_app.tickers, frame))
+        th = threading.Thread(target=boost, args=(show_nwe_data, ["ETHUSDT"], frame))
         thread_list.append(th)
         th.start()
 

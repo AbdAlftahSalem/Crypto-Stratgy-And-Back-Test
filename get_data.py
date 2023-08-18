@@ -31,6 +31,12 @@ def getData(ticker, interval):
     del df["taker_base_vol"]
     del df["ignore"]
 
+    df["high"] = df["high"].astype(float)
+    df["low"] = df["low"].astype(float)
+    df["open"] = df["open"].astype(float)
+    df["close"] = df["close"].astype(float)
+    df["volume"] = df["volume"].astype(float)
+
     return df
     # df.to_csv(f"{const_app.saveDataFolder}{ticker}-{interval}.csv")
 

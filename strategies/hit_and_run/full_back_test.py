@@ -3,7 +3,7 @@ import threading
 import pandas
 
 import const_app as const_app
-from strategies.hit_and_run.back_test_sponge_bob import longBackTest, sellBackTest
+from strategies.hit_and_run.back_test_hit_and_run import longBackTest, sellBackTest
 from utils.boost import boost
 from utils.util_back_test import allStatistic, printStatistic
 
@@ -19,19 +19,19 @@ def show_hit_and_run_data(ticker, frame):
     if const_app.strategies["hit_and_run"]["config"]["long"]:
         # Perform long backtest
         dataLong = longBackTest(df, ticker, frame)
-        allStatistic(dataLong, frame, ticker, 'Nwe', False)
+        allStatistic(dataLong, frame, ticker, 'Hit And Run', False)
 
     if const_app.strategies["hit_and_run"]["config"]["short"]:
         # Perform sell backtest
         dataSell = sellBackTest(df, ticker, frame)
-        allStatistic(dataSell, frame, ticker, 'Nwe', True)
+        # allStatistic(dataSell, frame, ticker, 'Hit And Run', True)
 
 
 def hitAndRunIndicatorBackText():
     # Create a list to store the threads
     thread_list = []
 
-    for frame in const_app.intervals:
+    for frame in ["5m"]:
         # Create a thread for each combination of ema and frame
         th = threading.Thread(target=boost, args=(show_hit_and_run_data, const_app.tickers, frame))
         thread_list.append(th)

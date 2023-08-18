@@ -114,10 +114,8 @@ def allStatistic(data, frame, ticker, prefixMessage, sell=False):
                 data["data"])
             print_sell(data, frame, prefixMessage, ticker)
 
-
-
     except Exception as e:
-        print(e)
+        print(f"Ticker {ticker} - Interval {frame} - Error: {e}")
 
 
 def print_buy(dataLong, frame, prefixMessage, ticker):

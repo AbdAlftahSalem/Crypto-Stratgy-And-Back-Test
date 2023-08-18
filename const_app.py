@@ -77,10 +77,10 @@ strategies = {
             },
             "long": {
                 "tp5m": 1,
-                "tp15m": 2,
+                "tp15m": 1.5,
                 "tp30m": 3,
-                "tp1h": 4,
-                "tp4h": 5,
+                "tp1h": 3,
+                "tp4h": 4,
                 "sl": 1.5,
             },
         },
@@ -101,25 +101,25 @@ strategies = {
         "tp": {
             "short": {
                 "tp5m": 1,
-                "tp15m": 2,
-                "tp30m": 3,
-                "tp1h": 4,
-                "tp4h": 5,
+                "tp15m": 1.5,
+                "tp30m": 2,
+                "tp1h": 2.5,
+                "tp4h": 3,
                 "sl": 2,
             },
 
             "long": {
                 "tp5m": 1,
-                "tp15m": 2,
-                "tp30m": 3,
-                "tp1h": 4,
-                "tp4h": 5,
-                "sl": 1.5,
+                "tp15m": 1.5,
+                "tp30m": 2,
+                "tp1h": 2.5,
+                "tp4h": 4,
+                "sl": 2.5,
             },
         },
         "config": {
             "long": True,
-            "short": True,
+            "short": False,
         },
     },
     "nwe": {
@@ -149,5 +149,5 @@ strategies = {
             "long": True,
             "short": True,
         }
-    }
+    },
 }

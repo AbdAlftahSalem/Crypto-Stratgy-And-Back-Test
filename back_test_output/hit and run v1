@@ -1,0 +1,63 @@
+Hit And Run || BUY || Ticker: SOLUSDT, Frame: 4h, Profit number: 51, Lose number: 14 || ALL WIN CHANGE: +204% || ALL LOSE CHANGE: -35.0% || SUCCESS PCT: 78.46%
+
+Hit And Run || BUY || Ticker: BTCUSDT, Frame: 4h, Profit number: 35, Lose number: 15 || ALL WIN CHANGE: +140% || ALL LOSE CHANGE: -37.5% || SUCCESS PCT: 70.0%
+
+Hit And Run || BUY || Ticker: ADAUSDT, Frame: 4h, Profit number: 48, Lose number: 21 || ALL WIN CHANGE: +192% || ALL LOSE CHANGE: -52.5% || SUCCESS PCT: 69.57%
+
+Hit And Run || BUY || Ticker: BNBUSDT, Frame: 4h, Profit number: 40, Lose number: 10 || ALL WIN CHANGE: +160% || ALL LOSE CHANGE: -25.0% || SUCCESS PCT: 80.0%
+
+Hit And Run || BUY || Ticker: ETHUSDT, Frame: 4h, Profit number: 29, Lose number: 8 || ALL WIN CHANGE: +116% || ALL LOSE CHANGE: -20.0% || SUCCESS PCT: 78.38%
+
+Hit And Run || BUY || Ticker: ADAUSDT, Frame: 1h, Profit number: 210, Lose number: 45 || ALL WIN CHANGE: +525.0% || ALL LOSE CHANGE: -112.5% || SUCCESS PCT: 82.35%
+
+Hit And Run || BUY || Ticker: ETHUSDT, Frame: 1h, Profit number: 162, Lose number: 48 || ALL WIN CHANGE: +405.0% || ALL LOSE CHANGE: -120.0% || SUCCESS PCT: 77.14%
+
+Hit And Run || BUY || Ticker: SOLUSDT, Frame: 1h, Profit number: 206, Lose number: 50 || ALL WIN CHANGE: +515.0% || ALL LOSE CHANGE: -125.0% || SUCCESS PCT: 80.47%
+
+Hit And Run || BUY || Ticker: BNBUSDT, Frame: 1h, Profit number: 148, Lose number: 61 || ALL WIN CHANGE: +370.0% || ALL LOSE CHANGE: -152.5% || SUCCESS PCT: 70.81%
+
+Hit And Run || BUY || Ticker: SOLUSDT, Frame: 30m, Profit number: 417, Lose number: 86 || ALL WIN CHANGE: +834% || ALL LOSE CHANGE: -215.0% || SUCCESS PCT: 82.9%
+
+Hit And Run || BUY || Ticker: ADAUSDT, Frame: 30m, Profit number: 364, Lose number: 99 || ALL WIN CHANGE: +728% || ALL LOSE CHANGE: -247.5% || SUCCESS PCT: 78.62%
+
+Hit And Run || BUY || Ticker: ETHUSDT, Frame: 30m, Profit number: 319, Lose number: 79 || ALL WIN CHANGE: +638% || ALL LOSE CHANGE: -197.5% || SUCCESS PCT: 80.15%
+
+Hit And Run || BUY || Ticker: BTCUSDT, Frame: 30m, Profit number: 300, Lose number: 84 || ALL WIN CHANGE: +600% || ALL LOSE CHANGE: -210.0% || SUCCESS PCT: 78.12%
+
+Hit And Run || BUY || Ticker: BNBUSDT, Frame: 30m, Profit number: 298, Lose number: 84 || ALL WIN CHANGE: +596% || ALL LOSE CHANGE: -210.0% || SUCCESS PCT: 78.01%
+
+Hit And Run || BUY || Ticker: ADAUSDT, Frame: 15m, Profit number: 781, Lose number: 171 || ALL WIN CHANGE: +1171.5% || ALL LOSE CHANGE: -427.5% || SUCCESS PCT: 82.04%
+
+Hit And Run || BUY || Ticker: ETHUSDT, Frame: 15m, Profit number: 706, Lose number: 148 || ALL WIN CHANGE: +1059.0% || ALL LOSE CHANGE: -370.0% || SUCCESS PCT: 82.67%
+
+Hit And Run || BUY || Ticker: SOLUSDT, Frame: 15m, Profit number: 818, Lose number: 144 || ALL WIN CHANGE: +1227.0% || ALL LOSE CHANGE: -360.0% || SUCCESS PCT: 85.03%
+
+Hit And Run || BUY || Ticker: BTCUSDT, Frame: 15m, Profit number: 627, Lose number: 157 || ALL WIN CHANGE: +940.5% || ALL LOSE CHANGE: -392.5% || SUCCESS PCT: 79.97%
+
+Hit And Run || BUY || Ticker: BNBUSDT, Frame: 15m, Profit number: 641, Lose number: 193 || ALL WIN CHANGE: +961.5% || ALL LOSE CHANGE: -482.5% || SUCCESS PCT: 76.86%
+
+******************************************************************************
+
+Tickers search                         : ['BTCUSDT', 'ETHUSDT', 'SOLUSDT', 'BNBUSDT', 'ADAUSDT']
+Interval search                        : ['15m', '30m', '1h' , '4h']
+
+
+Number Of Success Long Signal           : + 6200
+Number Of Success Short Signal          : 0
+Number all success signal               : + 6200
+
+
+Number Of Lose Long Signal             : - 1517
+Number Of Lose Short Signal            : 0
+Number all lose signal                 : 1095
+
+
+Summation Of Success Long PCT          : + 11381 %
+Summation Of Success Short PCT         : 0
+Summation Of Lose Long PCT             : - 3764 %
+Summation Of Lose Short PCT            : 0
+
+Summation of Lose in Long and Short    : - 3764.0 %
+Summation of Success in Long and Short : + 11381.0 %
+
+******************************************************************************

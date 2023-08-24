@@ -22,4 +22,4 @@ if const_app.apply_strategy:
 # Calling the 'nextIndicatorBackText' function from 'full_back_test' module to start testing
 # nweIndicatorBackText()
 # trendFollowingIndicatorBackText()
-hitAndRunIndicatorBackText()
+# hitAndRunIndicatorBackText()

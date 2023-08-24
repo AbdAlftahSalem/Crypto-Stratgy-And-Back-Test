@@ -21,7 +21,7 @@ def long_backTest_optimized(combined_df, ticker: str, frame: str):
 
     profitPCT = getProfit("trend_following", frame, True)
 
-    output = {"ticker": ticker, "frame": frame, "profitNum": 0, "loseNum": 0, "data": []}
+    output = {"ticker": ticker, "interval": frame, "profitNum": 0, "loseNum": 0, "data": []}
 
     searchProfit = False
 
@@ -82,7 +82,7 @@ def sell_backtest_optimized(combined_df, ticker: str, frame: str):
 
     profitPCT = getProfit("trend_following", frame, False)
 
-    output = {"ticker": ticker, "frame": frame, "profitNum": 0, "loseNum": 0, "data": []}
+    output = {"ticker": ticker, "interval": frame, "profitNum": 0, "loseNum": 0, "data": []}
 
     searchProfit = False
 

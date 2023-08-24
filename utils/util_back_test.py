@@ -122,6 +122,11 @@ def print_buy(dataLong, frame, prefixMessage, ticker):
     # Calculate total win and lose percentages for long signals
     total_lose_pct = round(sum((d["change"] if d["status"] == "sl" else 0) for d in dataLong["data"]), 2)
     total_win_pct = round(sum((d["change"] if d["status"] == "tp" else 0) for d in dataLong["data"]), 2)
+    dataLong["total_lose_pct"] = total_lose_pct
+    dataLong["total_win_pct"] = total_win_pct
+    dataLong[
+        "pctSuccess"] = f"{round((dataLong['profitNum'] / (dataLong['profitNum'] + dataLong['loseNum'])) * 100, 2)} %"
+
     # Update overall win and lose counts
     const_app.numberOfSuccessLongSignal += dataLong['profitNum']
     const_app.numberOfLoseLongSignal += dataLong['loseNum']
@@ -136,20 +141,25 @@ def print_buy(dataLong, frame, prefixMessage, ticker):
     #     print(Fore.GREEN + f"{i}")
 
 
-def print_sell(dataSell, frame, prefixMessage, ticker):
+def print_sell(dataShort, frame, prefixMessage, ticker):
     # Calculate total win and lose percentages for sell signals
-    total_lose_pct = round(sum((float(d["change"]) if d["status"] == "sl" else 0) for d in dataSell["data"]), 2)
-    total_win_pct = round(sum((float(d["change"]) if d["status"] == "tp" else 0) for d in dataSell["data"]), 2)
+    total_lose_pct = round(sum((float(d["change"]) if d["status"] == "sl" else 0) for d in dataShort["data"]), 2)
+    total_win_pct = round(sum((float(d["change"]) if d["status"] == "tp" else 0) for d in dataShort["data"]), 2)
+    dataShort["total_lose_pct"] = total_lose_pct
+    dataShort["total_win_pct"] = total_win_pct
+    dataShort[
+        "pctSuccess"] = f"{round((dataShort['profitNum'] / (dataShort['profitNum'] + dataShort['loseNum'])) * 100, 2)} %"
+
     # Update overall win and lose counts
-    const_app.allWin += dataSell['profitNum']
-    const_app.allLose += dataSell['loseNum']
-    const_app.numberOfSuccessShortSignal += dataSell['profitNum']
-    const_app.numberOfLoseShortSignal += dataSell['loseNum']
+    const_app.allWin += dataShort['profitNum']
+    const_app.allLose += dataShort['loseNum']
+    const_app.numberOfSuccessShortSignal += dataShort['profitNum']
+    const_app.numberOfLoseShortSignal += dataShort['loseNum']
     const_app.summationOfSuccessShortPCT += total_win_pct
     const_app.summationOfLoseShortPCT += total_lose_pct
     # Print sell signal statistics
     print(
-        Fore.RED + f"{prefixMessage} || SELL || Ticker: {ticker}, Frame: {frame}, Profit number: {dataSell['profitNum']}, Lose number: {dataSell['loseNum']} || ALL WIN CHANGE: +{total_win_pct}% || ALL LOSE CHANGE: {total_lose_pct}% || SUCCESS PCT: {round((dataSell['profitNum'] / (dataSell['profitNum'] + dataSell['loseNum'])) * 100, 2)}%\n")
+        Fore.RED + f"{prefixMessage} || SELL || Ticker: {ticker}, Frame: {frame}, Profit number: {dataShort['profitNum']}, Lose number: {dataShort['loseNum']} || ALL WIN CHANGE: +{total_win_pct}% || ALL LOSE CHANGE: {total_lose_pct}% || SUCCESS PCT: {round((dataShort['profitNum'] / (dataShort['profitNum'] + dataShort['loseNum'])) * 100, 2)}%\n")
 
     # # print last 7 sell signal
     # for i in dataSell['data'][-7:]:

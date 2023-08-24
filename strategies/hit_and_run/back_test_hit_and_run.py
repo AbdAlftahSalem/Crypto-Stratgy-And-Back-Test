@@ -5,7 +5,7 @@ from utils.util_back_test import getProfit, getStopLose
 def longBackTest(df, ticker: str, frame: str):
     df["sponge_bob_long"] = df["sponge_bob_long"].fillna(0)
 
-    output = {"ticker": ticker, "frame": frame, "profitNum": 0, "loseNum": 0, "data": []}
+    output = {"ticker": ticker, "interval": frame, "profitNum": 0, "loseNum": 0, "strategy_name": "HAR", "data": []}
 
     # 1- Add sponge_bob_long condition [ sponge_bob_long != 0 and  sponge_bob_long <= -65 ] & candle is red
     condition = (df['sponge_bob_long'] != 0) & (df['sponge_bob_long'] <= -65) & (df['close'] < df['open'])
@@ -81,7 +81,7 @@ def sellBackTest(combined_df, ticker: str, frame: str):
     """
     combined_df["sponge_bob_short"] = combined_df["sponge_bob_short"].fillna(0)
 
-    output = {"ticker": ticker, "frame": frame, "profitNum": 0, "loseNum": 0, "data": []}
+    output = {"ticker": ticker, "interval": frame, "profitNum": 0, "loseNum": 0, "strategy_name": "HAR", "data": []}
 
     # 1- Add sponge_bob_short condition [ sponge_bob_short != 0 and  sponge_bob_short >= 65 ] & candle is green
     condition = (combined_df['sponge_bob_short'] != 0) & (combined_df['sponge_bob_short'] >= 65) & (

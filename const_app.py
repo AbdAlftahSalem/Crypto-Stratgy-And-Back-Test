@@ -147,7 +147,7 @@ strategies = {
         },
         "config": {
             "long": True,
-            "short": True,
+            "short": False,
         }
     },
 }

@@ -21,7 +21,7 @@ def longBackTest(combined_df, ticker: str, frame: str):
     stop = 0
     enterCandle = combined_df.iloc[0]
 
-    output = {"ticker": ticker, "frame": frame, "profitNum": 0, "loseNum": 0, "data": []}
+    output = {"ticker": ticker, "interval": frame, "profitNum": 0, "loseNum": 0, "strategy_name": "NWE", "data": []}
 
     for i in range(len(combined_df) - 3):
         currentCandleSearch = combined_df.iloc[i]
@@ -84,7 +84,7 @@ def sellBackTest(combined_df, ticker: str, frame: str):
     stop = 0
     enterCandle = combined_df.iloc[0]
 
-    output = {"ticker": ticker, "frame": frame, "profitNum": 0, "loseNum": 0, "data": []}
+    output = {"ticker": ticker, "interval": frame, "profitNum": 0, "loseNum": 0, "strategy_name": "NWE", "data": []}
 
     for i in range(len(combined_df) - 3):
         enterCandleSearch = combined_df.iloc[i]

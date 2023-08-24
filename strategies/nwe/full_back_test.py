@@ -20,8 +20,8 @@ def show_nwe_data(ticker, frame):
     if const_app.strategies["nwe"]["config"]["long"]:
         # Perform long backtest
         dataLong = longBackTest(df, ticker, frame)
-        plot_with_signals(df, dataLong, save_path=f"{const_app.saveDataFolderIndicator}{ticker}-{frame}-long.svg")
-        # allStatistic(dataLong, frame, ticker, 'Nwe', False)
+        # plot_with_signals(df, dataLong, save_path=f"{const_app.saveDataFolderIndicator}{ticker}-{frame}-long.svg")
+        allStatistic(dataLong, frame, ticker, 'Nwe', False)
 
     if const_app.strategies["nwe"]["config"]["short"]:
         # Perform sell backtest
@@ -33,7 +33,7 @@ def nweIndicatorBackText():
     # Create a list to store the threads
     thread_list = []
 
-    for frame in ["30m"]:
+    for frame in ["1h"]:
         # Create a thread for each combination of ema and frame
         th = threading.Thread(target=boost, args=(show_nwe_data, ["ETHUSDT"], frame))
         thread_list.append(th)

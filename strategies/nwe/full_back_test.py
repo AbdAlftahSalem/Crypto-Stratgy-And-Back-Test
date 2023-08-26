@@ -33,9 +33,9 @@ def nweIndicatorBackText():
     # Create a list to store the threads
     thread_list = []
 
-    for frame in ["1h"]:
+    for frame in ["5m", "15m", "30m", "1h"]:
         # Create a thread for each combination of ema and frame
-        th = threading.Thread(target=boost, args=(show_nwe_data, ["ETHUSDT"], frame))
+        th = threading.Thread(target=boost, args=(show_nwe_data, const_app.tickers, frame))
         thread_list.append(th)
         th.start()
 

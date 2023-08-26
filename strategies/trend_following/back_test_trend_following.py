@@ -21,7 +21,7 @@ def long_backTest_optimized(combined_df, ticker: str, frame: str):
 
     profitPCT = getProfit("trend_following", frame, True)
 
-    output = {"ticker": ticker, "interval": frame, "profitNum": 0, "loseNum": 0, "data": []}
+    output = {"ticker": ticker, "interval": frame, "profit_num": 0, "lose_num": 0, "data": []}
 
     searchProfit = False
 
@@ -56,14 +56,14 @@ def long_backTest_optimized(combined_df, ticker: str, frame: str):
                 output["data"].append(
                     getTradeData("trend_following", True, enterCandle, currentCandleSearch, profit, stop, "tp", frame)
                 )
-                output["profitNum"] += 1
+                output["profit_num"] += 1
                 searchProfit = False
 
             elif low[i] <= stop:
                 output["data"].append(
                     getTradeData("trend_following", True, enterCandle, currentCandleSearch, profit, stop, "sl", frame)
                 )
-                output["loseNum"] += 1
+                output["lose_num"] += 1
                 searchProfit = False
 
     return output
@@ -82,7 +82,7 @@ def sell_backtest_optimized(combined_df, ticker: str, frame: str):
 
     profitPCT = getProfit("trend_following", frame, False)
 
-    output = {"ticker": ticker, "interval": frame, "profitNum": 0, "loseNum": 0, "data": []}
+    output = {"ticker": ticker, "interval": frame, "profit_num": 0, "lose_num": 0, "data": []}
 
     searchProfit = False
 
@@ -116,14 +116,14 @@ def sell_backtest_optimized(combined_df, ticker: str, frame: str):
                 output["data"].append(
                     getTradeData("trend_following", False, enterCandle, enterCandleSearch, profit, stop, "tp", frame)
                 )
-                output["profitNum"] += 1
+                output["profit_num"] += 1
                 searchProfit = False
 
             elif high[i] >= stop:
                 output["data"].append(
                     getTradeData("trend_following", False, enterCandle, enterCandleSearch, profit, stop, "sl", frame)
                 )
-                output["loseNum"] += 1
+                output["lose_num"] += 1
                 searchProfit = False
 
     return output

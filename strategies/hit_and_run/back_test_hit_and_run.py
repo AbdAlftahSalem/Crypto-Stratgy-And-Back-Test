@@ -5,7 +5,7 @@ from utils.util_back_test import getProfit, getStopLose
 def longBackTest(df, ticker: str, frame: str):
     df["sponge_bob_long"] = df["sponge_bob_long"].fillna(0)
 
-    output = {"ticker": ticker, "interval": frame, "profitNum": 0, "loseNum": 0, "strategy_name": "HAR", "data": []}
+    output = {"ticker": ticker, "interval": frame, "profit_num": 0, "lose_num": 0, "strategy_name": "HAR", "data": []}
 
     # 1- Add sponge_bob_long condition [ sponge_bob_long != 0 and  sponge_bob_long <= -65 ] & candle is red
     condition = (df['sponge_bob_long'] != 0) & (df['sponge_bob_long'] <= -65) & (df['close'] < df['open'])
@@ -29,37 +29,37 @@ def longBackTest(df, ticker: str, frame: str):
 
             for j in range(i + 1, len(df)):
                 # check if current candle low is less than or equal enterPrice and candle is red
-                if df.iloc[j]["low"] <= enterCandle["enterPrice"]:
+                if df.iloc[j]["low"] <= enterCandle["enter_price"]:
                     # loop through candles until targetPrice or stopPrice is reached
                     for k in range(j, len(df)):
                         # check if current candle high is greater than or equal targetPrice
                         if df.iloc[k]["high"] >= targetPrice:
                             data = {
-                                "entryDate": enterCandle["date"],
-                                "outDate": df.iloc[k]["date"],
-                                "enterPrice": enterCandle["enterPrice"],
+                                "entry_date": enterCandle["date"],
+                                "out_date": df.iloc[k]["date"],
+                                "enter_price": enterCandle["enter_price"],
                                 "tp": targetPrice,
                                 "sl": stopPrice,
                                 "status": "tp",
                                 "change": getProfit("hit_and_run", frame, True),
                             }
                             output["data"].append(data)
-                            output["profitNum"] += 1
+                            output["profit_num"] += 1
                             break
 
                         # check if current candle low is less than or equal stopPrice
                         elif df.iloc[k]["close"] <= stopPrice:
                             data = {
-                                "entryDate": enterCandle["date"],
-                                "outDate": df.iloc[k]["date"],
-                                "enterPrice": enterCandle["enterPrice"],
+                                "entry_date": enterCandle["date"],
+                                "out_date": df.iloc[k]["date"],
+                                "enter_price": enterCandle["enter_price"],
                                 "tp": targetPrice,
                                 "sl": stopPrice,
                                 "status": "sl",
                                 "change": -getStopLose("hit_and_run", True),
                             }
                             output["data"].append(data)
-                            output["loseNum"] += 1
+                            output["lose_num"] += 1
                             break
 
                     break
@@ -81,7 +81,7 @@ def sellBackTest(combined_df, ticker: str, frame: str):
     """
     combined_df["sponge_bob_short"] = combined_df["sponge_bob_short"].fillna(0)
 
-    output = {"ticker": ticker, "interval": frame, "profitNum": 0, "loseNum": 0, "strategy_name": "HAR", "data": []}
+    output = {"ticker": ticker, "interval": frame, "profit_num": 0, "lose_num": 0, "strategy_name": "HAR", "data": []}
 
     # 1- Add sponge_bob_short condition [ sponge_bob_short != 0 and  sponge_bob_short >= 65 ] & candle is green
     condition = (combined_df['sponge_bob_short'] != 0) & (combined_df['sponge_bob_short'] >= 65) & (
@@ -106,37 +106,37 @@ def sellBackTest(combined_df, ticker: str, frame: str):
 
             for j in range(i + 1, len(combined_df)):
                 # check if current candle high is greater than or equal enterPrice and candle is green
-                if combined_df.iloc[j]["high"] >= enterCandle["enterPrice"]:
+                if combined_df.iloc[j]["high"] >= enterCandle["enter_price"]:
                     # loop through candles until targetPrice or stopPrice is reached
                     for k in range(j, len(combined_df)):
                         # check if current candle low is less than or equal targetPrice
                         if combined_df.iloc[k]["low"] <= targetPrice:
                             data = {
-                                "entryDate": enterCandle["date"],
-                                "outDate": combined_df.iloc[k]["date"],
-                                "enterPrice": enterCandle["enterPrice"],
+                                "entry_date": enterCandle["date"],
+                                "out_date": combined_df.iloc[k]["date"],
+                                "enter_price": enterCandle["enter_price"],
                                 "tp": targetPrice,
                                 "sl": stopPrice,
                                 "status": "tp",
                                 "change": -getProfit("hit_and_run", frame, False),
                             }
                             output["data"].append(data)
-                            output["profitNum"] += 1
+                            output["profit_num"] += 1
                             break
 
                         # check if current candle high is greater than or equal stopPrice
                         elif combined_df.iloc[k]["close"] >= stopPrice:
                             data = {
-                                "entryDate": enterCandle["date"],
-                                "outDate": combined_df.iloc[k]["date"],
-                                "enterPrice": enterCandle["enterPrice"],
+                                "entry_date": enterCandle["date"],
+                                "out_date": combined_df.iloc[k]["date"],
+                                "enter_price": enterCandle["enter_price"],
                                 "tp": targetPrice,
                                 "sl": stopPrice,
                                 "status": "sl",
                                 "change": getStopLose("hit_and_run", False),
                             }
                             output["data"].append(data)
-                            output["loseNum"] += 1
+                            output["lose_num"] += 1
                             break
 
     return output

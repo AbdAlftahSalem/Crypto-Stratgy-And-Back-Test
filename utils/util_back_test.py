@@ -3,6 +3,7 @@ from datetime import datetime
 from colorama import Fore
 
 import const_app
+import requests
 
 
 def getProfit(strategy: str, frame: str, long: bool):
@@ -61,9 +62,9 @@ def getTradeData(strategy, long, enterCandle, exitCandle, profit, stop, status, 
 
     """
     return {
-        "entryDate": enterCandle["date"],
-        "outDate": exitCandle["date"],
-        "enterPrice": enterCandle["close"],
+        "entry_date": enterCandle["date"],
+        "out_date": exitCandle["date"],
+        "enter_price": enterCandle["close"],
         "tp": profit,
         "sl": stop,
         "status": status,
@@ -80,8 +81,8 @@ def getDetailOfSignals(data):
     summDiffDate = 0
 
     for i in data:
-        entryDate = datetime.strptime(i["entryDate"], '%Y-%m-%d %H:%M:%S')
-        outDate = datetime.strptime(i["outDate"], '%Y-%m-%d %H:%M:%S')
+        entryDate = datetime.strptime(i["entry_date"], '%Y-%m-%d %H:%M:%S')
+        outDate = datetime.strptime(i["out_date"], '%Y-%m-%d %H:%M:%S')
 
         summDiffDate += (outDate - entryDate).total_seconds() / 3600
         if i["status"] == "tp":
@@ -101,41 +102,50 @@ def getDetailOfSignals(data):
 
 
 def allStatistic(data, frame, ticker, prefixMessage, sell=False):
-    try:
-        if not sell:
-            # Calculate statistics for long trades
-            winNumLong, loseNumLong, changeWinLong, changeLoseLong, startWalletLong, endWalletLong, pctSuccessLong, avgWaitingLong = getDetailOfSignals(
-                data["data"])
-            print_buy(data, frame, prefixMessage, ticker)
+    # try:
+    if not sell:
+        # Calculate statistics for long trades
+        winNumLong, loseNumLong, changeWinLong, changeLoseLong, startWalletLong, endWalletLong, pctSuccessLong, avgWaitingLong = getDetailOfSignals(
+            data["data"])
+        print_buy(data, frame, prefixMessage, ticker)
 
-        else:
-            # Calculate statistics for short trades
-            winNumShort, loseNumShort, changeWinShort, changeLoseShort, startWalletShort, endWalletShort, pctSuccessShort, avgWaitingShort = getDetailOfSignals(
-                data["data"])
-            print_sell(data, frame, prefixMessage, ticker)
+    else:
+        # Calculate statistics for short trades
+        winNumShort, loseNumShort, changeWinShort, changeLoseShort, startWalletShort, endWalletShort, pctSuccessShort, avgWaitingShort = getDetailOfSignals(
+            data["data"])
+        print_sell(data, frame, prefixMessage, ticker)
 
-    except Exception as e:
-        print(f"Ticker {ticker} - Interval {frame} - Error: {e}")
+
+# except Exception as e:
+#     print(f"Ticker {ticker} - Interval {frame} - Error: {e}")
 
 
 def print_buy(dataLong, frame, prefixMessage, ticker):
     # Calculate total win and lose percentages for long signals
     total_lose_pct = round(sum((d["change"] if d["status"] == "sl" else 0) for d in dataLong["data"]), 2)
     total_win_pct = round(sum((d["change"] if d["status"] == "tp" else 0) for d in dataLong["data"]), 2)
-    dataLong["total_lose_pct"] = total_lose_pct
+    dataLong["total_lose_pct"] = -total_lose_pct
     dataLong["total_win_pct"] = total_win_pct
     dataLong[
-        "pctSuccess"] = f"{round((dataLong['profitNum'] / (dataLong['profitNum'] + dataLong['loseNum'])) * 100, 2)} %"
+        "pct_success"] = f"{round((dataLong['profit_num'] / (dataLong['profit_num'] + dataLong['lose_num'])) * 100, 2)} %"
+    dataLong["total_change"] = total_win_pct + -total_lose_pct
 
     # Update overall win and lose counts
-    const_app.numberOfSuccessLongSignal += dataLong['profitNum']
-    const_app.numberOfLoseLongSignal += dataLong['loseNum']
+    const_app.numberOfSuccessLongSignal += dataLong['profit_num']
+    const_app.numberOfLoseLongSignal += dataLong['lose_num']
     const_app.summationOfSuccessLongPCT += total_win_pct
     const_app.summationOfLoseLongPCT += total_lose_pct
     # Print buy signal statistics
-    print(
-        Fore.GREEN + f"{prefixMessage} || BUY || Ticker: {ticker}, Frame: {frame}, Profit number: {dataLong['profitNum']}, Lose number: {dataLong['loseNum']} || ALL WIN CHANGE: +{total_win_pct}% || ALL LOSE CHANGE: {total_lose_pct}% || SUCCESS PCT: {round((dataLong['profitNum'] / (dataLong['profitNum'] + dataLong['loseNum'])) * 100, 2)}%\n")
+    # print(
+    #     Fore.GREEN + f"{prefixMessage} || BUY || Ticker: {ticker}, Frame: {frame}, Profit number: {dataLong['profit_num']}, Lose number: {dataLong['lose_num']} || ALL WIN CHANGE: +{total_win_pct}% || ALL LOSE CHANGE: {total_lose_pct}% || SUCCESS PCT: {round((dataLong['profit_num'] / (dataLong['profit_num'] + dataLong['lose_num'])) * 100, 2)}%\n")
 
+    # send data long to api by post request to http://localhost:8000/api/v1/admin/back-tests
+    response = requests.post('http://localhost:8000/api/v1/admin/back-tests', json=dataLong)
+    if response.json()["status"]:
+        print(Fore.GREEN + f"{ticker} - {frame} Send to api successfully - profit number {dataLong['profit_num']} - PCT success: {dataLong['pct_success']} 🚀")
+
+    else:
+        print(response.json())
     # # print last 7 buy signal
     # for i in dataLong['data'][-7:]:
     #     print(Fore.GREEN + f"{i}")
@@ -145,22 +155,30 @@ def print_sell(dataShort, frame, prefixMessage, ticker):
     # Calculate total win and lose percentages for sell signals
     total_lose_pct = round(sum((float(d["change"]) if d["status"] == "sl" else 0) for d in dataShort["data"]), 2)
     total_win_pct = round(sum((float(d["change"]) if d["status"] == "tp" else 0) for d in dataShort["data"]), 2)
-    dataShort["total_lose_pct"] = total_lose_pct
+    dataShort["total_lose_pct"] = -total_lose_pct
     dataShort["total_win_pct"] = total_win_pct
     dataShort[
-        "pctSuccess"] = f"{round((dataShort['profitNum'] / (dataShort['profitNum'] + dataShort['loseNum'])) * 100, 2)} %"
+        "pct_success"] = f"{round((dataShort['profit_num'] / (dataShort['profit_num'] + dataShort['lose_num'])) * 100, 2)} %"
+    dataShort["total_change"] = total_win_pct + -total_lose_pct
 
     # Update overall win and lose counts
-    const_app.allWin += dataShort['profitNum']
-    const_app.allLose += dataShort['loseNum']
-    const_app.numberOfSuccessShortSignal += dataShort['profitNum']
-    const_app.numberOfLoseShortSignal += dataShort['loseNum']
+    const_app.allWin += dataShort['profit_num']
+    const_app.allLose += dataShort['lose_num']
+    const_app.numberOfSuccessShortSignal += dataShort['profit_num']
+    const_app.numberOfLoseShortSignal += dataShort['lose_num']
     const_app.summationOfSuccessShortPCT += total_win_pct
     const_app.summationOfLoseShortPCT += total_lose_pct
     # Print sell signal statistics
-    print(
-        Fore.RED + f"{prefixMessage} || SELL || Ticker: {ticker}, Frame: {frame}, Profit number: {dataShort['profitNum']}, Lose number: {dataShort['loseNum']} || ALL WIN CHANGE: +{total_win_pct}% || ALL LOSE CHANGE: {total_lose_pct}% || SUCCESS PCT: {round((dataShort['profitNum'] / (dataShort['profitNum'] + dataShort['loseNum'])) * 100, 2)}%\n")
+    # print(
+    #     Fore.RED + f"{prefixMessage} || SELL || Ticker: {ticker}, Frame: {frame}, Profit number: {dataShort['profit_num']}, Lose number: {dataShort['lose_num']} || ALL WIN CHANGE: +{total_win_pct}% || ALL LOSE CHANGE: {total_lose_pct}% || SUCCESS PCT: {round((dataShort['profit_num'] / (dataShort['profit_num'] + dataShort['lose_num'])) * 100, 2)}%\n")
 
+    # send data short to api by post request to http://localhost:8000/api/v1/admin/back-tests
+    response = requests.post('http://localhost:8000/api/v1/admin/back-tests', json=dataShort)
+    if response.json()["status"]:
+        print(Fore.RED + f"{ticker} - {frame} Send to api successfully - profit number {dataShort['profit_num']} - PCT success: {dataShort['pct_success']} 🚀")
+
+    else:
+        print(response.json())
     # # print last 7 sell signal
     # for i in dataSell['data'][-7:]:
     #     print(Fore.RED + f"{i}")

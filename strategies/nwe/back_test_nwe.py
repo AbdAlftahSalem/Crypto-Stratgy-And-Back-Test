@@ -21,7 +21,9 @@ def longBackTest(combined_df, ticker: str, frame: str):
     stop = 0
     enterCandle = combined_df.iloc[0]
 
-    output = {"ticker": ticker, "interval": frame, "profitNum": 0, "loseNum": 0, "strategy_name": "NWE", "data": []}
+    output = {"ticker": ticker, "interval": frame, "profit_num": 0, "lose_num": 0, "strategy_name": "NWE",
+              "strategy_type": "Long", "start_date": combined_df.iloc[0]["date"],
+              "end_date": combined_df.iloc[-1]["date"], "data": []}
 
     for i in range(len(combined_df) - 3):
         currentCandleSearch = combined_df.iloc[i]
@@ -50,7 +52,7 @@ def longBackTest(combined_df, ticker: str, frame: str):
                 output["data"].append(
                     getTradeData("nwe", True, enterCandle, combined_df.iloc[i], profit, stop, "tp", frame)
                 )
-                output["profitNum"] += 1
+                output["profit_num"] += 1
                 searchProfit = False
                 continue
 
@@ -58,7 +60,7 @@ def longBackTest(combined_df, ticker: str, frame: str):
                 output["data"].append(
                     getTradeData("nwe", True, enterCandle, combined_df.iloc[i], profit, stop, "sl", frame)
                 )
-                output["loseNum"] += 1
+                output["lose_num"] += 1
                 searchProfit = False
                 continue
 
@@ -84,7 +86,9 @@ def sellBackTest(combined_df, ticker: str, frame: str):
     stop = 0
     enterCandle = combined_df.iloc[0]
 
-    output = {"ticker": ticker, "interval": frame, "profitNum": 0, "loseNum": 0, "strategy_name": "NWE", "data": []}
+    output = {"ticker": ticker, "interval": frame, "profit_num": 0, "lose_num": 0, "strategy_name": "NWE",
+              "strategy_type": "Short", "start_date": combined_df.iloc[0]["date"],
+              "end_date": combined_df.iloc[-1]["date"], "data": []}
 
     for i in range(len(combined_df) - 3):
         enterCandleSearch = combined_df.iloc[i]
@@ -112,7 +116,7 @@ def sellBackTest(combined_df, ticker: str, frame: str):
             if combined_df.iloc[i]["low"] <= profit:
                 output["data"].append(
                     getTradeData("nwe", False, enterCandle, combined_df.iloc[i], profit, stop, "tp", frame))
-                output["profitNum"] += 1
+                output["profit_num"] += 1
                 searchProfit = False
                 i += 1
                 continue
@@ -120,7 +124,7 @@ def sellBackTest(combined_df, ticker: str, frame: str):
             elif combined_df.iloc[i]["high"] >= stop:
                 output["data"].append(
                     getTradeData("nwe", False, enterCandle, combined_df.iloc[i], profit, stop, "sl", frame))
-                output["loseNum"] += 1
+                output["lose_num"] += 1
                 searchProfit = False
                 i += 1
                 continue

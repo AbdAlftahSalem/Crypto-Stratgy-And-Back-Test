@@ -15,7 +15,7 @@ as needed.
 
 Backtest Output
 --------------
-This is the output search from 1 Jan 2022 to 10 Jul 2023
+This is the output search from 1 Jan 2021 to 10 Aug 2023
 
 
 <img src="assets/ETHUSDT-30m-long.svg" alt="Backtest Output" width="100%">

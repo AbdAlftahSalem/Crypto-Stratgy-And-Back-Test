@@ -5,19 +5,21 @@ from utils.util_back_test import getProfit, getStopLose
 def longBackTest(df, ticker: str, frame: str):
     df["sponge_bob_long"] = df["sponge_bob_long"].fillna(0)
 
-    output = {"ticker": ticker, "interval": frame, "profit_num": 0, "lose_num": 0, "strategy_name": "HAR", "data": []}
+    output = {"ticker": ticker, "interval": frame, "profit_num": 0, "lose_num": 0, "strategy_name": "HAR",
+              "strategy_type": "Long", "start_date": df.iloc[0]["date"],
+              "end_date": df.iloc[-1]["date"], "data": []}
 
     # 1- Add sponge_bob_long condition [ sponge_bob_long != 0 and  sponge_bob_long <= -65 ] & candle is red
     condition = (df['sponge_bob_long'] != 0) & (df['sponge_bob_long'] <= -65) & (df['close'] < df['open'])
 
-    # 2- Create a new column 'enterPrice' when the condition is true
-    df.loc[condition, 'enterPrice'] = (getNumByChange(df.loc[condition, 'low'], -3)).fillna(0)
+    # 2- Create a new column 'enter_price' when the condition is true
+    df.loc[condition, 'enter_price'] = (getNumByChange(df.loc[condition, 'low'], -3)).fillna(0)
 
     # 3- Calculate target and stop prices based on the entered price
     df.loc[condition, 'targetPrice'] = (
-        getNumByChange(df.loc[condition, 'enterPrice'], getProfit("hit_and_run", frame, True))).fillna(0)
+        getNumByChange(df.loc[condition, 'enter_price'], getProfit("hit_and_run", frame, True))).fillna(0)
     df.loc[condition, 'stopPrice'] = (
-        getNumByChange(df.loc[condition, 'enterPrice'], -getStopLose("hit_and_run", True))).fillna(0)
+        getNumByChange(df.loc[condition, 'enter_price'], -getStopLose("hit_and_run", True))).fillna(0)
     # add column strategy to df with true or false values
     df.loc[condition, 'strategy'] = True
 
@@ -87,14 +89,14 @@ def sellBackTest(combined_df, ticker: str, frame: str):
     condition = (combined_df['sponge_bob_short'] != 0) & (combined_df['sponge_bob_short'] >= 65) & (
             combined_df['close'] > combined_df['open'])
 
-    # 2- Create a new column 'enterPrice' when the condition is true
-    combined_df.loc[condition, 'enterPrice'] = (getNumByChange(combined_df.loc[condition, 'high'], 3)).fillna(0)
+    # 2- Create a new column 'enter_price' when the condition is true
+    combined_df.loc[condition, 'enter_price'] = (getNumByChange(combined_df.loc[condition, 'high'], 3)).fillna(0)
 
     # 3- Calculate target and stop prices based on the entered price
     combined_df.loc[condition, 'targetPrice'] = (
-        getNumByChange(combined_df.loc[condition, 'enterPrice'], -getProfit("hit_and_run", frame, False))).fillna(0)
+        getNumByChange(combined_df.loc[condition, 'enter_price'], -getProfit("hit_and_run", frame, False))).fillna(0)
     combined_df.loc[condition, 'stopPrice'] = (
-        getNumByChange(combined_df.loc[condition, 'enterPrice'], getStopLose("hit_and_run", False))).fillna(0)
+        getNumByChange(combined_df.loc[condition, 'enter_price'], getStopLose("hit_and_run", False))).fillna(0)
     # add column strategy to df with true or false values
     combined_df.loc[condition, 'strategy'] = True
 

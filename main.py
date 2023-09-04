@@ -20,6 +20,6 @@ if const_app.apply_strategy:
     sentToTelegram("******************* \n\nFINISH GET DATA ******************* \n\n")
 
 # Calling the 'nextIndicatorBackText' function from 'full_back_test' module to start testing
-nweIndicatorBackText()
+# nweIndicatorBackText()
 # trendFollowingIndicatorBackText()
-# hitAndRunIndicatorBackText()
+hitAndRunIndicatorBackText()

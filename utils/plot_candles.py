@@ -13,7 +13,7 @@ def plot_with_signals(df, output, save_path=None):
     for data in output['data']:
         entry_date = data['entryDate']
         out_date = data['outDate']
-        enter_price = data['enterPrice']
+        enter_price = data['enter_price']
         status = data['status']
 
         entry_candle = df[df['date'] == entry_date].iloc[0]

@@ -136,16 +136,16 @@ def print_buy(dataLong, frame, prefixMessage, ticker):
     const_app.summationOfSuccessLongPCT += total_win_pct
     const_app.summationOfLoseLongPCT += total_lose_pct
     # Print buy signal statistics
-    # print(
-    #     Fore.GREEN + f"{prefixMessage} || BUY || Ticker: {ticker}, Frame: {frame}, Profit number: {dataLong['profit_num']}, Lose number: {dataLong['lose_num']} || ALL WIN CHANGE: +{total_win_pct}% || ALL LOSE CHANGE: {total_lose_pct}% || SUCCESS PCT: {round((dataLong['profit_num'] / (dataLong['profit_num'] + dataLong['lose_num'])) * 100, 2)}%\n")
+    print(
+        Fore.GREEN + f"{prefixMessage} || BUY || Ticker: {ticker}, Frame: {frame}, Profit number: {dataLong['profit_num']}, Lose number: {dataLong['lose_num']} || ALL WIN CHANGE: +{total_win_pct}% || ALL LOSE CHANGE: {total_lose_pct}% || SUCCESS PCT: {round((dataLong['profit_num'] / (dataLong['profit_num'] + dataLong['lose_num'])) * 100, 2)}%\n")
 
-    # send data long to api by post request to http://localhost:8000/api/v1/admin/back-tests
-    response = requests.post('http://localhost:8000/api/v1/admin/back-tests', json=dataLong)
-    if response.json()["status"]:
-        print(Fore.GREEN + f"{ticker} - {frame} Send to api successfully - profit number {dataLong['profit_num']} - PCT success: {dataLong['pct_success']} 🚀")
-
-    else:
-        print(response.json())
+    # # send data long to api by post request to http://localhost:8000/api/v1/admin/back-tests
+    # response = requests.post('http://localhost:8000/api/v1/admin/back-tests', json=dataLong)
+    # if response.json()["status"]:
+    #     print(Fore.GREEN + f"{ticker} - {frame} Send to api successfully - profit number {dataLong['profit_num']} - PCT success: {dataLong['pct_success']} 🚀")
+    #
+    # else:
+    #     print(response.json())
     # # print last 7 buy signal
     # for i in dataLong['data'][-7:]:
     #     print(Fore.GREEN + f"{i}")
@@ -169,16 +169,16 @@ def print_sell(dataShort, frame, prefixMessage, ticker):
     const_app.summationOfSuccessShortPCT += total_win_pct
     const_app.summationOfLoseShortPCT += total_lose_pct
     # Print sell signal statistics
-    # print(
-    #     Fore.RED + f"{prefixMessage} || SELL || Ticker: {ticker}, Frame: {frame}, Profit number: {dataShort['profit_num']}, Lose number: {dataShort['lose_num']} || ALL WIN CHANGE: +{total_win_pct}% || ALL LOSE CHANGE: {total_lose_pct}% || SUCCESS PCT: {round((dataShort['profit_num'] / (dataShort['profit_num'] + dataShort['lose_num'])) * 100, 2)}%\n")
+    print(
+        Fore.RED + f"{prefixMessage} || SELL || Ticker: {ticker}, Frame: {frame}, Profit number: {dataShort['profit_num']}, Lose number: {dataShort['lose_num']} || ALL WIN CHANGE: +{total_win_pct}% || ALL LOSE CHANGE: {total_lose_pct}% || SUCCESS PCT: {round((dataShort['profit_num'] / (dataShort['profit_num'] + dataShort['lose_num'])) * 100, 2)}%\n")
 
-    # send data short to api by post request to http://localhost:8000/api/v1/admin/back-tests
-    response = requests.post('http://localhost:8000/api/v1/admin/back-tests', json=dataShort)
-    if response.json()["status"]:
-        print(Fore.RED + f"{ticker} - {frame} Send to api successfully - profit number {dataShort['profit_num']} - PCT success: {dataShort['pct_success']} 🚀")
+    # # send data short to api by post request to http://localhost:8000/api/v1/admin/back-tests
+    # response = requests.post('http://localhost:8000/api/v1/admin/back-tests', json=dataShort)
+    # if response.json()["status"]:
+    #     print(Fore.RED + f"{ticker} - {frame} Send to api successfully - profit number {dataShort['profit_num']} - PCT success: {dataShort['pct_success']} 🚀")
 
-    else:
-        print(response.json())
+    # else:
+    #     print(response.json())
     # # print last 7 sell signal
     # for i in dataSell['data'][-7:]:
     #     print(Fore.RED + f"{i}")
@@ -187,7 +187,7 @@ def print_sell(dataShort, frame, prefixMessage, ticker):
 def printStatistic():
     print(f"******************************************************************************\n")
     print(f"Tickers search                         : {const_app.tickers}")
-    print(f"Interval search                        : {const_app.intervals}\n\n")
+    print(f"Interval search                        : ['15m', '30m', '1h']\n\n")
     print(Fore.GREEN + f"Number Of Success Long Signal          : +{const_app.numberOfSuccessLongSignal}")
     print(Fore.GREEN + f"Number Of Success Short Signal         : +{const_app.numberOfSuccessShortSignal}")
     print(

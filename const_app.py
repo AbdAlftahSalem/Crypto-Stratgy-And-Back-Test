@@ -150,4 +150,28 @@ strategies = {
             "short": True,
         }
     },
+    "hammer": {
+        "tp": {
+            "short": {
+                "tp5m": 1,
+                "tp15m": 1,
+                "tp30m": 1,
+                "tp1h": 1,
+                "tp4h": 1,
+                "sl": 1,
+            },
+            "long": {
+                "tp5m": 1,
+                "tp15m": 1,
+                "tp30m": 1,
+                "tp1h": 1,
+                "tp4h": 1,
+                "sl": 1,
+            },
+        },
+        "config": {
+            "long": True,
+            "short": True,
+        }
+    },
 }

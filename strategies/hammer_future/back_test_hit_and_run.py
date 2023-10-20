@@ -23,7 +23,7 @@ def longBackTest(df, ticker: str, frame: str):
     df['IsHammer'] = df.apply(is_hammer, axis=1)
 
     for i in range(len(df)):
-        if df.iloc[i]["IsHammer"] and df.iloc[i]["rsi"] <= 40 and not searchProfit:
+        if df.iloc[i]["IsHammer"] and not searchProfit:
             enterCandle = df.iloc[i]
             profitPCT = getProfit("hammer", frame, True)
             profit = getNumByChange(enterCandle["close"], profitPCT)
@@ -63,7 +63,7 @@ def sellBackTest(df, ticker: str, frame: str):
     df['IsInvertedHammer'] = df.apply(isInvertedHammerCandle, axis=1)
 
     for i in range(len(df)):
-        if df.iloc[i]["IsInvertedHammer"] and df.iloc[i]["rsi"] >= 60 and not searchProfit:
+        if df.iloc[i]["IsInvertedHammer"] and not searchProfit:
             enterCandle = df.iloc[i]
             profitPCT = getProfit("hammer", frame, False)
             profit = getNumByChange(enterCandle["close"], -profitPCT)

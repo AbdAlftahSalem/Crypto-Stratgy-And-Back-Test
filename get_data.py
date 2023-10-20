@@ -1,8 +1,8 @@
+import ccxt
 import pandas as pd
 from binance.client import Client
 
 import const_app
-from utils.send_to_tele import sentToTelegram
 
 
 def getData(ticker, interval):
@@ -18,7 +18,7 @@ def getData(ticker, interval):
 
     """
     client = Client()
-    kLine = client.get_historical_klines(ticker, interval)
+    kLine = client.get_historical_klines(ticker, interval, "4 OCT, 2023")
     df = pd.DataFrame(
         kLine,
         columns=['date', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'qav', 'num_trades', 'taker_base_vol',
@@ -53,3 +53,20 @@ def getDataForAllTickers():
     for ticker in const_app.tickers:
         for interval in const_app.intervals:
             getData(ticker, interval)
+
+
+def getFromBinance(ticker, interval, limit):
+    try:
+
+        exchange = ccxt.binance()
+        exchange.enableRateLimit = True
+        bars = exchange.fetch_ohlcv(ticker, timeframe=interval, limit=limit)
+        df = pd.DataFrame(
+            bars, columns=['date', 'open', 'high', 'low', 'close', 'volume'])
+        df['date'] = pd.to_datetime(df["date"], unit='ms')
+        df.to_csv(f"{ticker}-{interval}.csv")
+
+        return df
+
+    except:
+        pass

@@ -23,6 +23,6 @@
 # # nweIndicatorBackText()
 # # trendFollowingIndicatorBackText()
 # hitAndRunIndicatorBackText()
-from strategies.hammer_future.full_back_test import hammerBackText
+from strategies.nwe.full_back_test import show_nwe_data
 
-hammerBackText()
+show_nwe_data()

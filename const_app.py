@@ -13,7 +13,7 @@ tickers = ["BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT", "ADAUSDT"]
 List of tickers for which historical data will be retrieved.
 """
 
-intervals = ["5m", "15m", "30m", "1h", "4h"]
+intervals = ["5m", "15m", "30m", "1h"]
 """
 List of intervals for which historical data will be retrieved.
 """

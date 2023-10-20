@@ -11,8 +11,8 @@ def plot_with_signals(df, output, save_path=None):
     ax.bar(df['date'], df['high'] - df['low'], bottom=df['low'], width=0.2, color=candle_colors, align='center')
 
     for data in output['data']:
-        entry_date = data['entryDate']
-        out_date = data['outDate']
+        entry_date = data['entry_date']
+        out_date = data['out_date']
         enter_price = data['enter_price']
         status = data['status']
 
@@ -38,7 +38,7 @@ def plot_with_signals(df, output, save_path=None):
     plt.xticks(rotation=45)
     plt.xlabel('Date')
     plt.ylabel('Price')
-    plt.title(f'Candlesticks with Entry Signals for {output["ticker"]} ({output["frame"]})')
+    plt.title(f'Candlesticks with Entry Signals for {output["ticker"]} ({output["interval"]})')
     plt.tight_layout()
 
     if save_path:

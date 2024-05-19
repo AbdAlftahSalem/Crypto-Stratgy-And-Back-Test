@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f59376b-505b-4a08-9909-443cf0fdd200" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/strategies/support_and_re.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/get_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/get_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/strategies/hammer_future/back_test_hit_and_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/strategies/hammer_future/back_test_hit_and_run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/strategies/hammer_future/full_back_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/strategies/hammer_future/full_back_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/strategies/nwe/full_back_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/strategies/nwe/full_back_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/plot_candles.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/plot_candles.py" afterDir="false" />
-    </list>
+    <list default="true" id="0f59376b-505b-4a08-9909-443cf0fdd200" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,28 +36,31 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Python project/backtest/Crypto-Stratgy-And-Back-Test/strategies/hammer_future&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
+    &quot;last_opened_file_path&quot;: &quot;D:/Python project/backtest/Crypto-Stratgy-And-Back-Test/test_bactest.py&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Python project\backtest\Crypto-Stratgy-And-Back-Test\strategies" />
       <recent name="D:\Python project\backtest\Crypto-Stratgy-And-Back-Test\strategies\hammer_future" />
       <recent name="D:\Python project\backtest\Crypto-Stratgy-And-Back-Test\assets" />
       <recent name="D:\Python project\backtest\Crypto-Stratgy-And-Back-Test\strategies\hit_and_run" />
       <recent name="D:\Python project\backtest\Crypto-Stratgy-And-Back-Test\strategies\volume_confirmation" />
-      <recent name="D:\Python project\backtest\Crypto-Stratgy-And-Back-Test\strategies\volume_confirmation_strategy" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Python project\backtest\Crypto-Stratgy-And-Back-Test\strategies" />
+      <recent name="D:\Python project\backtest\Crypto-Stratgy-And-Back-Test\back_tests" />
+      <recent name="D:\Python project\backtest\Crypto-Stratgy-And-Back-Test\assets\images" />
       <recent name="D:\Python project\backtest\Crypto-Stratgy-And-Back-Test\utils" />
-      <recent name="D:\Python project\backtest\Crypto-Stratgy-And-Back-Test\nwe" />
-      <recent name="D:\Python project\nadaraya_watson_envelope\back_test" />
-      <recent name="D:\Python project\nadaraya_watson_envelope\assets" />
+      <recent name="D:\Python project\backtest\Crypto-Stratgy-And-Back-Test\database" />
+      <recent name="D:\Python project\backtest\Crypto-Stratgy-And-Back-Test\strategies" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.Test">
     <configuration name="Run" type="PythonConfigurationType" factoryName="Python">
       <module name="nadaraya_watson_envelope" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -89,6 +83,32 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Test" type="PythonConfigurationType" factoryName="Python">
+      <module name="nadaraya_watson_envelope" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.10 (nadaraya_watson_envelope)" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="D:\Python project\backtest\Crypto-Stratgy-And-Back-Test\back_tests\test_bactest.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.Run" />
+      <item itemvalue="Python.Test" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -100,6 +120,17 @@
       <updated>1688642065443</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

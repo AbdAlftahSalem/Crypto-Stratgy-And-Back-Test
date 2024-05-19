@@ -1,15 +1,17 @@
 import math
 
+from utils import util_back_test
 
-def divideDf(df) -> list:
+
+def divide_df(df) -> list:
     """
-    Divide a DataFrame into smaller chunks of size 500.
+    Divide a Data interval into smaller chunks of size 500.
 
     Args:
-        df: The DataFrame to be divided.
+        df: The Data interval to be divided.
 
     Returns:
-        A list of smaller DataFrames.
+        A list of smaller Data intervals.
 
     """
     df_list = []
@@ -19,12 +21,12 @@ def divideDf(df) -> list:
     return df_list
 
 
-def getIndex(df, title, value):
+def get_index(df, title, value):
     """
-    Get the index of the first occurrence of a specific value in a DataFrame column.
+    Get the index of the first occurrence of a specific value in a Data interval column.
 
     Args:
-        df: The DataFrame to search in.
+        df: The Data interval to search in.
         title: The column name to search for the value.
         value: The value to find.
 
@@ -35,7 +37,7 @@ def getIndex(df, title, value):
     return next(iter(df[df[title] == value].index), 'no match')
 
 
-def checkRedCandle(candle):
+def check_red_candle(candle):
     """
     Check if a candle represents a red candle (open > close).
 
@@ -52,7 +54,7 @@ def checkRedCandle(candle):
         return False
 
 
-def getChange(current, previous):
+def get_change(current, previous):
     """
     Calculate the percentage change between two values.
 
@@ -72,7 +74,7 @@ def getChange(current, previous):
         return 0
 
 
-def getNumByChange(enterPrice, pct):
+def get_num_by_change(enterPrice, pct):
     """
     Calculate the resulting number by applying a percentage change to a given number.
 
@@ -87,7 +89,7 @@ def getNumByChange(enterPrice, pct):
     return round(((enterPrice * pct) + (100 * enterPrice)) / 100, 5)
 
 
-def searchInArray(array, value):
+def search_in_array(array, value):
     """
     Check if a value is present in an array.
 
@@ -107,3 +109,33 @@ def searchInArray(array, value):
         else:
             found = False
     return found
+
+
+def get_tp_sl_for_short(enter_candle, interval, strategy_name, using_atr_to_stop):
+    atr = enter_candle['atr']
+    if using_atr_to_stop:
+        #  CALCULATE STOP AND PROFIT USING ATR /// 1.5:1
+        stop = enter_candle['close'] + (atr * 1.5)
+        change_stop = get_change(stop, enter_candle['close'])
+        profit = get_num_by_change(enter_candle['close'], change_stop * -1.5)
+    else:
+        profit_pct = util_back_test.get_profit(strategy_name, interval, False)
+        profit = get_num_by_change(enter_candle["close"], profit_pct * -1)
+        stop = get_num_by_change(enter_candle["close"],
+                                 (profit_pct / util_back_test.get_stop_lose(strategy_name, False)))
+    return enter_candle, profit, stop
+
+
+def get_tp_sl_for_long(enter_candle, interval, strategy_name, using_atr_to_stop):
+    atr = enter_candle['atr']
+    if using_atr_to_stop:
+        #  CALCULATE STOP AND PROFIT USING ATR /// 1.5:1
+        stop = enter_candle['close'] - (atr * 1.5)
+        change_stop = get_change(stop, enter_candle['close'])
+        profit = get_num_by_change(enter_candle['close'], change_stop * 1.5)
+    else:
+        profit_pct = util_back_test.get_profit(strategy_name, interval, True)
+        profit = get_num_by_change(enter_candle["close"], profit_pct)
+        stop = get_num_by_change(enter_candle["close"],
+                                 ((profit_pct / util_back_test.get_stop_lose(strategy_name, True)) * -1))
+    return enter_candle, profit, stop

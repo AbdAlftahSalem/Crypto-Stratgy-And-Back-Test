@@ -47,4 +47,4 @@ def plot_with_signals(df, output, save_path=None):
     else:
         plt.show()
 
-# plot_with_signals(df, dataLong, save_path=f"{const_app.saveDataFolderIndicator}{ticker}-{frame}-long.svg")
+# plot_with_signals(df, dataLong, save_path=f"{const_app.saveDataFolderIndicator}{ticker}-{interval}-long.svg")

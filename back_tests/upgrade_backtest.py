@@ -77,6 +77,8 @@ def get_statistic():
     number_of_green_candle_entry = 0
     number_of_red_candle_entry = 0
 
+    sponge_bob_long = 0
+
     if len(data_list) > 0:
         for i in data_list:
             #######################################################
@@ -137,6 +139,8 @@ def get_statistic():
             else:
                 number_of_green_candle_entry += 1
 
+            sponge_bob_long += i['sponge_bob_long']
+
         message = f"AVG CCI : {sum_cci / len(data_list)}\n"
         message += f"MAX CCI : {max_cci}\n"
         message += f"MIN CCI : {max_cci}\n\n"
@@ -190,6 +194,8 @@ def get_statistic():
 
         message += f"Number of green candle entry : {number_of_green_candle_entry}\n"
         message += f"Number of red candle entry : {number_of_red_candle_entry}\n\n"
+
+        message += f"Sponge bob long : {sponge_bob_long / len(data_list)}"
 
         print(message)
     else:

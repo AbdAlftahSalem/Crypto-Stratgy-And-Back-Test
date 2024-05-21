@@ -26,7 +26,7 @@ def nwe_Short_entry_condition(enter_candle_search, prev_candle_search, prev_prev
 
 def nwe_long_entry_condition(current_candle_search, prev_candle_search, prev_prev_candle_search):
     # check if low is less than lower
-    condition = candle_condition(current_candle_search, False) and get_change(current_candle_search['close'], current_candle_search['vwap200']) < 10
+    condition = candle_condition(current_candle_search, False)
 
     # # check if low prev candle is less than low current candle and less than prev prev candle low and close prev prev candle is upper than prev candle close
     # condition = (condition and

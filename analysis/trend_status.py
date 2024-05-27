@@ -2,11 +2,7 @@ import pandas as pd
 
 
 def trend_status(df: pd.DataFrame, back_candle: int = 8) -> pd.DataFrame:
-    trend_status_list = []
-
-    # fill start list with 0
-    for i in range(back_candle):
-        trend_status_list.append(0)
+    trend_status_list = [0] * len(df)
 
     df['ema30'] = df['close'].ewm(span=30, adjust=False).mean()
     df['ema50'] = df['close'].ewm(span=50, adjust=False).mean()

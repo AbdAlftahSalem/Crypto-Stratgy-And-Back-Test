@@ -27,8 +27,7 @@ for x in range(len(df) - 3):
 
     support_and_resistant_signals.append(nwe_entry(current_candle_search, prev_candle_search, prev_candle_search))
 
-print("START")
+print(f"START BACKTEST FOR {strategy} . {ticker} . {interval}")
 df[f'{strategy}_status_signal'] = support_and_resistant_signals
-print(df[f'{strategy}_status_signal'])
 data = template_bak_test(df, strategy, ticker, interval)
 all_statistic(data, interval, ticker, strategy)

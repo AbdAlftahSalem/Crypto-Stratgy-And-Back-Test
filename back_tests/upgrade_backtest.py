@@ -4,13 +4,16 @@ from utils.util import get_change, check_red_candle
 
 ticker = 'SOLUSDT'
 interval = '30m'
-strategy = 'support_and_resistant'
+strategy = 'vwaps'
 main_df = pandas.read_csv(f'E:\Crypto System\dataIndicator\\{ticker}-{interval}-indicators-new7.csv')
 signals_df = pandas.read_csv(f"../database/backtest/{ticker}-{interval}-{strategy}.csv")
 data_list = []
 
+search_win_signal = True
+search_in_long_only = True
 
-def get_full_data(search_win_signal, search_in_long_only):
+
+def get_full_data():
     last_index = 0
     for signal in range(len(signals_df)):
         search_condition = signals_df.iloc[signal]['status'] == ("tp" if search_win_signal else 'sl')
@@ -21,7 +24,6 @@ def get_full_data(search_win_signal, search_in_long_only):
                 if main_df.iloc[main]['date'] == signals_df.iloc[signal]['entry_date']:
                     data_list.append(main_df.iloc[main])
                     last_index = main
-                    print(last_index)
                     break
 
 
@@ -48,7 +50,7 @@ def get_statistic():
     max_change_vwap100 = 0
     max_change_vwap200 = 0
 
-    min_change_vwap21 = get_change(data_list[0]['close'], data_list[0]['vwap21'])
+    min_change_vwap21 = 1000
     min_change_vwap50 = 1000
     min_change_vwap100 = 1000
     min_change_vwap200 = 1000
@@ -141,7 +143,8 @@ def get_statistic():
 
             sponge_bob_long += i['sponge_bob_long']
 
-        message = f"AVG CCI : {sum_cci / len(data_list)}\n"
+        message = f'⚡⚡ {ticker} || {interval} || {"LONG" if search_in_long_only else "SHORT"} || {"WIN SIGNALS" if search_win_signal else "LOSE SIGNALS"} ⚡⚡\n\n'
+        message += f"AVG CCI : {sum_cci / len(data_list)}\n"
         message += f"MAX CCI : {max_cci}\n"
         message += f"MIN CCI : {max_cci}\n\n"
 
@@ -211,7 +214,7 @@ def max_and_min(main_value, max_value, min_value):
     return max_value, min_value
 
 
-get_full_data(False, True)
+get_full_data()
 get_statistic()
 
 """

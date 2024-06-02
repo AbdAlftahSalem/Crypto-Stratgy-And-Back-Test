@@ -42,7 +42,7 @@ def get_stop_lose(strategy: str, long: bool):
     return const_app.strategies[strategy]["tp"]["long" if long else "short"]["sl"]
 
 
-def get_trade_data(strategy, long, enter_candle, exit_candle, profit, stop, status, interval):
+def get_trade_data(strategy, long, enter_candle, exit_candle, profit, stop, status, interval, message=''):
     """
     Get the trade data for a specific trade.
 
@@ -55,6 +55,7 @@ def get_trade_data(strategy, long, enter_candle, exit_candle, profit, stop, stat
         interval: The time interval.
         strategy: The strategy name.
         long: The long status.
+        message: The message add to data
 
     """
 
@@ -74,6 +75,7 @@ def get_trade_data(strategy, long, enter_candle, exit_candle, profit, stop, stat
         "status": status,
         "change": change,
         'strategy_long': long,
+        'message': message
     }
 
 

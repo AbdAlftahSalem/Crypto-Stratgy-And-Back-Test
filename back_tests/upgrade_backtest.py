@@ -1,4 +1,5 @@
 import pandas
+import pandas_ta
 
 from utils.util import get_change, check_red_candle
 
@@ -6,10 +7,15 @@ ticker = 'SOLUSDT'
 interval = '30m'
 strategy = 'vwaps'
 main_df = pandas.read_csv(f'E:\Crypto System\dataIndicator\\{ticker}-{interval}-indicators-new7.csv')
+main_df['zscore_48'] = pandas_ta.zscore(main_df['close'], 48)
+main_df['zscore_200'] = pandas_ta.zscore(main_df['close'], 200)
+main_df['zscore_484'] = pandas_ta.zscore(main_df['close'], 484)
+main_df['zscore_848'] = pandas_ta.zscore(main_df['close'], 848)
+
 signals_df = pandas.read_csv(f"../database/backtest/{ticker}-{interval}-{strategy}.csv")
 data_list = []
 
-search_win_signal = True
+search_win_signal = False
 search_in_long_only = True
 
 
@@ -81,6 +87,22 @@ def get_statistic():
 
     sponge_bob_long = 0
 
+    max_zscore48 = 0
+    min_zscore48 = 0
+    sum_zscore48 = 0
+
+    max_zscore200 = 0
+    min_zscore200 = 0
+    sum_zscore200 = 0
+
+    max_zscore484 = 0
+    min_zscore484 = 0
+    sum_zscore484 = 0
+
+    max_zscore848 = 0
+    min_zscore848 = 0
+    sum_zscore848 = 0
+
     if len(data_list) > 0:
         for i in data_list:
             #######################################################
@@ -129,6 +151,18 @@ def get_statistic():
             sum_change_ema50 += change_ema50
             sum_change_ema100 += change_ema100
             sum_change_ema200 += change_ema200
+
+            sum_zscore48 = i['zscore_48']
+            max_zscore48, min_zscore48 = max_and_min(i['zscore_48'], max_zscore48, min_zscore48)
+
+            sum_zscore200 = i['zscore_200']
+            max_zscore200, min_zscore200 = max_and_min(i['zscore_200'], max_zscore200, min_zscore200)
+
+            sum_zscore484 = i['zscore_484']
+            max_zscore484, min_zscore484 = max_and_min(i['zscore_484'], max_zscore484, min_zscore484)
+
+            sum_zscore848 = i['zscore_848']
+            max_zscore848, min_zscore848 = max_and_min(i['zscore_848'], max_zscore848, min_zscore848)
 
             if i['superTrend'] > i['close']:
                 number_of_super_trend_above += 1
@@ -198,7 +232,23 @@ def get_statistic():
         message += f"Number of green candle entry : {number_of_green_candle_entry}\n"
         message += f"Number of red candle entry : {number_of_red_candle_entry}\n\n"
 
-        message += f"Sponge bob long : {sponge_bob_long / len(data_list)}"
+        message += f"Sponge bob long : {sponge_bob_long / len(data_list)}\n\n"
+
+        message += f"AVG change zscore48 : {sum_zscore48 / len(data_list)}\n"
+        message += f"MAX change zscore48 : {max_zscore48}\n"
+        message += f"MIN change zscore48 : {min_zscore48}\n\n"
+
+        message += f"AVG change zscore200 : {sum_zscore200 / len(data_list)}\n"
+        message += f"MAX change zscore200 : {max_zscore200}\n"
+        message += f"MIN change zscore200 : {min_zscore200}\n\n"
+
+        message += f"AVG change zscore484 : {sum_zscore484 / len(data_list)}\n"
+        message += f"MAX change zscore484 : {max_zscore484}\n"
+        message += f"MIN change zscore484 : {min_zscore484}\n\n"
+
+        message += f"AVG change zscore848 : {sum_zscore848 / len(data_list)}\n"
+        message += f"MAX change zscore848 : {max_zscore848}\n"
+        message += f"MIN change zscore848 : {min_zscore848}\n\n"
 
         print(message)
     else:

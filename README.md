@@ -1,5 +1,9 @@
 <img src="assets/images/logo.png" width="300"/>
 
+<video controls autoplay>
+   <source src="assets/videos/test_system.mp4" type="video/mp4"/>
+</video>
+
 Strategy And Backtest Crypto Algorithm
 ======================================
 

@@ -1,8 +1,5 @@
 <img src="assets/images/logo.png" width="300"/>
 
-<video controls autoplay>
-   <source src="assets/videos/test_system.mp4" type="video/mp4"/>
-</video>
 
 Strategy And Backtest Crypto Algorithm
 ======================================
@@ -37,7 +34,7 @@ Features
 How to Use
 ----------
 
-Please follow the steps below to use this algorithms:
+Please follow the steps below to use these algorithms:
 
 1. Read the comments in the code to understand the implementation details and adjust them as necessary.
 2. Clone the repository by running the following command:
@@ -153,10 +150,9 @@ When contributing, please ensure to follow the existing code style and guideline
 Contact with me
 ---------------
 
-[Whats App]()<br>
-[LinkedIn]()<br>
-[Telegram](https://t.me/Abd_Alftah_Al_shanti)
-
+[Whats App](https://wa.me/00972598045064) ...
+[Telegram](https://t.me/Abd_Alftah_Al_shanti) ...
+[LinkedIn]()
 
 
 License

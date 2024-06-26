@@ -6,8 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="0f59376b-505b-4a08-9909-443cf0fdd200" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/videos/test_system.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_tests/test_bactest.py" beforeDir="false" afterPath="$PROJECT_DIR$/back_tests/test_bactest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_tests/vwap_back_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/back_tests/vwap_back_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/backtest/SOLUSDT-30m-vwaps.csv" beforeDir="false" afterPath="$PROJECT_DIR$/database/backtest/SOLUSDT-30m-vwaps.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +65,7 @@
       <recent name="D:\Python project\backtest\Crypto-Stratgy-And-Back-Test\database" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Run">
+  <component name="RunManager" selected="Python.Test">
     <configuration name="Run" type="PythonConfigurationType" factoryName="Python">
       <module name="nadaraya_watson_envelope" />
       <option name="INTERPRETER_OPTIONS" value="" />

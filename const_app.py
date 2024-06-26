@@ -86,7 +86,7 @@ strategies = {
             },
         },
         "config": {
-            "long": True,
+            "long": False,
             "short": False,
             'using_atr': False
         },

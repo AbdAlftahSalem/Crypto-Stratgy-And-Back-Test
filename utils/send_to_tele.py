@@ -46,8 +46,9 @@ def send_future_scalping_to_telegram(message):
 
 def setup_messages(ticker, enterPrice, takeProfit, stopLoss, interval, signalType):
     message = f"{'🟠' if signalType == 'Short' else '🟢'}{ticker} || {signalType}\n"
-    message += f"🚀 Enter at : {enterPrice}\n"
+    message += f"⚡ Enter at : {enterPrice}\n"
     message += f"⏰ Interval : {interval}\n"
     message += f"💰 TP : {takeProfit}\n"
     message += f"😅 SL : {stopLoss}\n\n"
+    message += "⚡ BOT BUILD BY : @abd_alftah_al_shanti ⚡"
     return message

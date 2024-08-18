@@ -3,7 +3,7 @@ from candlles_services import multi_candles
 from strategies.nwe_strategy import nwe_strategy
 from strategies.support_and_resistant_strategy import support_and_resistant_strategy
 from strategies.vwaps_strategy import vwaps_strategy
-from utils.boost_search import boost_search
+from utils.boost_search import boost_search_strategies
 from utils.db_service import tickers_path, read_from_database
 
 
@@ -30,4 +30,4 @@ def start_strategies(ticker, interval="5m", limit=1000):
 
 def start_all_strategies():
     tickers = read_from_database(tickers_path)
-    boost_search(start_strategies, tickers, '5m')
+    boost_search_strategies(start_strategies, tickers, '5m')

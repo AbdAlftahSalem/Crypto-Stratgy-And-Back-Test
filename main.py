@@ -9,13 +9,13 @@ from utils.util_back_test import get_statistic_for_strategy
 if const_app.settings['get_data']:
     print("🔃 Start Get Data ...")
     multi_candles.get_data_for_all_tickers()
-    print("🚀 Finish Get Data ...")
+    print("⚡ Finish Get Data ...")
 
 # apply all indicator to csv
 if const_app.settings['apply_strategy']:
     print("🔃 Start apply indicators for tickers ...")
     add_all_indicator_to_csv()
-    send_message_to_telegram("🚀 FINISH APPLY INDICATORS FOR TICKERS")
+    send_message_to_telegram("⚡ FINISH APPLY INDICATORS FOR TICKERS")
 
 if const_app.settings['startBackTest']:
     # # Calling backtest functions

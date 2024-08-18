@@ -21,7 +21,7 @@ def boost_back_test(callback, input_tickers, interval, strategy_name):
         print(f"An error occurred: {e}")
 
 
-def boost_search(callback, assets, interval, limit=1000):
+def boost_search_strategies(callback, assets, interval, limit=1000):
     try:
         thread_list = []
         for i in range(len(assets)):

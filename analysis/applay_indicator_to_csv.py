@@ -57,11 +57,10 @@ def add_all_indicator_to_csv():
         for interval in const_app.settings['intervals']:
             df = pd.read_csv(f"{const_app.settings['saveDataFolder']}{ticker}-{interval}.csv")
 
-            df_5m, df_15m, df_30m, df_1h = apply_indicators(df)
+            df_5m, df_15m, df_30m = apply_indicators(df)
             df_5m.to_csv(f"{const_app.settings['saveDataFolderIndicator']}{ticker}-{interval}-indicators.csv")
             df_15m.to_csv(f"{const_app.settings['saveDataFolderIndicator']}{ticker}-{interval}-indicators.csv")
             df_30m.to_csv(f"{const_app.settings['saveDataFolderIndicator']}{ticker}-{interval}-indicators.csv")
-            df_1h.to_csv(f"{const_app.settings['saveDataFolderIndicator']}{ticker}-{interval}-indicators.csv")
 
             print(f"Add all indicator to {ticker}-{interval}.csv")
             send_message_to_telegram(f"Add all indicator to {ticker}-{interval}-indicators.csv\n\nLength : {len(df)}")

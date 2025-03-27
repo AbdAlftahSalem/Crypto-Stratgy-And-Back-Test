@@ -67,7 +67,6 @@ def get_from_binance(ticker, interval='5m', limit=1000):
         df['date'] = pd.to_datetime(df["date"], unit='ms')
         # df.to_csv(f"{ticker}-{interval}.csv")
         # df_5m, df_15m, df_30m = apply_indicators(df)
-        print(df)
         df_15m = apply_indicators(df)
 
         return df_15m

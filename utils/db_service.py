@@ -1,7 +1,6 @@
-import json
 from datetime import datetime
 
-from utils.send_to_tele import setup_messages, send_signals_to_telegram
+from utils.send_to_tele import setup_messages, sendGeneralToTelegram
 
 back_test_path = 'database/backtest/'
 open_signal_path = 'database/open_signals.json'
@@ -11,9 +10,9 @@ tickers_path = 'database/tickers.json'
 def send_to_database(ticker, enter_price, interval, profit, stop, isLong, strategy_name):
     message = setup_messages(ticker, enter_price, profit, stop, interval, "Long" if isLong else "Short")
 
-    send_signals_to_telegram(message)
+    sendGeneralToTelegram(message)
 
-    save_signal(ticker, enter_price, profit, stop, interval, strategy_name, "Long" if isLong else "Short")
+    # save_signal(ticker, enter_price, profit, stop, interval, strategy_name, "Long" if isLong else "Short")
 
 
 def create_back_test_model(ticker, interval, profit_num, lose_um, strategy_name, total_lose_pct, total_win_pct,

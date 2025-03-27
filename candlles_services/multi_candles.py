@@ -59,16 +59,19 @@ def get_data_for_all_tickers():
 def get_from_binance(ticker, interval='5m', limit=1000):
     try:
 
-        exchange = ccxt.binance()
+        exchange = ccxt.binanceusdm()
         exchange.enableRateLimit = True
         bars = exchange.fetch_ohlcv(ticker, timeframe=interval, limit=limit)
         df = pd.DataFrame(
             bars, columns=['date', 'open', 'high', 'low', 'close', 'volume'])
         df['date'] = pd.to_datetime(df["date"], unit='ms')
         # df.to_csv(f"{ticker}-{interval}.csv")
-        df_5m, df_15m, df_30m = apply_indicators(df)
+        # df_5m, df_15m, df_30m = apply_indicators(df)
+        print(df)
+        df_15m = apply_indicators(df)
 
-        return df_5m, df_15m, df_30m
+        return df_15m
+        # return df_5m, df_15m, df_30m
 
     except:
         pass

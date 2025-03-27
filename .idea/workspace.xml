@@ -7,25 +7,19 @@
     <list default="true" id="0f59376b-505b-4a08-9909-443cf0fdd200" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/analysis/applay_indicator_to_csv.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/applay_indicator_to_csv.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/backtest/ADAUSDT-15m-nwe.csv" beforeDir="false" afterPath="$PROJECT_DIR$/database/backtest/ADAUSDT-15m-nwe.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/backtest/ADAUSDT-30m-nwe.csv" beforeDir="false" afterPath="$PROJECT_DIR$/database/backtest/ADAUSDT-30m-nwe.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/backtest/ADAUSDT-5m-nwe.csv" beforeDir="false" afterPath="$PROJECT_DIR$/database/backtest/ADAUSDT-5m-nwe.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/backtest/BNBUSDT-15m-nwe.csv" beforeDir="false" afterPath="$PROJECT_DIR$/database/backtest/BNBUSDT-15m-nwe.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/backtest/BNBUSDT-30m-nwe.csv" beforeDir="false" afterPath="$PROJECT_DIR$/database/backtest/BNBUSDT-30m-nwe.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/backtest/BNBUSDT-5m-nwe.csv" beforeDir="false" afterPath="$PROJECT_DIR$/database/backtest/BNBUSDT-5m-nwe.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/backtest/BTCUSDT-15m-nwe.csv" beforeDir="false" afterPath="$PROJECT_DIR$/database/backtest/BTCUSDT-15m-nwe.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/backtest/BTCUSDT-30m-nwe.csv" beforeDir="false" afterPath="$PROJECT_DIR$/database/backtest/BTCUSDT-30m-nwe.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/backtest/BTCUSDT-5m-nwe.csv" beforeDir="false" afterPath="$PROJECT_DIR$/database/backtest/BTCUSDT-5m-nwe.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/backtest/ETHUSDT-15m-nwe.csv" beforeDir="false" afterPath="$PROJECT_DIR$/database/backtest/ETHUSDT-15m-nwe.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/backtest/ETHUSDT-30m-nwe.csv" beforeDir="false" afterPath="$PROJECT_DIR$/database/backtest/ETHUSDT-30m-nwe.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/backtest/ETHUSDT-5m-nwe.csv" beforeDir="false" afterPath="$PROJECT_DIR$/database/backtest/ETHUSDT-5m-nwe.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/backtest/SOLUSDT-15m-nwe.csv" beforeDir="false" afterPath="$PROJECT_DIR$/database/backtest/SOLUSDT-15m-nwe.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/backtest/SOLUSDT-30m-nwe.csv" beforeDir="false" afterPath="$PROJECT_DIR$/database/backtest/SOLUSDT-30m-nwe.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/backtest/SOLUSDT-5m-nwe.csv" beforeDir="false" afterPath="$PROJECT_DIR$/database/backtest/SOLUSDT-5m-nwe.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/support_and_resistant.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/support_and_resistant.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/trend_status.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/trend_status.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_tests/set_entery_signals_all_str.py" beforeDir="false" afterPath="$PROJECT_DIR$/back_tests/set_entery_signals_all_str.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back_tests/test_bactest.py" beforeDir="false" afterPath="$PROJECT_DIR$/back_tests/test_bactest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/candlles_services/multi_candles.py" beforeDir="false" afterPath="$PROJECT_DIR$/candlles_services/multi_candles.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/const_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/const_app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/backtest/ETHUSDT-15m-support_and_resistant.csv" beforeDir="false" afterPath="$PROJECT_DIR$/database/backtest/ETHUSDT-15m-support_and_resistant.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/backtest/ETHUSDT-30m-support_and_resistant.csv" beforeDir="false" afterPath="$PROJECT_DIR$/database/backtest/ETHUSDT-30m-support_and_resistant.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/strategies/nwe_strategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/strategies/nwe_strategy.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/strategies/start_strategies.py" beforeDir="false" afterPath="$PROJECT_DIR$/strategies/start_strategies.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/boost_search.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/boost_search.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/send_to_tele.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/send_to_tele.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/db_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/db_service.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +57,7 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/Python project/pumb_hunter&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
   }
 }</component>
   <component name="RecentsManager">

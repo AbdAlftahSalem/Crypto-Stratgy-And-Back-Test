@@ -1,10 +1,10 @@
 settings = {
     "get_data": False,
     "apply_strategy": False,
-    "showStatistic": True,
-    "startBackTest": True,
+    "showStatistic": False,
+    "startBackTest": False,
     "sendBackTestToTele": False,
-    "saveBakeTestOutput": True,
+    "saveBakeTestOutput": False,
     "tickers": ["BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT", "ADAUSDT"],
     "intervals": ["5m", "15m", "30m"],
     "saveDataFolder": "E:\Crypto System\data\\new",

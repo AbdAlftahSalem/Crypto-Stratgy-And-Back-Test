@@ -18,13 +18,14 @@ def apply_indicators(df: pd.DataFrame):
     """
 
     # Convert df
-    df5m, df15m, df30m = convert_df(df)
+    # df5m, df15m, df30m = convert_df(df)
 
-    df_5m = apply_in_one_df(df5m)
-    df_15m = apply_in_one_df(df15m)
-    df_30m = apply_in_one_df(df30m)
+    # df_5m = apply_in_one_df(df5m)
+    df_15m = apply_in_one_df(df)
+    # df_30m = apply_in_one_df(df30m)
 
-    return df_5m, df_15m, df_30m
+    return df_15m
+    # return df_5m, df_15m, df_30m
 
 
 def apply_in_one_df(df):
@@ -48,7 +49,10 @@ def apply_in_one_df(df):
     # df = spongebob_indicator(df)
 
     # df = bollinger_band(df)
-    df = trend_status(df, 12)
+    # df = trend_status(df, 12)
+    # print("HERE")
+    # print(df)
+
     return df
 
 

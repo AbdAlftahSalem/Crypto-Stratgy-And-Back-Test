@@ -32,4 +32,6 @@ def trend_status(df: pd.DataFrame, back_candle: int = 8) -> pd.DataFrame:
         else:
             trend_status_list.append(0)
     df['trend_status'] = trend_status_list
+    print("IN TREND")
+    print(df)
     return df

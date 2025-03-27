@@ -2,6 +2,7 @@ import const_app
 from analysis.applay_indicator_to_csv import add_all_indicator_to_csv
 from back_tests.template_back_test import show_back_test_data
 from candlles_services import multi_candles
+from strategies.start_strategies import start_all_strategies
 from utils.send_to_tele import send_message_to_telegram
 from utils.util_back_test import get_statistic_for_strategy
 
@@ -27,3 +28,5 @@ if const_app.settings['showStatistic']:
     get_statistic_for_strategy("nwe")
     get_statistic_for_strategy("support_and_resistant")
     get_statistic_for_strategy("vwaps")
+
+start_all_strategies()

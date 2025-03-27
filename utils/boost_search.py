@@ -22,7 +22,7 @@ def boost_back_test(callback, input_tickers, interval, strategy_name):
 
 
 def boost_search_strategies(callback, assets, interval, limit=1000):
-    try:
+    # try:
         thread_list = []
         for i in range(len(assets)):
             th = threading.Thread(target=callback, args=(assets[i], interval, limit))
@@ -34,5 +34,5 @@ def boost_search_strategies(callback, assets, interval, limit=1000):
 
 
 
-    except:
-        pass
+    # except:
+    #     pass
